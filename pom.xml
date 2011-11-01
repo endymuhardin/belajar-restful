@@ -36,6 +36,12 @@
         <commons-fileupload.version>1.2.2</commons-fileupload.version>
         <commons-io.version>2.0.1</commons-io.version>
         <jackson-mapper-asl.version>1.9.1</jackson-mapper-asl.version>
+        
+        <!-- konfigurasi database development -->
+        <db-devel.driver>com.mysql.jdbc.Driver</db-devel.driver>
+        <db-devel.url>jdbc:mysql://localhost</db-devel.url>
+        <db-devel.username>root</db-devel.username>
+        <db-devel.password>admin</db-devel.password>
     </properties>
 
 
@@ -121,6 +127,7 @@
                         <exclude>**/src/test/data/**</exclude>
                         <exclude>.git/**</exclude>
                         <exclude>**/.metadata/**</exclude>
+                        <exclude>**/logs/**</exclude>
                         <exclude>**/src/main/webapp/resources/**</exclude>
                     </excludes>
                 </configuration>

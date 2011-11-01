@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <c_application_config
+        id="abc123"
+        name="application.version"
+        label="Application Version"
+        value="1.0"
+    />
+</dataset>
