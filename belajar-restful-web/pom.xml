@@ -1,62 +1,70 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <groupId>com.artivisi.belajar</groupId>
-        <artifactId>belajar-restful</artifactId>
-        <version>0.1.1-SNAPSHOT</version>
-    </parent>
+	<parent>
+		<groupId>com.artivisi.belajar</groupId>
+		<artifactId>belajar-restful</artifactId>
+		<version>0.1.1-SNAPSHOT</version>
+	</parent>
 
-    <artifactId>belajar-restful-web</artifactId>
-    <packaging>jar</packaging>
-    <name>RESTful Service</name>
+	<artifactId>belajar-restful-web</artifactId>
+	<packaging>war</packaging>
+	<name>RESTful Service</name>
 
 
-    <dependencies>
+	<dependencies>
 
-        <dependency>
-            <groupId>com.artivisi.belajar</groupId>
-            <artifactId>belajar-restful-domain</artifactId>
-            <version>0.1.1-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-web</artifactId>
-            <version>${org.springframework.version}</version>
-        </dependency>
+		<dependency>
+			<groupId>com.artivisi.belajar</groupId>
+			<artifactId>belajar-restful-domain</artifactId>
+			<version>0.1.1-SNAPSHOT</version>
+		</dependency>
 		
+		<dependency>
+            <groupId>com.artivisi.belajar</groupId>
+            <artifactId>belajar-restful-service</artifactId>
+            <version>0.1.1-SNAPSHOT</version>
+            <scope>runtime</scope>
+        </dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>${jackson-mapper-asl.version}</version>
 		</dependency>
 
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>${servlet.version}</version>
-            <scope>provided</scope>
-        </dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
 
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>${commons-fileupload.version}</version>
-        </dependency>
-        
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>${commons-fileupload.version}</version>
+		</dependency>
+
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
@@ -64,7 +72,62 @@
 			<scope>runtime</scope>
 		</dependency>
 
-    </dependencies>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>keytool-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>generate-resources</phase>
+						<id>clean</id>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+					<execution>
+						<phase>generate-resources</phase>
+						<id>genkey</id>
+						<goals>
+							<goal>genkey</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
+					<dname>cn=com.artivisi.endy</dname><!-- put your CN here -->
+					<keypass>jetty6</keypass>
+					<storepass>jetty6</storepass>
+					<alias>jetty6</alias>
+					<keyalg>RSA</keyalg>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.26</version>
+				<configuration>
+					<contextPath>/</contextPath>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>10000</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+						<connector implementation="org.mortbay.jetty.security.SslSocketConnector">
+							<port>10001</port>
+							<maxIdleTime>60000</maxIdleTime>
+							<keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
+							<password>jetty6</password>
+							<keyPassword>jetty6</keyPassword>
+							<!--<needClientAuth>true</needClientAuth> -->
+						</connector>
+					</connectors>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
 
