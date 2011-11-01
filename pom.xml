@@ -1,0 +1,140 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.artivisi.belajar</groupId>
+	<artifactId>belajar-restful</artifactId>
+	<packaging>pom</packaging>
+	<version>0.1.1-SNAPSHOT</version>
+	<name>Belajar Aplikasi RESTful</name>
+	<inceptionYear>2011</inceptionYear>
+
+	<modules>
+        <module>belajar-restful-config</module>
+        <module>belajar-restful-domain</module>
+        <module>belajar-restful-service</module>
+        <module>belajar-restful-web</module>
+        <module>belajar-restful-functest</module>
+    </modules>
+
+	<scm>
+		<connection>scm:git:git@github.com:artivisi/belajar-restful.git</connection>
+		<url>scm:git:git@github.com:artivisi/belajar-restful.git</url>
+		<developerConnection>scm:git:git@github.com:artivisi/belajar-restful.git</developerConnection>
+	</scm>
+
+    <!-- Shared version number properties -->
+    <properties>
+        <org.springframework.version>3.0.6.RELEASE</org.springframework.version>
+  	    <org.hibernate.version>3.6.0.Final</org.hibernate.version>
+  	    <org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>
+        <org.slf4j.version>1.6.3</org.slf4j.version>
+        <ch.qos.logback.version>0.9.30</ch.qos.logback.version>
+        <joda-time.version>2.0</joda-time.version>
+        <mysql.version>5.1.18</mysql.version>
+        <javassist.version>3.12.0.GA</javassist.version>
+        <dbunit.version>2.4.8</dbunit.version>
+        <servlet.version>2.5</servlet.version>
+        <commons-fileupload.version>1.2.2</commons-fileupload.version>
+        <commons-io.version>2.0.1</commons-io.version>
+        <jackson-mapper-asl.version>1.9.1</jackson-mapper-asl.version>
+    </properties>
+
+
+    <dependencies>
+
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+       <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-api</artifactId>
+          <version>${org.slf4j.version}</version>
+       </dependency>
+       <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>jcl-over-slf4j</artifactId>
+          <version>${org.slf4j.version}</version>
+          <scope>runtime</scope>
+       </dependency>
+
+       <dependency>
+          <groupId>org.slf4j</groupId>
+          <artifactId>log4j-over-slf4j</artifactId>
+          <version>${org.slf4j.version}</version>
+          <scope>runtime</scope>
+       </dependency>
+
+       <dependency>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+          <version>${ch.qos.logback.version}</version>
+          <scope>runtime</scope>
+       </dependency>
+
+       <dependency>
+          <groupId>joda-time</groupId>
+          <artifactId>joda-time</artifactId>
+          <version>${joda-time.version}</version>
+       </dependency>
+
+       <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.0.2</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <inherited>false</inherited>
+                <groupId>com.google.code.maven-license-plugin</groupId>
+                <artifactId>maven-license-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <header>NOTICE</header>
+                    <failIfMissing>true</failIfMissing>
+                    <aggregate>true</aggregate>
+                    <properties>
+                        <owner>ArtiVisi Intermedia</owner>
+                        <year>${project.inceptionYear}</year>
+                        <email>info@artivisi.com</email>
+                    </properties>
+                    <excludes>
+                        <exclude>LICENSE</exclude>
+                        <exclude>NOTICE</exclude>
+                        <exclude>**/Servers/**</exclude>
+                        <exclude>**/src/test/resources/**</exclude>
+                        <exclude>**/src/test/data/**</exclude>
+                        <exclude>.git/**</exclude>
+                        <exclude>**/.metadata/**</exclude>
+                        <exclude>**/src/main/webapp/resources/**</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check-headers</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+

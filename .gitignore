@@ -1,0 +1,22 @@
+logs
+
+# Eclipse Setting
+/.metadata
+/Servers
+.settings
+.project
+.classpath
+.buildpath
+RemoteSystemsTempFiles
+bin
+org.eclipse.jdt.core.prefs
+
+# Maven
+target
+
+# Netbeans Ignore
+nbproject
+build
+dist
+private
+
