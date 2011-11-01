@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -12,19 +13,21 @@
 	<name>Functional Test</name>
 
 	<dependencies>
+
 		<dependency>
 			<groupId>com.artivisi.belajar</groupId>
-			<artifactId>belajar-restful-domain</artifactId>
+			<artifactId>belajar-restful-web</artifactId>
 			<version>0.1.1-SNAPSHOT</version>
+			<type>war</type>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
 			<version>${org.springframework.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
@@ -32,6 +35,53 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.0.6</version>
+				<configuration>
+					<container>
+						<containerId>jetty6x</containerId>
+						<type>embedded</type>
+					</container>
+
+					<configuration>
+						<deployables>
+							<deployable>
+								<groupId>com.artivisi.belajar</groupId>
+								<artifactId>belajar-restful-web</artifactId>
+								<type>war</type>
+								<properties>
+									<context>/</context>
+								</properties>
+							</deployable>
+						</deployables>
+					</configuration>
+					<wait>true</wait>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>start-container</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-container</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>stop</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
 
