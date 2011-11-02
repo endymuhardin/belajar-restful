@@ -12,7 +12,7 @@
         <module>belajar-restful-domain</module>
         <module>belajar-restful-service</module>
         <module>belajar-restful-web</module>
-        <module>belajar-restful-functest</module>
+        <module>belajar-restful-deployer</module>
     </modules>
 
 	<scm>

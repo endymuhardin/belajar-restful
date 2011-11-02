@@ -8,31 +8,16 @@
 		<version>0.1.1-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>belajar-restful-functest</artifactId>
-	<packaging>jar</packaging>
-	<name>Functional Test</name>
+	<artifactId>belajar-restful-deployer</artifactId>
+	<packaging>pom</packaging>
+	<name>Deploy Application For Testing</name>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.artivisi.belajar</groupId>
 			<artifactId>belajar-restful-web</artifactId>
 			<version>0.1.1-SNAPSHOT</version>
 			<type>war</type>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-			<version>${org.springframework.version}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson-mapper-asl.version}</version>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 
@@ -44,41 +29,34 @@
 				<version>1.0.6</version>
 				<configuration>
 					<container>
-						<containerId>jetty6x</containerId>
-						<type>embedded</type>
+						<containerId>tomcat7x</containerId>
+						<type>remote</type>
 					</container>
 
 					<configuration>
+						<type>runtime</type>
+						<properties>
+							<cargo.remote.username>cargo</cargo.remote.username>
+							<cargo.remote.password>cargo</cargo.remote.password>
+							<cargo.tomcat.manager.url>http://localhost:8080/manager/text</cargo.tomcat.manager.url>
+						</properties>
+					</configuration>
+
+					<deployer>
+						<type>remote</type>
 						<deployables>
 							<deployable>
 								<groupId>com.artivisi.belajar</groupId>
 								<artifactId>belajar-restful-web</artifactId>
 								<type>war</type>
 								<properties>
-									<context>/</context>
+									<context>/belajar</context>
 								</properties>
 							</deployable>
 						</deployables>
-					</configuration>
-					<wait>true</wait>
-				</configuration>
+					</deployer>
 
-				<executions>
-					<execution>
-						<id>start-container</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>start</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>stop-container</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
