@@ -53,9 +53,9 @@ public class BelajarRestfulServiceImplTestIT {
 	}
 	
 	@Test public void testFindByName(){
-		ApplicationConfig ac = service.findApplicationConfigByName("application.version");
+		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
 		assertNotNull(ac);
-		assertEquals("application.version", ac.getName());
+		assertEquals("applicationversion", ac.getName());
 		assertEquals("Application Version", ac.getLabel());
 		assertEquals("1.0", ac.getValue());
 	}
@@ -71,26 +71,26 @@ public class BelajarRestfulServiceImplTestIT {
 	}
 	
 	@Test public void testSaveExisting(){
-		ApplicationConfig ac = service.findApplicationConfigByName("application.version");
+		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
 		assertNotNull(ac);
 		ac.setLabel("Versi Aplikasi");
 		ac.setValue("2.0");
 		
 		service.save(ac);
 
-		ApplicationConfig ac1 = service.findApplicationConfigByName("application.version");
+		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
 		assertNotNull(ac1);
 		assertEquals("Versi Aplikasi", ac1.getLabel());
 		assertEquals("2.0", ac1.getValue());
 	}
 	
 	@Test public void testDeleteExisting(){
-		ApplicationConfig ac = service.findApplicationConfigByName("application.version");
+		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
 		assertNotNull(ac);
 		
 		service.delete(ac);
 
-		ApplicationConfig ac1 = service.findApplicationConfigByName("application.version");
+		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
 		assertNull(ac1);
 	}
 

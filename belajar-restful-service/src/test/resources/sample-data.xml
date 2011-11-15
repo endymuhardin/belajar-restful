@@ -2,7 +2,14 @@
 <dataset>
     <c_application_config
         id="abc123"
-        name="application.version"
+        name="applicationname"
+        label="Application Name"
+        value="Belajar Restful"
+    />
+    
+    <c_application_config
+        id="def456"
+        name="applicationversion"
         label="Application Version"
         value="1.0"
     />
