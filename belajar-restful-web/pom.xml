@@ -116,58 +116,81 @@
 					</execution>
 				</executions>
 				<configuration>
-					<keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
+					<keystore>${project.build.directory}/appserver-ssl.keystore</keystore>
 					<dname>cn=com.artivisi.endy</dname><!-- put your CN here -->
-					<keypass>jetty6</keypass>
-					<storepass>jetty6</storepass>
-					<alias>jetty6</alias>
+					<keypass>rahasia123</keypass>
+					<storepass>rahasia123</storepass>
+					<alias>tomcat</alias>
 					<keyalg>RSA</keyalg>
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.26</version>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.5.3.201107060350</version>
 				<configuration>
-					<contextPath>/</contextPath>
-					<connectors>
-						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-							<port>10000</port>
-							<maxIdleTime>60000</maxIdleTime>
-						</connector>
-						<connector implementation="org.mortbay.jetty.security.SslSocketConnector">
-							<port>10001</port>
-							<maxIdleTime>60000</maxIdleTime>
-							<keystore>${project.build.directory}/jetty-ssl.keystore</keystore>
-							<password>jetty6</password>
-							<keyPassword>jetty6</keyPassword>
-							<!--<needClientAuth>true</needClientAuth> -->
-						</connector>
-					</connectors>
-					<stopKey>coba</stopKey>
-					<stopPort>9999</stopPort>
+					<append>true</append>
 				</configuration>
 				<executions>
 					<execution>
-						<id>start-jetty</id>
+						<id>prepare-agent</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>prepare-agent</goal>
 						</goals>
-						<configuration>
-							<daemon>true</daemon>
-							<useTestClasspath>true</useTestClasspath>
-							<testClassesDirectory>${project.build.testOutputDirectory}</testClassesDirectory>
-						</configuration>
 					</execution>
 					<execution>
-						<id>stop-jetty</id>
+						<id>generate-report</id>
+						<phase>post-integration-test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.cargo</groupId>
+				<artifactId>cargo-maven2-plugin</artifactId>
+				<version>1.0.6</version>
+				<executions>
+					<execution>
+						<id>start-container</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>start</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>stop-container</id>
 						<phase>post-integration-test</phase>
 						<goals>
 							<goal>stop</goal>
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<wait>false</wait>
+					<container>
+						<containerId>jetty7x</containerId>
+						<type>embedded</type>
+					</container>
+					<configuration>
+						<properties>
+							<cargo.servlet.port>10000</cargo.servlet.port>
+						</properties>
+
+						<deployables>
+							<deployable>
+								<groupId>${project.groupId}</groupId>
+								<artifactId>${project.artifactId}</artifactId>
+								<type>war</type>
+								<properties>
+									<context>/</context>
+								</properties>
+							</deployable>
+						</deployables>
+					</configuration>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
