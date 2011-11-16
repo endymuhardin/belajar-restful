@@ -128,22 +128,12 @@
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
 				<version>0.5.3.201107060350</version>
-				<configuration>
-					<append>true</append>
-				</configuration>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
 						<phase>pre-integration-test</phase>
 						<goals>
 							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>generate-report</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>
@@ -171,12 +161,16 @@
 				<configuration>
 					<wait>false</wait>
 					<container>
-						<containerId>jetty7x</containerId>
-						<type>embedded</type>
+						<containerId>tomcat6x</containerId>
+						<type>installed</type>
+						<home>${env.CATALINA_HOME}</home>
 					</container>
 					<configuration>
+						<type>standalone</type>
+						<home>${project.build.directory}/tomcat</home>
 						<properties>
 							<cargo.servlet.port>10000</cargo.servlet.port>
+							<cargo.jvmargs>${argLine}</cargo.jvmargs>
 						</properties>
 
 						<deployables>
