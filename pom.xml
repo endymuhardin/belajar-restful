@@ -65,11 +65,11 @@
 		<rest-assured.version>1.4</rest-assured.version>
 
 		<!-- konfigurasi database development -->
-		<db-devel.driver>com.mysql.jdbc.Driver</db-devel.driver>
-		<db-devel.url>jdbc:mysql://localhost</db-devel.url>
-		<db-devel.name>belajar_development</db-devel.name>
-		<db-devel.username>root</db-devel.username>
-		<db-devel.password>admin</db-devel.password>
+		<db.driver>com.mysql.jdbc.Driver</db.driver>
+		<db.url>jdbc:mysql://localhost</db.url>
+		<db.name>belajar_development</db.name>
+		<db.username>root</db.username>
+		<db.password>admin</db.password>
 
 		<!-- konfigurasi application server -->
 		<appserver.type>tomcat6x</appserver.type>
@@ -100,11 +100,11 @@
 			<id>testing</id>
 			<properties>
 				<!-- konfigurasi database -->
-				<db-devel.driver>com.mysql.jdbc.Driver</db-devel.driver>
-				<db-devel.url>jdbc:mysql://localhost</db-devel.url>
-				<db-devel.name>belajar_testing</db-devel.name>
-				<db-devel.username>root</db-devel.username>
-				<db-devel.password>admin</db-devel.password>
+				<db.driver>com.mysql.jdbc.Driver</db.driver>
+				<db.url>jdbc:mysql://localhost</db.url>
+				<db.name>belajar_testing</db.name>
+				<db.username>root</db.username>
+				<db.password>admin</db.password>
 
 				<!-- konfigurasi application server -->
 				<appserver.type>tomcat7x</appserver.type>

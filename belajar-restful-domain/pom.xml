@@ -48,10 +48,10 @@
 				<version>${liquibase-maven-plugin.version}</version>
                 <configuration>
                     <changeLogFile>src/main/resources/com/artivisi/belajar/restful/db/db-changelog.xml</changeLogFile>
-                    <driver>${db-devel.driver}</driver>
-                    <url>${db-devel.url}/${db-devel.name}</url>
-                    <username>${db-devel.username}</username>
-                    <password>${db-devel.password}</password>
+                    <driver>${db.driver}</driver>
+                    <url>${db.url}/${db.name}</url>
+                    <username>${db.username}</username>
+                    <password>${db.password}</password>
                 </configuration>
                 <dependencies>
                     <dependency>

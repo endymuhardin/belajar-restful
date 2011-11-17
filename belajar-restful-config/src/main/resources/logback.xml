@@ -16,7 +16,7 @@
 	</appender>
 
 	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${catalina.home:-.}/logs/kasbon-${stage:-development}.log</file>
+		<file>${catalina.home:-.}/logs/belajar-${stage:-development}.log</file>
 		<encoder>
 			<pattern>%d %-5level %logger{35} - %msg %n</pattern>
 		</encoder>
