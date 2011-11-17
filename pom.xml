@@ -17,9 +17,9 @@
 	</modules>
 
 	<scm>
-		<connection>scm:git:git@github.com:artivisi/belajar-restful.git</connection>
-		<url>scm:git:git@github.com:artivisi/belajar-restful.git</url>
-		<developerConnection>scm:git:git@github.com:artivisi/belajar-restful.git</developerConnection>
+		<url>https://bitbucket.org/endymuhardin/belajar-restful</url>
+		<connection>scm:git:git@bitbucket.org:endymuhardin/belajar-restful.git</connection>
+		<developerConnection>scm:git:git@bitbucket.org:endymuhardin/belajar-restful.git</developerConnection>
 	</scm>
 
 	<distributionManagement>
