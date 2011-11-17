@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.artivisi.belajar</groupId>
 		<artifactId>belajar-restful</artifactId>
-		<version>0.1.1-SNAPSHOT</version>
+		<version>0.1.1</version>
 	</parent>
 
 	<artifactId>belajar-restful-config</artifactId>
