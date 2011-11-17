@@ -198,9 +198,6 @@
 				<configuration>
 					<filesets>
 						<fileset>
-							<directory>jacoco-result</directory>
-						</fileset>
-						<fileset>
 							<directory>logs</directory>
 						</fileset>
 					</filesets>
