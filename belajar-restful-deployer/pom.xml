@@ -11,11 +11,25 @@
 	<packaging>pom</packaging>
 	<name>Deploy Application For Testing</name>
 
+	<properties>
+		<target.version>${project.version}</target.version>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>nexus-artivisi</id>
+			<name>ArtiVisi Nexus</name>
+			<url>http://forge.artivisi.com:8080/nexus/content/groups/public</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>com.artivisi.belajar</groupId>
 			<artifactId>belajar-restful-web</artifactId>
-			<version>${project.version}</version>
+			<version>${target.version}</version>
 			<type>war</type>
 		</dependency>
 	</dependencies>
