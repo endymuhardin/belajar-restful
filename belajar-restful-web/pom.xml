@@ -149,7 +149,7 @@
 					<container>
 						<containerId>tomcat6x</containerId>
 						<type>installed</type>
-						<home>${env.CATALINA_HOME}</home>
+						<home>${tomcat6_home}</home>
 					</container>
 					<configuration>
 						<type>standalone</type>

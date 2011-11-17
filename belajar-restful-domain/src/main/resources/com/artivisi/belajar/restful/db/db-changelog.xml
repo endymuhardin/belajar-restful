@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
 
     Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com>
@@ -16,14 +15,11 @@
     limitations under the License.
 
 -->
-<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-<hibernate-configuration>
-	<session-factory>
-		<property name="hibernate.show_sql">
-			true
-        </property>
-		<property name="hibernate.format_sql">
-			true
-        </property>
-	</session-factory>
-</hibernate-configuration>
+<databaseChangeLog 
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd"> 
+
+  <include file="com/artivisi/belajar/restful/db/db-changelog-0.0.1.xml"/> 
+</databaseChangeLog> 
