@@ -133,6 +133,7 @@
 						<id>start-container</id>
 						<phase>pre-integration-test</phase>
 						<goals>
+							<goal>install</goal>
 							<goal>start</goal>
 						</goals>
 					</execution>
@@ -147,8 +148,11 @@
 				<configuration>
 					<container>
 						<containerId>tomcat6x</containerId>
-						<type>installed</type>
-						<home>${tomcat6_home}</home>
+						<zipUrlInstaller>
+							<url>http://apache.the.net.id/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</url>
+							<downloadDir>/tmp</downloadDir>
+							<extractDir>/tmp</extractDir>
+						</zipUrlInstaller>
 					</container>
 					<configuration>
 						<type>standalone</type>
