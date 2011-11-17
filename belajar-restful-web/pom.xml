@@ -150,8 +150,8 @@
 						<type>${appserver.installation}</type>
 						<zipUrlInstaller>
 							<url>http://apache.the.net.id/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</url>
-							<downloadDir>/tmp</downloadDir>
-							<extractDir>/tmp</extractDir>
+							<downloadDir>${java.io.tmpdir}</downloadDir>
+							<extractDir>${java.io.tmpdir}</extractDir>
 						</zipUrlInstaller>
 					</container>
 					<configuration>
