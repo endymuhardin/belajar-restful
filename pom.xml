@@ -3,7 +3,7 @@
 	<groupId>com.artivisi.belajar</groupId>
 	<artifactId>belajar-restful</artifactId>
 	<packaging>pom</packaging>
-	<version>0.1.1</version>
+	<version>0.1.2-SNAPSHOT</version>
 	<name>Belajar Aplikasi RESTful</name>
 	<inceptionYear>2011</inceptionYear>
 
