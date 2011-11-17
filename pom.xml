@@ -22,6 +22,24 @@
 		<developerConnection>scm:git:git@github.com:artivisi/belajar-restful.git</developerConnection>
 	</scm>
 
+	<distributionManagement>
+		<!-- releases repository -->
+		<repository>
+			<id>artivisi-nexus</id>
+			<name>ArtiVisi Release Repository</name>
+			<url>scp://forge.artivisi.com:/root/sonatype-work/nexus/storage/releases</url>
+		</repository>
+
+		<!-- snapshot repository -->
+		<snapshotRepository>
+			<id>artivisi-nexus</id>
+			<name>ArtiVisi Snapshot Repository</name>
+			<url>scp://forge.artivisi.com:/root/sonatype-work/nexus/storage/snapshots</url>
+		</snapshotRepository>
+
+	</distributionManagement>
+
+
 	<!-- Default Properties -->
 	<properties>
 		<!-- versi library dan framework -->
