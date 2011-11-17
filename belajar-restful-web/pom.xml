@@ -147,7 +147,8 @@
 				</executions>
 				<configuration>
 					<container>
-						<containerId>tomcat6x</containerId>
+						<containerId>${appserver.type}</containerId>
+						<type>${appserver.installation}</type>
 						<zipUrlInstaller>
 							<url>http://apache.the.net.id/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</url>
 							<downloadDir>/tmp</downloadDir>
@@ -155,10 +156,11 @@
 						</zipUrlInstaller>
 					</container>
 					<configuration>
-						<type>standalone</type>
+						<type>${appserver.configuration}</type>
 						<home>${project.build.directory}/tomcat</home>
 						<properties>
-							<cargo.servlet.port>10000</cargo.servlet.port>
+							<cargo.servlet.port>${appserver.port.http}</cargo.servlet.port>
+							<cargo.tomcat.shutdown.port>${appserver.port.shutdown}</cargo.tomcat.shutdown.port>
 							<cargo.jvmargs>${argLine}</cargo.jvmargs>
 						</properties>
 
@@ -168,7 +170,7 @@
 								<artifactId>${project.artifactId}</artifactId>
 								<type>war</type>
 								<properties>
-									<context>/</context>
+									<context>${appserver.deployer.context}</context>
 								</properties>
 							</deployable>
 						</deployables>

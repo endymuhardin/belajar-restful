@@ -49,14 +49,61 @@
 		<!-- konfigurasi database development -->
 		<db-devel.driver>com.mysql.jdbc.Driver</db-devel.driver>
 		<db-devel.url>jdbc:mysql://localhost</db-devel.url>
-		<db-devel.name>belajar</db-devel.name>
+		<db-devel.name>belajar_development</db-devel.name>
 		<db-devel.username>root</db-devel.username>
 		<db-devel.password>admin</db-devel.password>
 
+		<!-- konfigurasi application server -->
+		<appserver.type>tomcat6x</appserver.type>
+		<appserver.installation>installed</appserver.installation>
+		<appserver.configuration>standalone</appserver.configuration>
+		<appserver.installer>http://apache.the.net.id/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</appserver.installer>
+		<appserver.ipaddress>localhost</appserver.ipaddress>
+		<appserver.port.http>10000</appserver.port.http>
+		<appserver.port.shutdown>10010</appserver.port.shutdown>
+		<appserver.deployer.url>http://${appserver.ipaddress}:${appserver.port.http}/manager/text</appserver.deployer.url>
+		<appserver.deployer.username>manager</appserver.deployer.username>
+		<appserver.deployer.password>test123</appserver.deployer.password>
+		<appserver.deployer.context>/</appserver.deployer.context>
+
+		<!-- konfigurasi sonar -->
 		<sonar.jacoco.itReportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.itReportPath>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
 	</properties>
+
+	<profiles>
+		<profile>
+			<id>development</id>
+			<!-- default profile, ditulis sebagai penjelasan saja -->
+		</profile>
+
+		<profile>
+			<id>testing</id>
+			<properties>
+				<!-- konfigurasi database -->
+				<db-devel.driver>com.mysql.jdbc.Driver</db-devel.driver>
+				<db-devel.url>jdbc:mysql://localhost</db-devel.url>
+				<db-devel.name>belajar_testing</db-devel.name>
+				<db-devel.username>root</db-devel.username>
+				<db-devel.password>admin</db-devel.password>
+
+				<!-- konfigurasi application server -->
+				<appserver.type>tomcat7x</appserver.type>
+				<appserver.installation>remote</appserver.installation>
+				<appserver.configuration>runtime</appserver.configuration>
+				<appserver.installer>http://apache.the.net.id/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</appserver.installer>
+				<appserver.ipaddress>localhost</appserver.ipaddress>
+				<appserver.port.http>8080</appserver.port.http>
+				<appserver.port.shutdown>8005</appserver.port.shutdown>
+				<appserver.deployer.url>http://${appserver.ipaddress}:${appserver.port.http}/manager/text</appserver.deployer.url>
+				<appserver.deployer.username>cargo</appserver.deployer.username>
+				<appserver.deployer.password>cargo</appserver.deployer.password>
+				<appserver.deployer.context>/belajar</appserver.deployer.context>
+			</properties>
+		</profile>
+
+	</profiles>
 
 
 	<dependencies>

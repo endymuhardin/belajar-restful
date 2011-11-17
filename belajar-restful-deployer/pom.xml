@@ -29,16 +29,16 @@
 				<version>${cargo-maven2-plugin.version}</version>
 				<configuration>
 					<container>
-						<containerId>tomcat7x</containerId>
-						<type>remote</type>
+						<containerId>${appserver.type}</containerId>
+						<type>${appserver.installation}</type>
 					</container>
 
 					<configuration>
-						<type>runtime</type>
+						<type>${appserver.configuration}</type>
 						<properties>
-							<cargo.remote.username>cargo</cargo.remote.username>
-							<cargo.remote.password>cargo</cargo.remote.password>
-							<cargo.tomcat.manager.url>http://localhost:8080/manager/text</cargo.tomcat.manager.url>
+							<cargo.remote.username>${appserver.deployer.username}</cargo.remote.username>
+							<cargo.remote.password>${appserver.deployer.password}</cargo.remote.password>
+							<cargo.remote.uri>${appserver.deployer.url}</cargo.remote.uri>
 						</properties>
 					</configuration>
 
@@ -50,7 +50,7 @@
 								<artifactId>belajar-restful-web</artifactId>
 								<type>war</type>
 								<properties>
-									<context>/belajar</context>
+									<context>${appserver.deployer.context}</context>
 								</properties>
 							</deployable>
 						</deployables>
