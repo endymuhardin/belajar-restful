@@ -159,7 +159,7 @@
 						<home>${project.build.directory}/tomcat</home>
 						<properties>
 							<cargo.servlet.port>${appserver.port.http}</cargo.servlet.port>
-							<cargo.tomcat.shutdown.port>${appserver.port.shutdown}</cargo.tomcat.shutdown.port>
+							<cargo.tomcat.ajp.port>${appserver.port.ajp}</cargo.tomcat.ajp.port>
 							<cargo.jvmargs>${argLine}</cargo.jvmargs>
 						</properties>
 
