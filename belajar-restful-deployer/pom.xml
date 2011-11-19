@@ -19,7 +19,7 @@
 		<repository>
 			<id>nexus-artivisi</id>
 			<name>ArtiVisi Nexus</name>
-			<url>http://forge.artivisi.com:8080/nexus/content/groups/public</url>
+			<url>${artifact.repo.url}</url>
 			<releases><enabled>true</enabled></releases>
 			<snapshots><enabled>true</enabled></snapshots>
 		</repository>

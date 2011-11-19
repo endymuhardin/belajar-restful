@@ -26,14 +26,14 @@
 		<repository>
 			<id>artivisi-nexus</id>
 			<name>ArtiVisi Release Repository</name>
-			<url>scp://forge.artivisi.com:/root/sonatype-work/nexus/storage/releases</url>
+			<url>scp://${artifact.repo.host}:${artifact.repo.path.upload}/releases</url>
 		</repository>
 
 		<!-- snapshot repository -->
 		<snapshotRepository>
 			<id>artivisi-nexus</id>
 			<name>ArtiVisi Snapshot Repository</name>
-			<url>scp://forge.artivisi.com:/root/sonatype-work/nexus/storage/snapshots</url>
+			<url>scp://${artifact.repo.host}:${artifact.repo.path.upload}/snapshots</url>
 		</snapshotRepository>
 
 	</distributionManagement>
@@ -87,6 +87,13 @@
 		<sonar.jacoco.itReportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.itReportPath>
 		<sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
 		<sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
+		
+		<!-- konfigurasi artifact repository -->
+		<artifact.repo.host>forge.artivisi.com</artifact.repo.host>
+		<artifact.repo.path.upload>/root/sonatype-work/nexus/storage</artifact.repo.path.upload>
+		<artifact.repo.port.http>8080</artifact.repo.port.http>
+		<artifact.repo.path.download>nexus/content/groups/public</artifact.repo.path.download>
+		<artifact.repo.url>http://${artifact.repo.host}:${artifact.repo.port.http}/${artifact.repo.path.download}</artifact.repo.url>
 	</properties>
 
 	<profiles>
