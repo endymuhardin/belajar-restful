@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="utf-8">
+	    <title>Tutorial: Hello Dojo!</title>
+	    <!-- load Dojo -->
+	    
+	    <link rel="stylesheet" type="text/css" href=
+		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/resources/dojo.css"/>
+		  <link rel="stylesheet" type="text/css" href=
+		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dijit/themes/claro/claro.css"/>
+		  <link rel="stylesheet" type="text/css" href=
+		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/Grid.css"/>
+		  <link rel="stylesheet" type="text/css" href=
+		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/claroGrid.css"/>
+	    
+	    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js" djConfig="parseOnLoad:true"></script>
+	    <script>
+	    	dojo.require("dojo.store.JsonRest");
+		    dojo.require("dojox.grid.DataGrid");
+			dojo.require("dojo.data.ObjectStore");
+	    
+	        dojo.ready(function(){
+	            dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
+	            myStore = new dojo.store.JsonRest({target:"/config/"});
+	            
+	            myGrid = new dojox.grid.DataGrid({
+			        store: dataStore = dojo.data.ObjectStore({objectStore: myStore}),
+			        structure: [
+			            {name:"Id", field:"id", width: "200px"},
+			            {name:"Name", field:"name", width: "200px"},
+			            {name:"Label", field:"label", width: "200px"},
+			            {name:"Value", field:"value", width: "200px"}
+			        ]
+			    }, "gridConfig"); 
+			    myGrid.startup();
+	        });
+	    </script>
+	</head>
+	<body class="claro">
+	    <h1 id="greeting">Hello</h1>
+	    
+	    <div id="gridConfig"></div>
+	</body>
+</html>
