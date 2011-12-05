@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
@@ -36,7 +37,11 @@
 			<version>${org.springframework.version}</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -45,20 +50,20 @@
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
 				<version>${liquibase-maven-plugin.version}</version>
-                <configuration>
-                    <changeLogFile>src/main/resources/com/artivisi/belajar/restful/db/db-changelog.xml</changeLogFile>
-                    <driver>${db.driver}</driver>
-                    <url>${db.url}/${db.name}</url>
-                    <username>${db.username}</username>
-                    <password>${db.password}</password>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>mysql</groupId>
-                        <artifactId>mysql-connector-java</artifactId>
-                        <version>${mysql.version}</version>
-                    </dependency>
-                </dependencies>
+				<configuration>
+					<changeLogFile>src/main/resources/com/artivisi/belajar/restful/db/db-changelog.xml</changeLogFile>
+					<driver>${db.driver}</driver>
+					<url>${db.url}/${db.name}</url>
+					<username>${db.username}</username>
+					<password>${db.password}</password>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>${mysql.version}</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<phase>process-resources</phase>
