@@ -22,18 +22,25 @@
 	    
 	        dojo.ready(function(){
 	            dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
-	            myStore = new dojo.store.JsonRest({target:"/config/"});
+	            myStore = dojo.store.JsonRest({target:"/config/", idProperty: "name"});
 	            
 	            myGrid = new dojox.grid.DataGrid({
-			        store: dataStore = dojo.data.ObjectStore({objectStore: myStore}),
+			        store: gridStore = dojo.data.ObjectStore({objectStore: myStore}),
 			        structure: [
 			            {name:"Id", field:"id", width: "200px"},
 			            {name:"Name", field:"name", width: "200px"},
-			            {name:"Label", field:"label", width: "200px"},
-			            {name:"Value", field:"value", width: "200px"}
+			            {name:"Label", field:"label", width: "200px", editable: true},
+			            {name:"Value", field:"value", width: "200px", editable: true}
 			        ]
 			    }, "gridConfig"); 
+			    
 			    myGrid.startup();
+			    
+			    dojo.connect(myGrid, "onApplyCellEdit", myGrid, function(evt){
+				    myGrid.store.save({onComplete: function(){
+				    	myGrid.setQuery();
+				    }});
+				});
 	        });
 	    </script>
 	</head>
@@ -41,5 +48,6 @@
 	    <h1 id="greeting">Hello</h1>
 	    
 	    <div id="gridConfig"></div>
+	    
 	</body>
 </html>
