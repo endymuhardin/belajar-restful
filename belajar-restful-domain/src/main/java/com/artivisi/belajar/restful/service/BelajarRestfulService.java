@@ -20,8 +20,8 @@ import java.util.List;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 
 public interface BelajarRestfulService {
-	public void save(ApplicationConfig ac);
-	public void delete(ApplicationConfig ac);
-	public ApplicationConfig findApplicationConfigByName(String name);
-	public List<ApplicationConfig> findAllApplicationConfigs();
+	void save(ApplicationConfig ac);
+	void delete(ApplicationConfig ac);
+	ApplicationConfig findApplicationConfigByName(String name);
+	List<ApplicationConfig> findAllApplicationConfigs();
 }

@@ -39,13 +39,17 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
 	@Override
 	public void delete(ApplicationConfig ac) {
-		if(ac == null || ac.getId() == null) return;
+		if(ac == null || ac.getId() == null) {
+			return;
+		}
 		sessionFactory.getCurrentSession().delete(ac);
 	}
 
 	@Override
 	public ApplicationConfig findApplicationConfigByName(String name) {
-		if(!StringUtils.hasText(name)) return null;
+		if(!StringUtils.hasText(name)) {
+			return null;
+		}
 		return (ApplicationConfig) sessionFactory.getCurrentSession().createQuery("from ApplicationConfig ac where ac.name = :name")
 				.setString("name", name)
 				.uniqueResult();
