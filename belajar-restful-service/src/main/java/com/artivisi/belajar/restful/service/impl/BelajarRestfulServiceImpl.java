@@ -57,9 +57,18 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<ApplicationConfig> findAllApplicationConfigs() {
+	public List<ApplicationConfig> findAllApplicationConfigs(Long start, Integer rows) {
 		return sessionFactory.getCurrentSession().createQuery("from ApplicationConfig ac order by ac.name")
+				.setFirstResult(start.intValue())
+				.setMaxResults(rows)
 			   .list();
+	}
+
+	@Override
+	public Long countAllApplicationConfigs() {
+		return (Long) sessionFactory.getCurrentSession()
+				.createQuery("select count(ac) from ApplicationConfig ac order by ac.name")
+			   .uniqueResult();
 	}
 
 }

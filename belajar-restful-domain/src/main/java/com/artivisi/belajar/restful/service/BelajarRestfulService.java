@@ -23,5 +23,6 @@ public interface BelajarRestfulService {
 	void save(ApplicationConfig ac);
 	void delete(ApplicationConfig ac);
 	ApplicationConfig findApplicationConfigByName(String name);
-	List<ApplicationConfig> findAllApplicationConfigs();
+	List<ApplicationConfig> findAllApplicationConfigs(Long start, Integer rows);
+	Long countAllApplicationConfigs();
 }

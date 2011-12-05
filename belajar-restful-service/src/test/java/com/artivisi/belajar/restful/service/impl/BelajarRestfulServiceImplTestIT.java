@@ -18,9 +18,11 @@ package com.artivisi.belajar.restful.service.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -65,8 +67,9 @@ public class BelajarRestfulServiceImplTestIT {
 		ac.setName("base.path");
 		ac.setLabel("Installation Path");
 		ac.setValue("/opt");
-		
+		Long countAll = service.countAllApplicationConfigs();
 		service.save(ac);
+		assertEquals(Long.valueOf(countAll + 1), service.countAllApplicationConfigs());
 		assertNotNull(ac.getId());
 	}
 	
@@ -75,9 +78,7 @@ public class BelajarRestfulServiceImplTestIT {
 		assertNotNull(ac);
 		ac.setLabel("Versi Aplikasi");
 		ac.setValue("2.0");
-		
 		service.save(ac);
-
 		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
 		assertNotNull(ac1);
 		assertEquals("Versi Aplikasi", ac1.getLabel());
@@ -87,11 +88,16 @@ public class BelajarRestfulServiceImplTestIT {
 	@Test public void testDeleteExisting(){
 		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
 		assertNotNull(ac);
-		
+		Long countAll = service.countAllApplicationConfigs();
 		service.delete(ac);
-
+		assertEquals(Long.valueOf(countAll - 1), service.countAllApplicationConfigs());
 		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
 		assertNull(ac1);
+	}
+	
+	@Test public void testFindAll(){
+		List<ApplicationConfig> result = service.findAllApplicationConfigs(0L, service.countAllApplicationConfigs().intValue());
+		assertTrue(result.size() > 0);
 	}
 
 }
