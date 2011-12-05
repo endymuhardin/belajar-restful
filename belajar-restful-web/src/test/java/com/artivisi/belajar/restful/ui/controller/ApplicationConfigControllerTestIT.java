@@ -19,10 +19,14 @@ import static com.jayway.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.*;
 
+import groovyx.net.http.ContentType;
+
 import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Test;
+
+import com.artivisi.belajar.restful.domain.ApplicationConfig;
 
 public class ApplicationConfigControllerTestIT {
 	private String target = "http://localhost:10000/config/";
@@ -69,12 +73,12 @@ public class ApplicationConfigControllerTestIT {
 	}
 	
 	private void testUpdateExisting(String name, String label, String value){
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("name", name);
-		params.put("label", label);
-		params.put("value", value);
+		ApplicationConfig config = new ApplicationConfig();
+		config.setName(name);
+		config.setLabel(label);
+		config.setValue(value);
 		
-		with().parameters(params).
+		given().body(config).contentType(ContentType.JSON).
 		expect().
 		statusCode(200).
 		when().put(target+name);

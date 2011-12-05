@@ -29,6 +29,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -69,7 +70,7 @@ public class ApplicationConfigController {
 	
 	@RequestMapping(method=RequestMethod.PUT, value="/{name}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable String name, @ModelAttribute ApplicationConfig config){
+	public void update(@PathVariable String name, @RequestBody ApplicationConfig config){
 		ApplicationConfig a = belajarRestfulService.findApplicationConfigByName(name);
 		if(a == null){
 			logger.warn("Config dengan nama [{}] tidak ditemukan", name);
