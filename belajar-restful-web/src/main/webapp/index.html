@@ -36,6 +36,9 @@
 	    	dojo.require("dojo.store.JsonRest");
 		    dojo.require("dojox.grid.DataGrid");
 			dojo.require("dojo.data.ObjectStore");
+			dojo.require("dijit.form.Form");
+			dojo.require("dijit.form.ValidationTextBox");
+			dojo.require("dijit.form.Button");
 	    
 	        dojo.ready(function(){
 	            dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
@@ -58,6 +61,10 @@
 				    	myGrid.setQuery();
 				    }});
 				});
+				
+				dojo.connect(dijit.byId("btnSave"), "onClick", function() {
+                    					
+                });
 	        });
 	    </script>
 	</head>
@@ -65,6 +72,30 @@
 	    <h1 id="greeting">Hello</h1>
 	    
 	    <div id="gridConfig"></div>
+	    
+	    <hr>
+	    <h1>Entri Konfigurasi</h1>
+	    <form id="formSave" dojotype="dijit.form.Form">
+	    <script type="dojo/method" event="onSubmit">
+		<!--
+		if (!this.validate()) {
+		    alert('Semua field harus diisi');
+		    return false;
+		}
+		var newData = dojo.formToObject("formSave");
+        console.log(newData);
+        dojo.when(myStore.add(newData), function(){
+        	myGrid.setQuery();
+        });
+		return false;
+		-->
+		</script>
+	    
+            Name : <input type="text" dojoType="dijit.form.ValidationTextBox" required="true" name="name"><br>
+            Label : <input type="text" dojoType="dijit.form.ValidationTextBox" required="true" name="label"><br>
+            Value : <input type="text" dojoType="dijit.form.ValidationTextBox" required="true" name="value"><br>
+            <input type="submit" value="Save" label="Save" id="btnSave" dojotype="dijit.form.Button">
+        </form>
 	    
 	</body>
 </html>
