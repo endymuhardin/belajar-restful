@@ -15,14 +15,14 @@
  */
 package com.artivisi.belajar.restful.ui.controller;
 
-import static com.jayway.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
-
+import static com.jayway.restassured.RestAssured.expect;
+import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.with;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.hasItems;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import groovyx.net.http.ContentType;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 

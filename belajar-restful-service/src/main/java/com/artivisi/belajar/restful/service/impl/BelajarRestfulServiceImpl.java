@@ -26,6 +26,7 @@ import org.springframework.util.StringUtils;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 
+@SuppressWarnings("unchecked")
 @Service("belajarRestfulService")
 @Transactional
 public class BelajarRestfulServiceImpl implements BelajarRestfulService {
@@ -54,7 +55,6 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 				.get(ApplicationConfig.class, id);
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<ApplicationConfig> findAllApplicationConfigs(Long start, Integer rows) {
 		return sessionFactory.getCurrentSession().createQuery("from ApplicationConfig ac order by ac.name")
