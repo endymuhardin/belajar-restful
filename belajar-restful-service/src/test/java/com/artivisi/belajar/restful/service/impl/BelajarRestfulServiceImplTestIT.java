@@ -54,8 +54,8 @@ public class BelajarRestfulServiceImplTestIT {
 				new FlatXmlDataSetBuilder().build(new File("src/test/resources/sample-data.xml")));
 	}
 	
-	@Test public void testFindByName(){
-		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
+	@Test public void testFindById(){
+		ApplicationConfig ac = service.findApplicationConfigById("def456");
 		assertNotNull(ac);
 		assertEquals("applicationversion", ac.getName());
 		assertEquals("Application Version", ac.getLabel());
@@ -74,24 +74,24 @@ public class BelajarRestfulServiceImplTestIT {
 	}
 	
 	@Test public void testSaveExisting(){
-		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac = service.findApplicationConfigById("abc123");
 		assertNotNull(ac);
 		ac.setLabel("Versi Aplikasi");
 		ac.setValue("2.0");
 		service.save(ac);
-		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac1 = service.findApplicationConfigById("abc123");
 		assertNotNull(ac1);
 		assertEquals("Versi Aplikasi", ac1.getLabel());
 		assertEquals("2.0", ac1.getValue());
 	}
 	
 	@Test public void testDeleteExisting(){
-		ApplicationConfig ac = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac = service.findApplicationConfigById("abc123");
 		assertNotNull(ac);
 		Long countAll = service.countAllApplicationConfigs();
 		service.delete(ac);
 		assertEquals(Long.valueOf(countAll - 1), service.countAllApplicationConfigs());
-		ApplicationConfig ac1 = service.findApplicationConfigByName("applicationversion");
+		ApplicationConfig ac1 = service.findApplicationConfigById("applicationversion");
 		assertNull(ac1);
 	}
 	

@@ -46,13 +46,12 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 	}
 
 	@Override
-	public ApplicationConfig findApplicationConfigByName(String name) {
-		if(!StringUtils.hasText(name)) {
+	public ApplicationConfig findApplicationConfigById(String id) {
+		if(!StringUtils.hasText(id)) {
 			return null;
 		}
-		return (ApplicationConfig) sessionFactory.getCurrentSession().createQuery("from ApplicationConfig ac where ac.name = :name")
-				.setString("name", name)
-				.uniqueResult();
+		return (ApplicationConfig) sessionFactory.getCurrentSession()
+				.get(ApplicationConfig.class, id);
 	}
 
 	@SuppressWarnings("unchecked")

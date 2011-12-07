@@ -22,7 +22,7 @@ import com.artivisi.belajar.restful.domain.ApplicationConfig;
 public interface BelajarRestfulService {
 	void save(ApplicationConfig ac);
 	void delete(ApplicationConfig ac);
-	ApplicationConfig findApplicationConfigByName(String name);
+	ApplicationConfig findApplicationConfigById(String id);
 	List<ApplicationConfig> findAllApplicationConfigs(Long start, Integer rows);
 	Long countAllApplicationConfigs();
 }

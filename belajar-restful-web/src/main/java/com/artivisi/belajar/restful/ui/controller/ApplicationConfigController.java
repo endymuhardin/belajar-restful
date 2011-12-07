@@ -49,10 +49,10 @@ public class ApplicationConfigController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping("/{name}")
+	@RequestMapping("/{id}")
 	@ResponseBody
-	public ApplicationConfig findApplicationConfigByName(@PathVariable String name){
-		ApplicationConfig config = belajarRestfulService.findApplicationConfigByName(name);
+	public ApplicationConfig findApplicationConfigById(@PathVariable String id){
+		ApplicationConfig config = belajarRestfulService.findApplicationConfigById(id);
 		if(config == null){
 			throw new IllegalStateException();
 		}
@@ -68,25 +68,24 @@ public class ApplicationConfigController {
         response.setHeader("Location", uri.toASCIIString());
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/{name}")
+	@RequestMapping(method=RequestMethod.PUT, value="/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void update(@PathVariable String name, @RequestBody ApplicationConfig config){
-		ApplicationConfig a = belajarRestfulService.findApplicationConfigByName(name);
+	public void update(@PathVariable String id, @RequestBody ApplicationConfig config){
+		ApplicationConfig a = belajarRestfulService.findApplicationConfigById(id);
 		if(a == null){
-			logger.warn("Config dengan nama [{}] tidak ditemukan", name);
+			logger.warn("Config dengan id [{}] tidak ditemukan", id);
 			throw new IllegalStateException();
 		}
 		config.setId(a.getId());
-		config.setName(name);
 		belajarRestfulService.save(config);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/{name}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public void delete(@PathVariable String name){
-		ApplicationConfig a = belajarRestfulService.findApplicationConfigByName(name);
+	public void delete(@PathVariable String id){
+		ApplicationConfig a = belajarRestfulService.findApplicationConfigById(id);
 		if(a == null){
-			logger.warn("Config dengan nama [{}] tidak ditemukan", name);
+			logger.warn("Config dengan id [{}] tidak ditemukan", id);
 			throw new IllegalStateException();
 		}
 		belajarRestfulService.delete(a);

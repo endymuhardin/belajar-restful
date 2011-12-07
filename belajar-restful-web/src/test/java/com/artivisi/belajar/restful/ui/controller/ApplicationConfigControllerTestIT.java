@@ -38,11 +38,12 @@ public class ApplicationConfigControllerTestIT {
 		params.put("label", "Konfigurasi Percobaan");
 		params.put("value", "test");
 		
-		testSave(target, params);
-		testGetExistingByName("coba", "Konfigurasi Percobaan", "test");
-		testUpdateExisting("coba", "Konfigurasi Percobaan 001", "test123");
-		testGetExistingByName("coba", "Konfigurasi Percobaan 001", "test123");
-		testDeleteExistingByName("coba");
+		String id = testSave(target, params);
+		System.out.println("Id : "+id);
+		testGetExistingById(id, "coba", "Konfigurasi Percobaan", "test");
+		testUpdateExisting(id, "coba", "Konfigurasi Percobaan 001", "test123");
+		testGetExistingById(id, "coba", "Konfigurasi Percobaan 001", "test123");
+		testDeleteExistingById(id);
 	}
 	
 	private String testSave(String target, Map<String, String> params) {
@@ -61,7 +62,7 @@ public class ApplicationConfigControllerTestIT {
 		return id;
 	}
 	
-	private void testGetExistingByName(String name, String label, String value){
+	private void testGetExistingById(String id, String name, String label, String value){
 		expect().
 		statusCode(200).
 		body(
@@ -69,10 +70,10 @@ public class ApplicationConfigControllerTestIT {
 				"label", equalTo(label), 
 				"value", equalTo(value)
 		).
-		when().get(target+name);
+		when().get(target+id);
 	}
 	
-	private void testUpdateExisting(String name, String label, String value){
+	private void testUpdateExisting(String id, String name, String label, String value){
 		ApplicationConfig config = new ApplicationConfig();
 		config.setName(name);
 		config.setLabel(label);
@@ -81,21 +82,21 @@ public class ApplicationConfigControllerTestIT {
 		given().body(config).contentType(ContentType.JSON).
 		expect().
 		statusCode(200).
-		when().put(target+name);
+		when().put(target+id);
 	}
 	
-	private void testDeleteExistingByName(String name){
+	private void testDeleteExistingById(String id){
 		expect().
 		statusCode(200).
-		when().delete(target+name);
+		when().delete(target+id);
 		
 		expect().
 		statusCode(404).
-		when().get(target+name);
+		when().get(target+id);
 	}
 	
 	@Test
-	public void testGetExistingConfigByName(){
+	public void testGetExistingConfigById(){
 		expect().
 		statusCode(200).
 		body(
@@ -104,11 +105,11 @@ public class ApplicationConfigControllerTestIT {
 				"label", equalTo("Application Name"), 
 				"value", equalTo("Belajar Restful")
 		).
-		when().get(target+"applicationname");
+		when().get(target+"abc123");
 	}
 	
 	@Test
-	public void testGetNonExistentConfigByName(){
+	public void testGetNonExistentConfigById(){
 		expect().
 		statusCode(404).
 		when().get(target+"/nonexistentconfig");

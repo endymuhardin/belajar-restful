@@ -39,7 +39,7 @@
 	    
 	        dojo.ready(function(){
 	            dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
-	            myStore = dojo.store.JsonRest({target:"/config/", idProperty: "name"});
+	            myStore = dojo.store.JsonRest({target:"/config/", idProperty: "id"});
 	            
 	            myGrid = new dojox.grid.DataGrid({
 			        store: gridStore = dojo.data.ObjectStore({objectStore: myStore}),
