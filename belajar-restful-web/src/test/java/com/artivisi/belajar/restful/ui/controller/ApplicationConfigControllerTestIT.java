@@ -33,12 +33,7 @@ public class ApplicationConfigControllerTestIT {
 	
 	@Test public void testSaveUpdateDelete(){
 		
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("name", "coba");
-		params.put("label", "Konfigurasi Percobaan");
-		params.put("value", "test");
-		
-		String id = testSave(target, params);
+		String id = testSave(target);
 		System.out.println("Id : "+id);
 		testGetExistingById(id, "coba", "Konfigurasi Percobaan", "test");
 		testUpdateExisting(id, "coba", "Konfigurasi Percobaan 001", "test123");
@@ -46,9 +41,15 @@ public class ApplicationConfigControllerTestIT {
 		testDeleteExistingById(id);
 	}
 	
-	private String testSave(String target, Map<String, String> params) {
-		String location = with().
-		parameters(params).
+	private String testSave(String target) {
+		ApplicationConfig config = new ApplicationConfig();
+		config.setName("coba");
+		config.setLabel("Konfigurasi Percobaan");
+		config.setValue("test");
+		
+		String location = 
+		given().
+		body(config).contentType(ContentType.JSON).
 		expect().
 		statusCode(201).
 		when().post(target).getHeader("Location");

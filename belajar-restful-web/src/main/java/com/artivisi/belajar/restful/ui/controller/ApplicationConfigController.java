@@ -61,7 +61,7 @@ public class ApplicationConfigController {
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@ModelAttribute ApplicationConfig config, HttpServletRequest request, HttpServletResponse response){
+    public void create(@RequestBody ApplicationConfig config, HttpServletRequest request, HttpServletResponse response){
 		belajarRestfulService.save(config);
 		String requestUrl = request.getRequestURL().toString();
         URI uri = new UriTemplate("{requestUrl}{id}").expand(requestUrl, config.getId());
