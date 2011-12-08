@@ -30,7 +30,7 @@ public class RangeTest {
 	@Test
 	public void testConstructor(){
 		assertEquals(new Range(10,20,30L), new Range(10,20,30L));
-		assertEquals(new Range(10,30,30L), new Range(10,40,30L));
+		assertEquals(new Range(10,29,30L), new Range(10,40,30L));
 	}
 	
 	@Test

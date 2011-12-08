@@ -82,7 +82,7 @@ public class Range {
 		this.total = total;
 		
 		if(total != null && total < to) {
-			this.to = total.intValue();
+			this.to = total.intValue() - 1;
 		}
 		
 	}

@@ -101,7 +101,8 @@ public class ApplicationConfigController {
 		Range responseRange = new Range(requestRange.getFrom(), requestRange.getTo(), countAll);
 		response.setHeader("Content-Range", responseRange.toResponseHeader());
 		
-		return belajarRestfulService.findAllApplicationConfigs(responseRange.getFrom().longValue(), responseRange.getTo() - responseRange.getFrom());
+		return belajarRestfulService.findAllApplicationConfigs(responseRange.getFrom().longValue(), 
+				(responseRange.getTo() - responseRange.getFrom()+1));
 	}
 	
 	
