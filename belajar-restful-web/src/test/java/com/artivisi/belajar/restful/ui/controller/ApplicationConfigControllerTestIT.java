@@ -64,6 +64,7 @@ public class ApplicationConfigControllerTestIT {
 	}
 	
 	private void testGetExistingById(String id, String name, String label, String value){
+		with().header("Accept", "application/json").
 		expect().
 		statusCode(200).
 		body(
@@ -98,6 +99,7 @@ public class ApplicationConfigControllerTestIT {
 	
 	@Test
 	public void testGetExistingConfigById(){
+		with().header("Accept", "application/json").
 		expect().
 		statusCode(200).
 		body(
@@ -120,6 +122,7 @@ public class ApplicationConfigControllerTestIT {
 	public void testFindAll(){
 		with()
 		.header("Range", "items=0-5")
+		.header("Accept", "application/json")
 		.expect()
 		.statusCode(200)
 		.header("Content-Range", "items 0-1/2")

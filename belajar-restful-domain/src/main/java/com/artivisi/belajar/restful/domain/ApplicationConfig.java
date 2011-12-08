@@ -20,11 +20,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name="c_application_config")
+@XmlRootElement(name = "config")
 public class ApplicationConfig {
 	
 	@Id @GeneratedValue(generator="system-uuid")
@@ -40,24 +43,28 @@ public class ApplicationConfig {
 	public String getId() {
 		return id;
 	}
+	@XmlElement
 	public void setId(String id) {
 		this.id = id;
 	}
 	public String getName() {
 		return name;
 	}
+	@XmlElement
 	public void setName(String name) {
 		this.name = name;
 	}
 	public String getLabel() {
 		return label;
 	}
+	@XmlElement
 	public void setLabel(String label) {
 		this.label = label;
 	}
 	public String getValue() {
 		return value;
 	}
+	@XmlElement
 	public void setValue(String value) {
 		this.value = value;
 	}
