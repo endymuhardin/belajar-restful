@@ -38,13 +38,13 @@ public class RangeTest {
 		String input = null;
 		
 		Range hasil = Range.fromRequestHeader(input);
-		assertEquals(new Range(0,20,null), hasil);
+		assertEquals(new Range(0,19,null), hasil);
 	}
 	
 	@Test
 	public void testParseRangeInvalidString() {
-		assertEquals(new Range(0,20,null), Range.fromRequestHeader("halo=10-20"));
-		assertEquals(new Range(0,20,null), Range.fromRequestHeader("halo1020"));
+		assertEquals(new Range(0,19,null), Range.fromRequestHeader("halo=10-20"));
+		assertEquals(new Range(0,19,null), Range.fromRequestHeader("halo1020"));
 	}
 
 	@Test
@@ -52,7 +52,7 @@ public class RangeTest {
 		String input = "items=10-2a";
 		
 		Range hasil = Range.fromRequestHeader(input);
-		assertEquals(new Range(0,20,null), hasil);
+		assertEquals(new Range(0,19,null), hasil);
 	}
 	
 	@Test

@@ -122,7 +122,7 @@ public class ApplicationConfigControllerTestIT {
 		.header("Range", "items=0-5")
 		.expect()
 		.statusCode(200)
-		.header("Content-Range", "items 0-2/2")
+		.header("Content-Range", "items 0-1/2")
 		.body(
 				"id", hasItems("abc123", "def456")
 		)

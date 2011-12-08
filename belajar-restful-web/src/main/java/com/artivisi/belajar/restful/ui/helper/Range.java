@@ -25,7 +25,7 @@ public class Range {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(Range.class);
 	private static final Integer DEFAULT_FROM = 0;
-	private static final Integer DEFAULT_TO = 20;
+	private static final Integer DEFAULT_TO = 19;
 	
 	private Integer from = DEFAULT_FROM;
 	private Integer to = DEFAULT_TO;
