@@ -42,7 +42,7 @@
 	<!-- Default Properties -->
 	<properties>
 		<!-- versi library dan framework -->
-		<org.springframework.version>3.0.6.RELEASE</org.springframework.version>
+		<org.springframework.version>3.1.0.RELEASE</org.springframework.version>
 		<org.hibernate.version>3.6.0.Final</org.hibernate.version>
 		<org.hibernate.validator.version>4.2.0.Final</org.hibernate.validator.version>
 		<org.slf4j.version>1.6.3</org.slf4j.version>

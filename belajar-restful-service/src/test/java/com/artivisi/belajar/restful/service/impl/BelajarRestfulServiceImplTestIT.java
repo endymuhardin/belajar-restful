@@ -32,19 +32,15 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath*:com/artivisi/**/applicationContext.xml")
-@TransactionConfiguration(defaultRollback=true)
-@Transactional
 public class BelajarRestfulServiceImplTestIT {
 	@Autowired private BelajarRestfulService service;
 	@Autowired private DataSource dataSource;
