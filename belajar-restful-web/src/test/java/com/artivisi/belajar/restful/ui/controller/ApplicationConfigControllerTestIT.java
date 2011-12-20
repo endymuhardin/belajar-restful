@@ -137,6 +137,7 @@ public class ApplicationConfigControllerTestIT {
 			.post(target+"/abc123/files");
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testUploadPakaiRestTemplate(){
 		RestTemplate restTemplate = new RestTemplate();
