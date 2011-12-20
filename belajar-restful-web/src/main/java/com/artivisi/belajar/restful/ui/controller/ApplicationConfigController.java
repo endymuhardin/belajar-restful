@@ -15,8 +15,11 @@
  */
 package com.artivisi.belajar.restful.ui.controller;
 
+import java.io.File;
 import java.net.URI;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,8 +35,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriTemplate;
 
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
@@ -47,6 +52,56 @@ public class ApplicationConfigController {
 	@Autowired private BelajarRestfulService belajarRestfulService;
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	@RequestMapping("/{id}/files")
+	@ResponseBody
+	public Map<String, String> uploadFiles(
+			@PathVariable String id,
+			@RequestParam String keterangan, 
+			@RequestParam MultipartFile cv, 
+			@RequestParam MultipartFile foto
+			) throws Exception {
+		ApplicationConfig config = belajarRestfulService.findApplicationConfigById(id);
+		if(config == null){
+			throw new IllegalStateException();
+		}
+		
+		Map<String, String> result = new HashMap<String, String>();
+		
+		logger.info("CV => Content-Type : {}, Filename : {}, Size : {}", new Object[]{
+				cv.getContentType(), cv.getOriginalFilename(), cv.getSize()});
+		
+		logger.info("Foto => Content-Type : {}, Filename : {}, Size : {}", new Object[]{
+				foto.getContentType(), foto.getOriginalFilename(), foto.getSize()});
+		
+		File cvTarget = File.createTempFile(cv.getOriginalFilename().split("\\.")[0], "."+cv.getOriginalFilename().split("\\.")[1]);
+		File fotoTarget = File.createTempFile(foto.getOriginalFilename().split("\\.")[0], "."+foto.getOriginalFilename().split("\\.")[1]);
+		cv.transferTo(cvTarget);
+		foto.transferTo(fotoTarget);
+		
+		logger.info("CV disimpan ke {}",cvTarget.getAbsolutePath());
+		logger.info("Foto disimpan ke {}",fotoTarget.getAbsolutePath());
+		
+		if(cv.getSize() == 51987l) {
+			result.put("cv", "success");
+		} else {
+			result.put("cv", "error size");
+		}
+		
+		if(foto.getSize() == 583738l) {
+			result.put("foto", "success");
+		} else {
+			result.put("foto", "error size");
+		}
+		
+		if("File Endy".equals(keterangan)) {
+			result.put("keterangan", "success");
+		} else {
+			result.put("keterangan", "salah content");
+		}
+		
+		return result;
+	}
 	
 	@RequestMapping("/{id}")
 	@ResponseBody
