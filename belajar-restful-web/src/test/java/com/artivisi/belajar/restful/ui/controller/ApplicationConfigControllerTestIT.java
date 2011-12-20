@@ -23,11 +23,17 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.hasItems;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 import groovyx.net.http.ContentType;
 
 import java.io.File;
+import java.util.Map;
 
 import org.junit.Test;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 
@@ -129,5 +135,20 @@ public class ApplicationConfigControllerTestIT {
 			)
 		.when()
 			.post(target+"/abc123/files");
+	}
+	
+	@Test
+	public void testUploadPakaiRestTemplate(){
+		RestTemplate restTemplate = new RestTemplate();
+		MultiValueMap<String, Object> form = new LinkedMultiValueMap<String, Object>();
+		form.add("foto", new FileSystemResource("src/test/resources/foto-endy.jpg"));
+		form.add("Filename", "cv-endy.pdf");
+		form.add("cv", new FileSystemResource("src/test/resources/resume-endy-en.pdf"));
+		form.add("keterangan", "File Endy");
+		Map<String, String> result = restTemplate.postForObject(target+"/abc123/files", form, Map.class);
+		
+		assertEquals("success", result.get("cv"));
+		assertEquals("success", result.get("foto"));
+		assertEquals("success", result.get("keterangan"));
 	}
 }
