@@ -32,6 +32,7 @@ import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -41,19 +42,20 @@ import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath*:com/artivisi/**/applicationContext.xml"})
+@ContextConfiguration("classpath*:com/artivisi/**/applicationContext.xml")
 @TransactionConfiguration(defaultRollback=true)
+@Transactional
 public class BelajarRestfulServiceImplTestIT {
 	@Autowired private BelajarRestfulService service;
 	@Autowired private DataSource dataSource;
-	
+
 	@Before
 	public void resetDatabase() throws Exception {
 		Connection conn = dataSource.getConnection();
-		DatabaseOperation.CLEAN_INSERT.execute(new DatabaseConnection(conn), 
+		DatabaseOperation.CLEAN_INSERT.execute(new DatabaseConnection(conn),
 				new FlatXmlDataSetBuilder().build(new File("src/test/resources/sample-data.xml")));
 	}
-	
+
 	@Test public void testFindById(){
 		ApplicationConfig ac = service.findApplicationConfigById("def456");
 		assertNotNull(ac);
@@ -61,7 +63,7 @@ public class BelajarRestfulServiceImplTestIT {
 		assertEquals("Application Version", ac.getLabel());
 		assertEquals("1.0", ac.getValue());
 	}
-	
+
 	@Test public void testSaveNew(){
 		ApplicationConfig ac = new ApplicationConfig();
 		ac.setName("base.path");
@@ -72,7 +74,7 @@ public class BelajarRestfulServiceImplTestIT {
 		assertEquals(Long.valueOf(countAll + 1), service.countAllApplicationConfigs());
 		assertNotNull(ac.getId());
 	}
-	
+
 	@Test public void testSaveExisting(){
 		ApplicationConfig ac = service.findApplicationConfigById("abc123");
 		assertNotNull(ac);
@@ -84,7 +86,7 @@ public class BelajarRestfulServiceImplTestIT {
 		assertEquals("Versi Aplikasi", ac1.getLabel());
 		assertEquals("2.0", ac1.getValue());
 	}
-	
+
 	@Test public void testDeleteExisting(){
 		ApplicationConfig ac = service.findApplicationConfigById("abc123");
 		assertNotNull(ac);
@@ -94,7 +96,7 @@ public class BelajarRestfulServiceImplTestIT {
 		ApplicationConfig ac1 = service.findApplicationConfigById("applicationversion");
 		assertNull(ac1);
 	}
-	
+
 	@Test public void testFindAll(){
 		List<ApplicationConfig> result = service.findAllApplicationConfigs(0L, service.countAllApplicationConfigs().intValue());
 		assertTrue(result.size() > 0);
