@@ -120,6 +120,23 @@ public class ApplicationConfigControllerTestIT {
 				.header("Content-Range", "items 0-1/2")
 				.body("id", hasItems("abc123", "def456")).when().get(target);
 	}
+	
+	@Test
+	public void testSearch() {
+		with().header("Range", "items=0-5")
+				.header("Accept", "application/json")
+				.param("search", "name")
+				.expect().statusCode(200)
+				.header("Content-Range", "items 0-0/1")
+				.body("id", hasItems("abc123")).when().get(target);
+		
+		with().header("Range", "items=0-5")
+		.header("Accept", "application/json")
+		.param("search", "xx")
+		.expect().statusCode(200)
+		.header("Content-Range", "items 0-0/0")
+		.when().get(target);
+	}
 
 	@Test
 	public void testUploadFile() {

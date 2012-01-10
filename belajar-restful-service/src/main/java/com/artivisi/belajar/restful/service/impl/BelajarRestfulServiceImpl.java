@@ -69,5 +69,36 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 				.createQuery("select count(ac) from ApplicationConfig ac")
 			   .uniqueResult();
 	}
+	
+	@Override
+	public List<ApplicationConfig> findApplicationConfigs(String search, Long start, Integer rows) {
+		if(!StringUtils.hasText(search)) {
+			return findAllApplicationConfigs(start, rows);
+		}
+		
+		return sessionFactory.getCurrentSession()
+				.createQuery("from ApplicationConfig ac " +
+						"where lower(ac.name) like :search " +
+						"or lower(ac.label) like :search " +
+						"or lower(ac.value) like :search " +
+						"order by ac.name")
+					.setString("search", "%"+search.trim().toLowerCase()+"%")
+				.setFirstResult(start.intValue())
+				.setMaxResults(rows)
+			   .list();
+	}
 
+	@Override
+	public Long countApplicationConfigs(String search) {
+		if(!StringUtils.hasText(search)) {
+			return countAllApplicationConfigs();
+		}
+		return (Long) sessionFactory.getCurrentSession()
+				.createQuery("select count(ac) from ApplicationConfig ac " +
+						"where lower(ac.name) like :search " +
+						"or lower(ac.label) like :search " +
+						"or lower(ac.value) like :search ")
+						.setString("search", "%"+search.trim().toLowerCase()+"%")
+			   .uniqueResult();
+	}
 }

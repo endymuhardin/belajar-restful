@@ -42,7 +42,10 @@
 	    
 	        dojo.ready(function(){
 	            dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
-	            myStore = dojo.store.JsonRest({target:"/config/", idProperty: "id"});
+	            myStore = dojo.store.JsonRest({
+	            	target:"/config/", 
+	            	idProperty: "id"
+            	});
 	            
 	            myGrid = new dojox.grid.DataGrid({
 			        store: gridStore = dojo.data.ObjectStore({objectStore: myStore}),
@@ -60,12 +63,20 @@
 				    myGrid.store.save({onComplete: function(){
 				    	myGrid.setQuery();
 				    }});
-				});				
+				});	
+			    
+			    dojo.connect(dojo.byId("cari"), "keypress", function(evt){
+				    var keyword = dijit.byId("cari").get('value');
+				    console.log("cari : "+keyword);
+				    myGrid.setQuery("?search="+keyword);
+				});	
 	        });
 	    </script>
 	</head>
 	<body class="claro">
 	    <h1 id="greeting">Hello</h1>
+	    
+	    Cari : <input id="cari" type="text" dojoType="dijit.form.TextBox" name="search">
 	    
 	    <div id="gridConfig"></div>
 	    

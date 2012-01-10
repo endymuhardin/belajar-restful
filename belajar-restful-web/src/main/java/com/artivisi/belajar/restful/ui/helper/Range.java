@@ -82,11 +82,13 @@ public class Range {
 		this.total = total;
 		
 		if(total != null && total < to) {
-			this.to = total.intValue() - 1;
+			if(total > 0) {
+				this.to = total.intValue() - 1; 
+			} else {
+				this.to = 0;
+			}
 		}
-		
 	}
-
 
 	public Integer getFrom() {
 		return from;
