@@ -66,7 +66,7 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 	@Override
 	public Long countAllApplicationConfigs() {
 		return (Long) sessionFactory.getCurrentSession()
-				.createQuery("select count(ac) from ApplicationConfig ac order by ac.name")
+				.createQuery("select count(ac) from ApplicationConfig ac")
 			   .uniqueResult();
 	}
 
