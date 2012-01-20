@@ -17,10 +17,12 @@ package com.artivisi.belajar.restful.ui.controller;
 
 import java.io.File;
 import java.net.URI;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -46,6 +48,7 @@ import org.springframework.web.util.UriTemplate;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import com.artivisi.belajar.restful.ui.helper.Range;
+import com.google.common.io.Files;
 
 @Controller
 @RequestMapping("/config")
@@ -178,7 +181,7 @@ public class ApplicationConfigController {
 	
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	@ResponseBody
-	public List<Map<String, String>> testUpload(@RequestParam(value="uploadedfiles[]") List<MultipartFile> daftarFoto){
+	public List<Map<String, String>> testUpload(@RequestParam(value="uploadedfiles[]") List<MultipartFile> daftarFoto) throws Exception {
 		
 		logger.debug("Jumlah file yang diupload {}", daftarFoto.size());
 		
@@ -192,10 +195,24 @@ public class ApplicationConfigController {
 			Map<String, String> keterangan = new HashMap<String, String>();
 			keterangan.put("Nama File", multipartFile.getOriginalFilename());
 			keterangan.put("Ukuran File", Long.valueOf(multipartFile.getSize()).toString());
+			keterangan.put("Content Type", multipartFile.getContentType());
+			keterangan.put("UUID", UUID.randomUUID().toString());
+			File temp = File.createTempFile("xxx", "xxx");
+			multipartFile.transferTo(temp);
+			keterangan.put("MD5", createMD5Sum(temp));
 			hasil.add(keterangan);
 		}
 		
 		return hasil;
+	}
+	
+	private String createMD5Sum(File file) throws Exception{
+		byte[] checksum = Files.getDigest(file, MessageDigest.getInstance("MD5"));
+		StringBuffer result = new StringBuffer();
+		for (int i = 0; i < checksum.length; i++) {
+			result.append(Integer.toString( ( checksum[i] & 0xff ) + 0x100, 16).substring( 1 ));
+		}
+		return result.toString();
 	}
 	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
