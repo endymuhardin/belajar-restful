@@ -17,6 +17,7 @@ package com.artivisi.belajar.restful.ui.controller;
 
 import java.io.File;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -175,6 +176,27 @@ public class ApplicationConfigController {
 		
 	}
 	
+	@RequestMapping(value="/upload", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Map<String, String>> testUpload(@RequestParam(value="uploadedfiles[]") List<MultipartFile> daftarFoto){
+		
+		logger.debug("Jumlah file yang diupload {}", daftarFoto.size());
+		
+		List<Map<String, String>> hasil = new ArrayList<Map<String,String>>();
+		
+		for (MultipartFile multipartFile : daftarFoto) {
+			logger.debug("Nama File : {}", multipartFile.getName());
+			logger.debug("Nama File Original : {}", multipartFile.getOriginalFilename());
+			logger.debug("Ukuran File : {}", multipartFile.getSize());
+			
+			Map<String, String> keterangan = new HashMap<String, String>();
+			keterangan.put("Nama File", multipartFile.getOriginalFilename());
+			keterangan.put("Ukuran File", Long.valueOf(multipartFile.getSize()).toString());
+			hasil.add(keterangan);
+		}
+		
+		return hasil;
+	}
 	
 	@ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler({IllegalStateException.class})

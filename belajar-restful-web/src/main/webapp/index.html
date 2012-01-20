@@ -17,73 +17,97 @@
 -->
 <!DOCTYPE html>
 <html>
-	<head>
-	    <meta charset="utf-8">
-	    <title>Tutorial: Hello Dojo!</title>
-	    <!-- load Dojo -->
-	    
-	    <link rel="stylesheet" type="text/css" href=
-		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/resources/dojo.css"/>
-		  <link rel="stylesheet" type="text/css" href=
-		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dijit/themes/claro/claro.css"/>
-		  <link rel="stylesheet" type="text/css" href=
-		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/Grid.css"/>
-		  <link rel="stylesheet" type="text/css" href=
-		  "http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/claroGrid.css"/>
-	    
-	    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js" djConfig="parseOnLoad:true"></script>
-	    <script>
-	    	dojo.require("dojo.store.JsonRest");
-		    dojo.require("dojox.grid.DataGrid");
-			dojo.require("dojo.data.ObjectStore");
-			dojo.require("dijit.form.Form");
-			dojo.require("dijit.form.ValidationTextBox");
-			dojo.require("dijit.form.Button");
-	    
-	        dojo.ready(function(){
-	            dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
-	            myStore = dojo.store.JsonRest({
-	            	target:"/config/", 
-	            	idProperty: "id"
-            	});
-	            
-	            myGrid = new dojox.grid.DataGrid({
-			        store: gridStore = dojo.data.ObjectStore({objectStore: myStore}),
-			        structure: [
-			            {name:"Id", field:"id", width: "200px"},
-			            {name:"Name", field:"name", width: "200px"},
-			            {name:"Label", field:"label", width: "200px", editable: true},
-			            {name:"Value", field:"value", width: "200px", editable: true}
-			        ]
-			    }, "gridConfig"); 
-			    
-			    myGrid.startup();
-			    
-			    dojo.connect(myGrid, "onApplyCellEdit", myGrid, function(evt){
-				    myGrid.store.save({onComplete: function(){
-				    	myGrid.setQuery();
-				    }});
-				});	
-			    
-			    dojo.connect(dojo.byId("cari"), "keypress", function(evt){
-				    var keyword = dijit.byId("cari").get('value');
-				    console.log("cari : "+keyword);
-				    myGrid.setQuery("?search="+keyword);
-				});	
-	        });
-	    </script>
-	</head>
-	<body class="claro">
-	    <h1 id="greeting">Hello</h1>
-	    
-	    Cari : <input id="cari" type="text" dojoType="dijit.form.TextBox" name="search">
-	    
-	    <div id="gridConfig"></div>
-	    
-	    <hr>
-	    <h1>Entri Konfigurasi</h1>
-	    <form id="formSave" dojotype="dijit.form.Form">
-	    <script type="dojo/method" event="onSubmit">
+<head>
+<meta charset="utf-8">
+<title>Tutorial: Hello Dojo!</title>
+<!-- load Dojo -->
+
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/resources/dojo.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dijit/themes/claro/claro.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/Grid.css" />
+<link rel="stylesheet" type="text/css"
+	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/claroGrid.css" />
+
+<script
+	src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js"
+	djConfig="parseOnLoad:true"></script>
+<script>
+	dojo.require("dojo.store.JsonRest");
+	dojo.require("dojox.grid.DataGrid");
+	dojo.require("dojo.data.ObjectStore");
+	dojo.require("dijit.form.Form");
+	dojo.require("dijit.form.ValidationTextBox");
+	dojo.require("dijit.form.Button");
+	dojo.require("dojox.form.Uploader");
+	dojo.require("dojox.form.uploader.FileList");
+	dojo.require("dojox.form.uploader.plugins.HTML5");
+
+	dojo.ready(function() {
+		dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
+		myStore = dojo.store.JsonRest({
+			target : "/config/",
+			idProperty : "id"
+		});
+
+		myGrid = new dojox.grid.DataGrid({
+			store : gridStore = dojo.data.ObjectStore({
+				objectStore : myStore
+			}),
+			structure : [ {
+				name : "Id",
+				field : "id",
+				width : "200px"
+			}, {
+				name : "Name",
+				field : "name",
+				width : "200px"
+			}, {
+				name : "Label",
+				field : "label",
+				width : "200px",
+				editable : true
+			}, {
+				name : "Value",
+				field : "value",
+				width : "200px",
+				editable : true
+			} ]
+		}, "gridConfig");
+
+		myGrid.startup();
+
+		dojo.connect(myGrid, "onApplyCellEdit", myGrid, function(evt) {
+			myGrid.store.save({
+				onComplete : function() {
+					myGrid.setQuery();
+				}
+			});
+		});
+
+		dojo.connect(dojo.byId("cari"), "keypress", function(evt) {
+			var keyword = dijit.byId("cari").get('value');
+			console.log("cari : " + keyword);
+			myGrid.setQuery("?search=" + keyword);
+		});
+	});
+</script>
+</head>
+<body class="claro">
+	<h1 id="greeting">Hello</h1>
+
+	Cari :
+	<input id="cari" type="text" dojoType="dijit.form.TextBox"
+		name="search">
+
+	<div id="gridConfig"></div>
+
+	<hr>
+	<h1>Entri Konfigurasi</h1>
+	<form id="formSave" dojotype="dijit.form.Form">
+		<script type="dojo/method" event="onSubmit">
 		<!--
 		if (!this.validate()) {
 		    alert('Semua field harus diisi');
@@ -97,12 +121,44 @@
 		return false;
 		-->
 		</script>
-	    
-            Name : <input type="text" dojoType="dijit.form.ValidationTextBox" required="true" name="name"><br>
-            Label : <input type="text" dojoType="dijit.form.ValidationTextBox" required="true" name="label"><br>
-            Value : <input type="text" dojoType="dijit.form.ValidationTextBox" required="true" name="value"><br>
-            <input type="submit" value="Save" label="Save" id="btnSave" dojotype="dijit.form.Button">
-        </form>
-	    
-	</body>
+
+		Name : <input type="text" dojoType="dijit.form.ValidationTextBox"
+			required="true" name="name"><br> Label : <input
+			type="text" dojoType="dijit.form.ValidationTextBox" required="true"
+			name="label"><br> Value : <input type="text"
+			dojoType="dijit.form.ValidationTextBox" required="true" name="value"><br>
+		<input type="submit" value="Save" label="Save" id="btnSave"
+			dojotype="dijit.form.Button">
+	</form>
+<hr>
+<h1>Upload Ajax</h1>
+	<form method="post" action="/config/upload" id="myForm"
+		enctype="multipart/form-data">
+		<input 
+			name="foto" 
+			multiple="true" 
+			type="file"
+			dojoType="dojox.form.Uploader" 
+			label="Select Some Files"
+			uploadOnSelect="true"
+			id="uploader" /> 
+			<input type="submit" value="Submit"
+			/>
+			
+			<div id="files" dojoType="dojox.form.uploader.FileList"
+        uploaderId="uploader"></div>
+	</form>
+
+<h1>Upload Normal</h1>
+	<form method="post" action="/config/upload" id="myForm"
+		enctype="multipart/form-data">
+		
+		<input name="uploadedfiles[]" type="file" multiple="true"> 
+		
+		<input type="submit" value="Submit"
+			/>
+		
+	</form>
+
+</body>
 </html>
