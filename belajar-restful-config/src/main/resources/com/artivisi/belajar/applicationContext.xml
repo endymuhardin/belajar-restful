@@ -27,12 +27,12 @@
 		p:maxActive="80" p:maxIdle="20" />
 
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate3.HibernateTransactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
 		p:sessionFactory-ref="sessionFactory" />
 
 
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
 		p:dataSource-ref="dataSource" p:configLocations="classpath*:com/artivisi/**/hibernate.cfg.xml">
 		<property name="hibernateProperties">
 			<props>
