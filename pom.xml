@@ -78,7 +78,7 @@
 		<appserver.type>tomcat6x</appserver.type>
 		<appserver.installation>installed</appserver.installation>
 		<appserver.configuration>standalone</appserver.configuration>
-		<appserver.installer>http://apache.the.net.id/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</appserver.installer>
+		<appserver.installer>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</appserver.installer>
 		<appserver.ipaddress>localhost</appserver.ipaddress>
 		<appserver.port.http>10000</appserver.port.http>
 		<appserver.port.ajp>10010</appserver.port.ajp>
@@ -120,7 +120,7 @@
 				<appserver.type>tomcat7x</appserver.type>
 				<appserver.installation>remote</appserver.installation>
 				<appserver.configuration>runtime</appserver.configuration>
-				<appserver.installer>http://apache.the.net.id/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</appserver.installer>
+				<appserver.installer>http://archive.apache.org/dist/tomcat/tomcat-6/v6.0.33/bin/apache-tomcat-6.0.33.zip</appserver.installer>
 				<appserver.ipaddress>localhost</appserver.ipaddress>
 				<appserver.port.http>8080</appserver.port.http>
 				<appserver.port.ajp>8009</appserver.port.ajp>
