@@ -40,10 +40,26 @@
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.generate_statistics">true</prop>
 			</props>
 		</property>
 		<property name="packagesToScan" value="com.artivisi.belajar.restful.domain" />
 	</bean>
+
+	<!-- Hibernate Statistics Monitoring -->
+	<bean id="hibernateStatisticsMBean" class="org.hibernate.jmx.StatisticsService">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="mbeanExporter" class="org.springframework.jmx.export.MBeanExporter">
+		<property name="beans">
+			<map>
+				<entry key="SpringBeans:name=hibernateStatisticsMBean" value-ref="hibernateStatisticsMBean" />
+			</map>
+		</property>
+	</bean>
+	
+	<context:mbean-server/>
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
