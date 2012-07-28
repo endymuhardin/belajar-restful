@@ -27,14 +27,14 @@
 		<repository>
 			<id>artivisi-nexus</id>
 			<name>ArtiVisi Release Repository</name>
-			<url>scp://${artifact.repo.host}:${artifact.repo.path.upload}/releases</url>
+			<url>http://forge.artivisi.com:8080/nexus/content/repositories/releases</url>
 		</repository>
 
 		<!-- snapshot repository -->
 		<snapshotRepository>
 			<id>artivisi-nexus</id>
 			<name>ArtiVisi Snapshot Repository</name>
-			<url>scp://${artifact.repo.host}:${artifact.repo.path.upload}/snapshots</url>
+			<url>http://forge.artivisi.com:8080/nexus/content/repositories/snapshots</url>
 		</snapshotRepository>
 
 	</distributionManagement>
