@@ -66,6 +66,7 @@
 		<liquibase-maven-plugin.version>2.0.3</liquibase-maven-plugin.version>
 		<maven-failsafe-plugin.version>2.10</maven-failsafe-plugin.version>
 		<rest-assured.version>1.4</rest-assured.version>
+		<javamelody.version>1.39.0</javamelody.version>
 
 		<!-- konfigurasi database development -->
 		<db.driver>com.mysql.jdbc.Driver</db.driver>

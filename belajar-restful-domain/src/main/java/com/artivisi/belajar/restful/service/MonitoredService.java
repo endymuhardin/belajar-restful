@@ -15,16 +15,6 @@
  */
 package com.artivisi.belajar.restful.service;
 
-import java.util.List;
+public interface MonitoredService {
 
-import com.artivisi.belajar.restful.domain.ApplicationConfig;
-
-public interface BelajarRestfulService extends MonitoredService {
-	void save(ApplicationConfig ac);
-	void delete(ApplicationConfig ac);
-	ApplicationConfig findApplicationConfigById(String id);
-	List<ApplicationConfig> findAllApplicationConfigs(Long start, Integer rows);
-	Long countAllApplicationConfigs();
-	Long countApplicationConfigs(String search);
-	List<ApplicationConfig> findApplicationConfigs(String search, Long longValue, Integer i);
 }

@@ -31,6 +31,7 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>${org.hibernate.validator.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -41,6 +42,12 @@
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
 			<version>${guava.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>${javamelody.version}</version>
 		</dependency>
 	</dependencies>
 
