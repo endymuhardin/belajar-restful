@@ -53,6 +53,9 @@ import com.google.common.io.Files;
 @Controller
 @RequestMapping("/config")
 public class ApplicationConfigController {
+    private static final String ESC_CHAR_TITIK = "\\.";
+    private static final long UKURAN_FILE_CV = 51987l;
+    private static final long UKURAN_FILE_FOTO = 583738l;
 	
 	@Autowired private BelajarRestfulService belajarRestfulService;
 	
@@ -79,21 +82,21 @@ public class ApplicationConfigController {
 		logger.info("Foto => Content-Type : {}, Filename : {}, Size : {}", new Object[]{
 				foto.getContentType(), foto.getOriginalFilename(), foto.getSize()});
 		
-		File cvTarget = File.createTempFile(cv.getOriginalFilename().split("\\.")[0], "."+cv.getOriginalFilename().split("\\.")[1]);
-		File fotoTarget = File.createTempFile(foto.getOriginalFilename().split("\\.")[0], "."+foto.getOriginalFilename().split("\\.")[1]);
+		File cvTarget = File.createTempFile(cv.getOriginalFilename().split(ESC_CHAR_TITIK)[0], "."+cv.getOriginalFilename().split(ESC_CHAR_TITIK)[1]);
+		File fotoTarget = File.createTempFile(foto.getOriginalFilename().split(ESC_CHAR_TITIK)[0], "."+foto.getOriginalFilename().split(ESC_CHAR_TITIK)[1]);
 		cv.transferTo(cvTarget);
 		foto.transferTo(fotoTarget);
 		
 		logger.info("CV disimpan ke {}",cvTarget.getAbsolutePath());
 		logger.info("Foto disimpan ke {}",fotoTarget.getAbsolutePath());
 		
-		if(cv.getSize() == 51987l) {
+		if(cv.getSize() == UKURAN_FILE_CV) {
 			result.put("cv", "success");
 		} else {
 			result.put("cv", "error size");
 		}
 		
-		if(foto.getSize() == 583738l) {
+		if(foto.getSize() == UKURAN_FILE_FOTO) {
 			result.put("foto", "success");
 		} else {
 			result.put("foto", "error size");
