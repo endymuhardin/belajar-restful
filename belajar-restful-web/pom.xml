@@ -124,58 +124,36 @@
 					<keyalg>RSA</keyalg>
 				</configuration>
 			</plugin>
+
 			<plugin>
-				<groupId>org.codehaus.cargo</groupId>
-				<artifactId>cargo-maven2-plugin</artifactId>
-				<version>${cargo-maven2-plugin.version}</version>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.0-beta-1</version>
+				<configuration>
+					<server>${appserver.config.name}</server>
+					<port>${appserver.port.http}</port>
+					<path>${appserver.deployment.context}</path>
+					<url>${appserver.deployment.url}</url>
+				</configuration>
 				<executions>
 					<execution>
-						<id>start-container</id>
-						<phase>pre-integration-test</phase>
+						<id>tomcat-run</id>
 						<goals>
-							<goal>install</goal>
-							<goal>start</goal>
+							<goal>run-war-only</goal>
 						</goals>
+						<phase>pre-integration-test</phase>
+						<configuration>
+							<fork>true</fork>
+						</configuration>
 					</execution>
 					<execution>
-						<id>stop-container</id>
-						<phase>post-integration-test</phase>
+						<id>tomcat-shutdown</id>
 						<goals>
-							<goal>stop</goal>
+							<goal>shutdown</goal>
 						</goals>
+						<phase>post-integration-test</phase>
 					</execution>
 				</executions>
-				<configuration>
-					<container>
-						<containerId>${appserver.type}</containerId>
-						<type>${appserver.installation}</type>
-						<zipUrlInstaller>
-							<url>${appserver.installer}</url>
-							<downloadDir>${java.io.tmpdir}</downloadDir>
-							<extractDir>${java.io.tmpdir}</extractDir>
-						</zipUrlInstaller>
-					</container>
-					<configuration>
-						<type>${appserver.configuration}</type>
-						<home>${project.build.directory}/tomcat</home>
-						<properties>
-							<cargo.servlet.port>${appserver.port.http}</cargo.servlet.port>
-							<cargo.tomcat.ajp.port>${appserver.port.ajp}</cargo.tomcat.ajp.port>
-							<cargo.jvmargs>${argLine}</cargo.jvmargs>
-						</properties>
-
-						<deployables>
-							<deployable>
-								<groupId>${project.groupId}</groupId>
-								<artifactId>${project.artifactId}</artifactId>
-								<type>war</type>
-								<properties>
-									<context>${appserver.deployer.context}</context>
-								</properties>
-							</deployable>
-						</deployables>
-					</configuration>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
