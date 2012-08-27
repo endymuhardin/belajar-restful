@@ -133,7 +133,6 @@
 					<server>${appserver.config.name}</server>
 					<port>${appserver.port.http}</port>
 					<path>${appserver.deployment.context}</path>
-					<url>${appserver.deployment.url}</url>
 				</configuration>
 				<executions>
 					<execution>

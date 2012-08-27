@@ -78,7 +78,6 @@
 		<appserver.config.name>tomcat6-development</appserver.config.name>
 		<appserver.port.http>10000</appserver.port.http>
 		<appserver.deployment.context>/</appserver.deployment.context>
-		<appserver.deployment.url>http://localhost:${appserver.port.http}/manager/text</appserver.deployment.url>
 
 		<!-- konfigurasi sonar -->
 		<sonar.jacoco.itReportPath>${project.build.directory}/jacoco.exec</sonar.jacoco.itReportPath>
@@ -113,7 +112,6 @@
 				<appserver.config.name>tomcat6-testing</appserver.config.name>
 				<appserver.port.http>8080</appserver.port.http>
 				<appserver.deployment.context>/belajar</appserver.deployment.context>
-				<appserver.deployment.url>http://localhost:${appserver.port.http}/manager</appserver.deployment.url>
 			</properties>
 		</profile>
 

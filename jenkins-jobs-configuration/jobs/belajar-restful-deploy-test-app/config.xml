@@ -61,10 +61,10 @@
   <concurrentBuild>false</concurrentBuild>
   <rootModule>
     <groupId>com.artivisi.belajar</groupId>
-    <artifactId>belajar-restful-deployer</artifactId>
+    <artifactId>belajar-restful-web</artifactId>
   </rootModule>
-  <rootPOM>belajar-restful-deployer/pom.xml</rootPOM>
-  <goals>cargo:redeploy -Ptesting</goals>
+  <rootPOM>belajar-restful-web/pom.xml</rootPOM>
+  <goals>tomcat6:redeploy -Ptesting</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>
   <incrementalBuild>false</incrementalBuild>
   <usePrivateRepository>false</usePrivateRepository>
