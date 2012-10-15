@@ -17,25 +17,25 @@ package com.artivisi.belajar.restful.service.impl;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import com.artivisi.belajar.restful.dao.ApplicationConfigDao;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 
-@SuppressWarnings("unchecked")
 @Service("belajarRestfulService")
 @Transactional
 public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
-	@Autowired private SessionFactory sessionFactory;
+	@Autowired private ApplicationConfigDao applicationConfigDao;
 	
 	@Override
 	public void save(ApplicationConfig ac) {
-		sessionFactory.getCurrentSession().saveOrUpdate(ac);
+		applicationConfigDao.save(ac);
 	}
 
 	@Override
@@ -43,7 +43,7 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 		if(ac == null || ac.getId() == null) {
 			return;
 		}
-		sessionFactory.getCurrentSession().delete(ac);
+		applicationConfigDao.delete(ac);
 	}
 
 	@Override
@@ -51,41 +51,42 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 		if(!StringUtils.hasText(id)) {
 			return null;
 		}
-		return (ApplicationConfig) sessionFactory.getCurrentSession()
-				.get(ApplicationConfig.class, id);
+		return applicationConfigDao.findOne(id);
 	}
 
 	@Override
-	public List<ApplicationConfig> findAllApplicationConfigs(Long start, Integer rows) {
-		return sessionFactory.getCurrentSession().createQuery("from ApplicationConfig ac order by ac.name")
-				.setFirstResult(start.intValue())
-				.setMaxResults(rows)
-			   .list();
+	public List<ApplicationConfig> findAllApplicationConfigs(Integer page, Integer rows) {
+		if(page == null || page < 0){
+			page = 0;
+		}
+		
+		if(rows == null || rows < 1){
+			rows = 20;
+		}
+		
+		return applicationConfigDao.findAll(new PageRequest(page, rows)).getContent();
 	}
 
 	@Override
 	public Long countAllApplicationConfigs() {
-		return (Long) sessionFactory.getCurrentSession()
-				.createQuery("select count(ac) from ApplicationConfig ac")
-			   .uniqueResult();
+		return applicationConfigDao.countAll();
 	}
 	
 	@Override
-	public List<ApplicationConfig> findApplicationConfigs(String search, Long start, Integer rows) {
-		if(!StringUtils.hasText(search)) {
-			return findAllApplicationConfigs(start, rows);
+	public List<ApplicationConfig> findApplicationConfigs(String search, Integer page, Integer rows) {
+		if(page == null || page < 0){
+			page = 0;
 		}
 		
-		return sessionFactory.getCurrentSession()
-				.createQuery("from ApplicationConfig ac " +
-						"where lower(ac.name) like :search " +
-						"or lower(ac.label) like :search " +
-						"or lower(ac.value) like :search " +
-						"order by ac.name")
-					.setString("search", "%"+search.trim().toLowerCase()+"%")
-				.setFirstResult(start.intValue())
-				.setMaxResults(rows)
-			   .list();
+		if(rows == null || rows < 1){
+			rows = 20;
+		}
+		
+		if(!StringUtils.hasText(search)) {
+			return findAllApplicationConfigs(page, rows);
+		}
+		
+		return applicationConfigDao.search("%"+search+"%", new PageRequest(page, rows));
 	}
 
 	@Override
@@ -93,12 +94,6 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 		if(!StringUtils.hasText(search)) {
 			return countAllApplicationConfigs();
 		}
-		return (Long) sessionFactory.getCurrentSession()
-				.createQuery("select count(ac) from ApplicationConfig ac " +
-						"where lower(ac.name) like :search " +
-						"or lower(ac.label) like :search " +
-						"or lower(ac.value) like :search ")
-						.setString("search", "%"+search.trim().toLowerCase()+"%")
-			   .uniqueResult();
+		return applicationConfigDao.count("%"+search+"%");
 	}
 }

@@ -27,26 +27,36 @@
 		p:username="${jdbc.username}" p:password="${jdbc.password}" p:maxWait="40000"
 		p:maxActive="80" p:maxIdle="20" />
 
-	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager"
-		p:sessionFactory-ref="sessionFactory" />
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+		id="transactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="jpaDialect">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+		</property>
+	</bean>
 
-
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"
-		p:dataSource-ref="dataSource">
-		<property name="hibernateProperties">
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="com.artivisi.belajar.restful.domain" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="databasePlatform" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+				<property name="showSql" value="true" />
+				<property name="generateDdl" value="true" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
 			<props>
-				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
-				<prop key="hibernate.show_sql">true</prop>
 				<prop key="hibernate.format_sql">true</prop>
-				<prop key="hibernate.generate_statistics">true</prop>
 			</props>
 		</property>
-		<property name="packagesToScan" value="com.artivisi.belajar.restful.domain" />
 	</bean>
 
 	<!-- Hibernate Statistics Monitoring -->
+	<!-- Publishing session factory to be able view statistics -->
+	<bean id="sessionFactory" factory-bean="entityManagerFactory"
+		factory-method="getSessionFactory" />
 	<bean id="hibernateStatisticsMBean" class="org.hibernate.jmx.StatisticsService">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
@@ -54,12 +64,13 @@
 	<bean id="mbeanExporter" class="org.springframework.jmx.export.MBeanExporter">
 		<property name="beans">
 			<map>
-				<entry key="SpringBeans:name=hibernateStatisticsMBean" value-ref="hibernateStatisticsMBean" />
+				<entry key="SpringBeans:name=hibernateStatisticsMBean"
+					value-ref="hibernateStatisticsMBean" />
 			</map>
 		</property>
 	</bean>
-	
-	<context:mbean-server/>
+
+	<context:mbean-server />
 
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">

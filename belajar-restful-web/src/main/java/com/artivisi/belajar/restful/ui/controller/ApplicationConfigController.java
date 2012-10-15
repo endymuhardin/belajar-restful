@@ -168,14 +168,14 @@ public class ApplicationConfigController {
 			logger.debug("Response Range : {}", responseRange.toString());
 			response.setHeader("Content-Range", responseRange.toResponseHeader());
 			
-			return belajarRestfulService.findApplicationConfigs(search, responseRange.getFrom().longValue()-1, 
+			return belajarRestfulService.findApplicationConfigs(search, responseRange.getFrom(), 
 					(responseRange.getTo() - responseRange.getFrom()+1));
 		} else {
 			Long countAll = belajarRestfulService.countAllApplicationConfigs();
 			Range responseRange = new Range(requestRange.getFrom(), requestRange.getTo(), countAll);
 			response.setHeader("Content-Range", responseRange.toResponseHeader());
 			
-			return belajarRestfulService.findAllApplicationConfigs(responseRange.getFrom().longValue() -1 , 
+			return belajarRestfulService.findAllApplicationConfigs(responseRange.getFrom() , 
 					(responseRange.getTo() - responseRange.getFrom()+1));
 		}
 		

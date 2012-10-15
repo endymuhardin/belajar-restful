@@ -94,8 +94,18 @@ public class BelajarRestfulServiceImplTestIT {
 	}
 
 	@Test public void testFindAll(){
-		List<ApplicationConfig> result = service.findAllApplicationConfigs(0L, service.countAllApplicationConfigs().intValue());
+		List<ApplicationConfig> result = service.findAllApplicationConfigs(0, service.countAllApplicationConfigs().intValue());
 		assertTrue(result.size() > 0);
+	}
+	
+	@Test public void testSearch(){
+		List<ApplicationConfig> result = service.findApplicationConfigs("name", 0, 5);
+		assertTrue(result.size() == 1);
+	}
+	
+	@Test public void testCountSearch(){
+		Long result = service.countApplicationConfigs("name");
+		assertTrue(result == 1);
 	}
 
 }
