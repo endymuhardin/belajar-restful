@@ -78,6 +78,25 @@
 					</execution>
 				</executions>
 			</plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>process-resources</phase>
+                        <configuration>
+                            <target>
+                                <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.url@" value="${db.url}"/>
+                                <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.name@" value="${db.name}"/>
+                                <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.username@" value="${db.username}"/>
+                                <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.password@" value="${db.password}"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
 
