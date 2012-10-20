@@ -93,50 +93,6 @@
 		<artifact.repo.url>http://${artifact.repo.host}:${artifact.repo.port.http}/${artifact.repo.path.download}</artifact.repo.url>
 	</properties>
 
-	<profiles>
-		<profile>
-			<id>development</id>
-			<!-- default profile, ditulis sebagai penjelasan saja -->
-		</profile>
-
-		<profile>
-			<id>testing</id>
-			<properties>
-				<!-- konfigurasi database -->
-				<db.driver>com.mysql.jdbc.Driver</db.driver>
-				<db.url>jdbc:mysql://localhost</db.url>
-				<db.name>belajar_testing</db.name>
-				<db.username>root</db.username>
-				<db.password>admin</db.password>
-
-				<!-- konfigurasi application server -->
-				<appserver.config.name>tomcat6-testing</appserver.config.name>
-				<appserver.port.http>8080</appserver.port.http>
-				<appserver.deployment.context>/belajar</appserver.deployment.context>
-			</properties>
-		</profile>
-
-		<profile>
-			<id>production</id>
-			<properties>
-				<!-- konfigurasi database -->
-				<db.driver>org.postgresql.Driver</db.driver>
-				<db.url>jdbc:postgresql://localhost</db.url>
-				<db.name>belajar</db.name>
-				<db.username>belajar</db.username>
-				<db.password>java</db.password>
-
-				<!-- konfigurasi application server -->
-				<appserver.config.name>tomcat6-production</appserver.config.name>
-				<appserver.port.http>8080</appserver.port.http>
-				<appserver.deployment.context>/belajar</appserver.deployment.context>
-
-			</properties>
-		</profile>
-
-	</profiles>
-
-
 	<dependencies>
 
 		<dependency>
