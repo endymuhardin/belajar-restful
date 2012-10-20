@@ -60,7 +60,7 @@
 				<configuration>
 					<changeLogFile>src/main/resources/com/artivisi/belajar/restful/db/db-changelog.xml</changeLogFile>
 					<driver>${db.driver}</driver>
-					<url>${db.url}/${db.name}</url>
+					<url>${db.url}</url>
 					<username>${db.username}</username>
 					<password>${db.password}</password>
 				</configuration>

@@ -86,7 +86,6 @@
                         <configuration>
                             <target>
                                 <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.url@" value="${db.url}"/>
-                                <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.name@" value="${db.name}"/>
                                 <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.username@" value="${db.username}"/>
                                 <replace file="${project.build.outputDirectory}/jdbc.properties" token="@db.password@" value="${db.password}"/>
                             </target>
