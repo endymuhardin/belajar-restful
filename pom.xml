@@ -75,7 +75,6 @@
 		<db.password>admin</db.password>
 
 		<!-- konfigurasi application server -->
-		<appserver.config.name>tomcat6-development</appserver.config.name>
 		<appserver.port.http>10000</appserver.port.http>
 		<appserver.deployment.context>/</appserver.deployment.context>
 
