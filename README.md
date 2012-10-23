@@ -29,5 +29,13 @@ Untuk menjalankan projectnya :
    * password : admin 
 
 2. Jalankan mvn clean install di top level folder
-3. Masuk ke folder web, kemudian jalankan mvn cargo:run
+3. Masuk ke folder web, kemudian jalankan mvn jetty:run
 4. Siap dibrowse di http://localhost:10000
+
+Konfigurasi
+-----------
+
+* Koneksi database : edit file `pom.xml` di top level folder, property `db.driver`, `db.url`, `db.username`, `db.password`
+* Port Aplikasi : edit file `pom.xml` di top level folder, property `appserver.port.http`
+* Context Path : edit file `pom.xml` di top level folder, property `appserver.deployment.context`
+
