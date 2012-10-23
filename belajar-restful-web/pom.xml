@@ -124,35 +124,43 @@
 					<keyalg>RSA</keyalg>
 				</configuration>
 			</plugin>
-
 			<plugin>
-				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat6-maven-plugin</artifactId>
-				<version>2.0-beta-1</version>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
-					<server>${appserver.config.name}</server>
-					<port>${appserver.port.http}</port>
-					<path>${appserver.deployment.context}</path>
+					<scanIntervalSeconds>10</scanIntervalSeconds>
+					<webAppConfig>
+						<contextPath>${appserver.deployment.context}</contextPath>
+					</webAppConfig>
+					<connectors>
+                    <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                      <port>${appserver.port.http}</port>
+                    </connector>
+                  </connectors>
+                  <stopPort>10066</stopPort>
+                  <stopKey>jetty</stopKey>
 				</configuration>
+				
 				<executions>
-					<execution>
-						<id>tomcat-run</id>
-						<goals>
-							<goal>run-war-only</goal>
-						</goals>
-						<phase>pre-integration-test</phase>
-						<configuration>
-							<fork>true</fork>
-						</configuration>
-					</execution>
-					<execution>
-						<id>tomcat-shutdown</id>
-						<goals>
-							<goal>shutdown</goal>
-						</goals>
-						<phase>post-integration-test</phase>
-					</execution>
-				</executions>
+                        <execution>
+                                <id>start-jetty</id>
+                                <phase>pre-integration-test</phase>
+                                <goals>
+                                        <goal>run</goal>
+                                </goals>
+                                <configuration>
+                                        <scanIntervalSeconds>0</scanIntervalSeconds>
+                                        <daemon>true</daemon>
+                                </configuration>
+                        </execution>
+                        <execution>
+                                <id>stop-jetty</id>
+                                <phase>post-integration-test</phase>
+                                <goals>
+                                        <goal>stop</goal>
+                                </goals>
+                        </execution>
+                </executions>
 			</plugin>
 		</plugins>
 	</build>
