@@ -1,5 +1,9 @@
 logs
 
+# IntelliJ IDEA
+*.iml
+.idea
+
 # Eclipse Setting
 /.metadata
 /Servers
