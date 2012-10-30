@@ -16,149 +16,85 @@
 
 -->
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<title>Tutorial: Hello Dojo!</title>
-<!-- load Dojo -->
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Belajar Restful</title>
 
-<link rel="stylesheet" type="text/css"
-	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/resources/dojo.css" />
-<link rel="stylesheet" type="text/css"
-	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dijit/themes/claro/claro.css" />
-<link rel="stylesheet" type="text/css"
-	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/Grid.css" />
-<link rel="stylesheet" type="text/css"
-	href="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojox/grid/resources/claroGrid.css" />
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.0/css/bootstrap-combined.min.css" rel="stylesheet">
 
-<script
-	src="http://ajax.googleapis.com/ajax/libs/dojo/1.6.0/dojo/dojo.xd.js"
-	djConfig="parseOnLoad:true"></script>
-<script>
-	dojo.require("dojo.store.JsonRest");
-	dojo.require("dojox.grid.DataGrid");
-	dojo.require("dojo.data.ObjectStore");
-	dojo.require("dijit.form.Form");
-	dojo.require("dijit.form.ValidationTextBox");
-	dojo.require("dijit.form.Button");
-	dojo.require("dojox.form.Uploader");
-	dojo.require("dojox.form.uploader.FileList");
-	dojo.require("dojox.form.uploader.plugins.HTML5");
+    </head>
+    <body>
+        <!-- header start -->
+        <div class="navbar navbar-inverse navbar-static-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">Belajar Restful</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Pengaturan Sistem</li>
+                                    <li><a href="#">Konfigurasi Aplikasi</a></li>
+                                    <li><a href="#">Manajemen User</a></li>
+                                    <li><a href="#">Manajemen Ijin Akses</a></li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Personalisasi</li>
+                                    <li><a href="#">Ganti Foto</a></li>
+                                    <li><a href="#">Ganti Password</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Produk</a></li>
+                                    <li><a href="#">Customer</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Pembelian</a></li>
+                                    <li><a href="#">Penjualan</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Rekap Pembelian</a></li>
+                                    <li><a href="#">Rekap Penjualan</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#about">About</a></li>
+                        </ul>
+                        <form class="navbar-form pull-right">
+                            <button type="submit" class="btn">Logout</button>
+                        </form>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+        <!-- header end -->
 
-	dojo.ready(function() {
-		dojo.byId("greeting").innerHTML += ", Dojo version: " + dojo.version;
-		myStore = dojo.store.JsonRest({
-			target : "/config/",
-			idProperty : "id"
-		});
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span6">
+                    <h1>Daftar Konfigurasi</h1>
+                </div>
+                <div class="span6">
+                    <h1>Form Konfigurasi</h1>
+                </div>
+            </div>
+        </div>
 
-		myGrid = new dojox.grid.DataGrid({
-			store : gridStore = dojo.data.ObjectStore({
-				objectStore : myStore
-			}),
-			structure : [ {
-				name : "Id",
-				field : "id",
-				width : "200px"
-			}, {
-				name : "Name",
-				field : "name",
-				width : "200px"
-			}, {
-				name : "Label",
-				field : "label",
-				width : "200px",
-				editable : true
-			}, {
-				name : "Value",
-				field : "value",
-				width : "200px",
-				editable : true
-			} ]
-		}, "gridConfig");
-
-		myGrid.startup();
-
-		dojo.connect(myGrid, "onApplyCellEdit", myGrid, function(evt) {
-			myGrid.store.save({
-				onComplete : function() {
-					myGrid.setQuery();
-				}
-			});
-		});
-
-		dojo.connect(dojo.byId("cari"), "keypress", function(evt) {
-			var keyword = dijit.byId("cari").get('value');
-			console.log("cari : " + keyword);
-			myGrid.setQuery("?search=" + keyword);
-		});
-	});
-</script>
-</head>
-<body class="claro">
-	<h1 id="greeting">Hello</h1>
-
-	Cari :
-	<input id="cari" type="text" dojoType="dijit.form.TextBox"
-		name="search">
-
-	<div id="gridConfig"></div>
-
-	<hr>
-	<h1>Entri Konfigurasi</h1>
-	<form id="formSave" dojotype="dijit.form.Form">
-		<script type="dojo/method" event="onSubmit">
-		<!--
-		if (!this.validate()) {
-		    alert('Semua field harus diisi');
-		    return false;
-		}
-		var newData = dojo.formToObject("formSave");
-        console.log(newData);
-        dojo.when(myStore.add(newData), function(){
-        	myGrid.setQuery();
-        });
-		return false;
-		-->
-		</script>
-
-		Name : <input type="text" dojoType="dijit.form.ValidationTextBox"
-			required="true" name="name"><br> Label : <input
-			type="text" dojoType="dijit.form.ValidationTextBox" required="true"
-			name="label"><br> Value : <input type="text"
-			dojoType="dijit.form.ValidationTextBox" required="true" name="value"><br>
-		<input type="submit" value="Save" label="Save" id="btnSave"
-			dojotype="dijit.form.Button">
-	</form>
-<hr>
-<h1>Upload Ajax</h1>
-	<form method="post" action="/config/upload" id="myForm"
-		enctype="multipart/form-data">
-		<input 
-			name="foto" 
-			multiple="true" 
-			type="file"
-			dojoType="dojox.form.Uploader" 
-			label="Select Some Files"
-			uploadOnSelect="true"
-			id="uploader" /> 
-			<input type="submit" value="Submit"
-			/>
-			
-			<div id="files" dojoType="dojox.form.uploader.FileList"
-        uploaderId="uploader"></div>
-	</form>
-
-<h1>Upload Normal</h1>
-	<form method="post" action="/config/upload" id="myForm"
-		enctype="multipart/form-data">
-		
-		<input name="uploadedfiles[]" type="file" multiple="true"> 
-		
-		<input type="submit" value="Submit"
-			/>
-		
-	</form>
-
-</body>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.0/js/bootstrap.min.js"></script>
+    </body>
 </html>
