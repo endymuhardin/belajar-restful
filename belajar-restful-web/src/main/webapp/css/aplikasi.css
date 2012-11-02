@@ -1,0 +1,10 @@
+.jumbotron {
+    text-align: center;
+}
+
+.marketing {
+    margin: 60px 0;
+}
+.marketing p + h4 {
+    margin-top: 28px;
+}
