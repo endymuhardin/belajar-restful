@@ -51,7 +51,6 @@ import com.artivisi.belajar.restful.ui.helper.Range;
 import com.google.common.io.Files;
 
 @Controller
-@RequestMapping("/config")
 public class ApplicationConfigController {
     private static final String ESC_CHAR_TITIK = "\\.";
     private static final long UKURAN_FILE_CV = 51987l;
@@ -61,7 +60,7 @@ public class ApplicationConfigController {
 	
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping("/{id}/files")
+	@RequestMapping("/config/{id}/files")
 	@ResponseBody
 	public Map<String, String> uploadFiles(
 			@PathVariable String id,
@@ -111,7 +110,7 @@ public class ApplicationConfigController {
 		return result;
 	}
 	
-	@RequestMapping("/{id}")
+	@RequestMapping("/config/{id}")
 	@ResponseBody
 	public ApplicationConfig findApplicationConfigById(@PathVariable String id){
 		ApplicationConfig config = belajarRestfulService.findApplicationConfigById(id);
@@ -121,16 +120,16 @@ public class ApplicationConfigController {
 		return config;
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.POST)
+	@RequestMapping(value="/config", method=RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
     public void create(@RequestBody ApplicationConfig config, HttpServletRequest request, HttpServletResponse response){
 		belajarRestfulService.save(config);
 		String requestUrl = request.getRequestURL().toString();
-        URI uri = new UriTemplate("{requestUrl}{id}").expand(requestUrl, config.getId());
+        URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, config.getId());
         response.setHeader("Location", uri.toASCIIString());
 	}
 	
-	@RequestMapping(method=RequestMethod.PUT, value="/{id}")
+	@RequestMapping(method=RequestMethod.PUT, value="/config/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void update(@PathVariable String id, @RequestBody ApplicationConfig config){
 		ApplicationConfig a = belajarRestfulService.findApplicationConfigById(id);
@@ -142,7 +141,7 @@ public class ApplicationConfigController {
 		belajarRestfulService.save(config);
 	}
 	
-	@RequestMapping(method=RequestMethod.DELETE, value="/{id}")
+	@RequestMapping(method=RequestMethod.DELETE, value="/config/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public void delete(@PathVariable String id){
 		ApplicationConfig a = belajarRestfulService.findApplicationConfigById(id);
@@ -153,7 +152,7 @@ public class ApplicationConfigController {
 		belajarRestfulService.delete(a);
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="/config", method=RequestMethod.GET)
 	@ResponseBody
 	public List<ApplicationConfig> findAll(@RequestHeader(value="Range", required=false) String range, 
 			@RequestParam(required=false) String search,
@@ -182,7 +181,7 @@ public class ApplicationConfigController {
 		
 	}
 	
-	@RequestMapping(value="/upload", method=RequestMethod.POST)
+	@RequestMapping(value="/config/upload", method=RequestMethod.POST)
 	@ResponseBody
 	public List<Map<String, String>> testUpload(@RequestParam(value="uploadedfiles[]") List<MultipartFile> daftarFoto) throws Exception {
 		

@@ -38,7 +38,7 @@ import org.springframework.web.client.RestTemplate;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 
 public class ApplicationConfigControllerTestIT {
-	private String target = "http://localhost:10000/config/";
+	private String target = "http://localhost:10000/config";
 
 	@Test
 	public void testSaveUpdateDelete() {
@@ -76,7 +76,7 @@ public class ApplicationConfigControllerTestIT {
 				.expect()
 				.statusCode(200)
 				.body("name", equalTo(name), "label", equalTo(label), "value",
-						equalTo(value)).when().get(target + id);
+						equalTo(value)).when().get(target + "/" + id);
 	}
 
 	private void testUpdateExisting(String id, String name, String label,
@@ -87,13 +87,13 @@ public class ApplicationConfigControllerTestIT {
 		config.setValue(value);
 
 		given().body(config).contentType(ContentType.JSON).expect()
-				.statusCode(200).when().put(target + id);
+				.statusCode(200).when().put(target + "/" + id);
 	}
 
 	private void testDeleteExistingById(String id) {
-		expect().statusCode(200).when().delete(target + id);
+		expect().statusCode(200).when().delete(target + "/" + id);
 
-		expect().statusCode(404).when().get(target + id);
+		expect().statusCode(404).when().get(target + "/" + id);
 	}
 
 	@Test
@@ -105,12 +105,12 @@ public class ApplicationConfigControllerTestIT {
 						"name",	equalTo("applicationname"), 
 						"label", equalTo("Application Name"), 
 						"value", equalTo("Belajar Restful")).when()
-				.get(target + "abc123");
+				.get(target + "/" + "abc123");
 	}
 
 	@Test
 	public void testGetNonExistentConfigById() {
-		expect().statusCode(404).when().get(target + "/nonexistentconfig");
+		expect().statusCode(404).when().get(target + "/" + "/nonexistentconfig");
 	}
 
 	@Test
@@ -151,7 +151,7 @@ public class ApplicationConfigControllerTestIT {
 					"keterangan", is("success")
 			)
 		.when()
-			.post(target+"/abc123/files");
+			.post(target+ "/" +"/abc123/files");
 	}
 	
 	@SuppressWarnings("unchecked")
