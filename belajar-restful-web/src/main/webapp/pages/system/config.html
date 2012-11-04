@@ -1,13 +1,17 @@
 <div class="span5 well-large">
     <h1>Daftar Konfigurasi</h1>
 
+    <a class="btn" ng-click="edit()">
+        <i class="icon-plus-sign"></i>Tambah Data
+    </a>
+    
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>Nama</th>
                 <th>Label</th>
                 <th>Nilai</th>
-                <th><i class="icon-plus"></i></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -15,7 +19,7 @@
                 <td>{{c.name}}</td>
                 <td>{{c.label}}</td>
                 <td>{{c.value}}</td>
-                <td><i class="icon-edit"></i></td>
+                <td><a ng-click="edit(c)"><i class="icon-edit"></i> edit</a></td>
             </tr>
         </tbody>
     </table>
@@ -27,19 +31,19 @@
     <form class="form-horizontal">
         <div class="control-group">
             <label class="control-label" for="name">Nama : &nbsp;</label>
-            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi">
+            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name">
         </div>
         <div class="control-group">
             <label class="control-label" for="label">Label : &nbsp;</label>
-            <input type="text" id="label" name="label" placeholder="Label Konfigurasi">
+            <input type="text" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label">
         </div>
         <div class="control-group">
             <label class="control-label" for="value">Nilai : &nbsp;</label>
-            <input type="text" id="value" name="value" placeholder="Nilai Konfigurasi">
+            <input type="text" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value">
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary">Simpan</button>
-            <button type="button" class="btn">Batal</button>
+            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+            <button type="button" class="btn" ng-click="edit()">Batal</button>
         </div>
     </form>
 </div>

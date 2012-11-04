@@ -20,5 +20,10 @@ modul.controller('AboutController', function($scope){
 
 modul.controller('ApplicationConfigController', function($scope, ApplicationConfigService){
     $scope.configs = ApplicationConfigService.findAll();
+    
+    $scope.edit = function(x){
+        $scope.currentConfig = x;
+    };
+    
 });
 
