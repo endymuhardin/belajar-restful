@@ -35,4 +35,12 @@ angular.module('belajar.controller',['belajar.service'])
                 $scope.configs = ApplicationConfigService.query();
             });
         }
+        $scope.remove = function(x){
+            if(x.id == null){
+                return;
+            }
+            ApplicationConfigService.remove(x).success(function(){
+                $scope.configs = ApplicationConfigService.query();
+            });
+        }
     }]);

@@ -36,7 +36,10 @@
                 <td>{{c.name}}</td>
                 <td>{{c.label}}</td>
                 <td>{{c.value}}</td>
-                <td><a ng-click="edit(c)"><i class="icon-edit"></i> edit</a></td>
+                <td>
+                    <a ng-click="edit(c)"><i class="icon-edit"></i></a>
+                    <a ng-click="remove(c)"><i class="icon-remove"></i></a>
+                </td>
             </tr>
         </tbody>
     </table>

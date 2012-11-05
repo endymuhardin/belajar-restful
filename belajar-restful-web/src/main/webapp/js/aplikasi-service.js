@@ -25,6 +25,11 @@ angular.module('belajar.service', ['ngResource'])
                 } else {
                     return $http.put('/config/'+obj.id, obj);
                 }
+            }, 
+            remove: function(obj){
+                if(obj.id != null){
+                    return $http.delete('/config/'+obj.id);
+                }
             }
         };
             
