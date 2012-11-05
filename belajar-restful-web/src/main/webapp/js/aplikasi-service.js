@@ -14,8 +14,19 @@
  * limitations under the License.
  */
 angular.module('belajar.service', ['ngResource'])
-    .factory('ApplicationConfigService', ['$resource', function($resource){
-        return $resource('/config/:configId', {}, {
+    .factory('ApplicationConfigService', ['$resource', '$http', function($resource, $http){
+        var service = {
+            applicationConfig: $resource('/config/:configId'),
+            get: function(param){ return this.applicationConfig.get(param) }, 
+            query: function(){ return this.applicationConfig.query() },
+            save: function(obj){
+                if(obj.id == null){
+                    return $http.post('/config', obj);
+                } else {
+                    return $http.put('/config/'+obj.id, obj);
+                }
+            }
+        };
             
-        });
+        return service;
     }]);

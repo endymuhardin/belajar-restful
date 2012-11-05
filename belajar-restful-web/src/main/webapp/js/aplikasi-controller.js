@@ -29,4 +29,10 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.baru = function(){
             $scope.currentConfig = null;
         }
+        $scope.simpan = function(){
+            ApplicationConfigService.save($scope.currentConfig)
+            .success(function(){
+                $scope.configs = ApplicationConfigService.query();
+            });
+        }
     }]);
