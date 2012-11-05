@@ -19,7 +19,7 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.appVersion = "Versi 1.0.0";
     }])
     .controller('ApplicationConfigController', ['$scope', 'ApplicationConfigService', function($scope, ApplicationConfigService){
-        $scope.configs = ApplicationConfigService.findAll();
+        $scope.configs = ApplicationConfigService.query();
         $scope.edit = function(x){
             $scope.currentConfig = x;
         };
