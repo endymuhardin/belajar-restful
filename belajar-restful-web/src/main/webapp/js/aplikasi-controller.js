@@ -21,6 +21,12 @@ angular.module('belajar.controller',['belajar.service'])
     .controller('ApplicationConfigController', ['$scope', 'ApplicationConfigService', function($scope, ApplicationConfigService){
         $scope.configs = ApplicationConfigService.query();
         $scope.edit = function(x){
-            $scope.currentConfig = x;
+            if(x.id == null){
+                return;
+            }
+            $scope.currentConfig = ApplicationConfigService.get({configId: x.id});
         };
+        $scope.baru = function(){
+            $scope.currentConfig = null;
+        }
     }]);
