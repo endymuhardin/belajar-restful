@@ -13,30 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-var modul = angular.module('belajar', ['belajar.controller'])
+angular.module('belajar', ['belajar.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})
             .when('/system/config', {templateUrl: 'pages/system/config.html', controller: 'ApplicationConfigController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});
-    }]);
-
-angular.module('belajar.service', ['ngResource'])
-    .factory('ApplicationConfigService', ['$resource', function($resource){
-        return $resource('/config/:configId', {}, {
-            findAll: {method: 'GET', isArray: true}
-        });
-    }]);
-
-angular.module('belajar.controller',['belajar.service'])
-    .controller('AboutController', ['$scope', function($scope){
-        $scope.appName = "Aplikasi Belajar";
-        $scope.appVersion = "Versi 1.0.0";
-    }])
-    .controller('ApplicationConfigController', ['$scope', 'ApplicationConfigService', function($scope, ApplicationConfigService){
-        $scope.configs = ApplicationConfigService.findAll();
-        $scope.edit = function(x){
-            $scope.currentConfig = x;
-        };
     }]);
