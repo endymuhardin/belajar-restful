@@ -20,4 +20,27 @@ angular.module('belajar', ['belajar.controller'])
             .when('/system/config', {templateUrl: 'pages/system/config.html', controller: 'ApplicationConfigController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});
-    }]);
+    }])
+    .config(['$httpProvider', function($httpProvider){
+        $httpProvider.responseInterceptors.push('httpLoadingSpinner');
+        var spinnerFunction = function (data, headersGetter) {
+            $('#loading').show();
+            return data;
+        };
+        $httpProvider.defaults.transformRequest.push(spinnerFunction);
+    }])
+    .factory('httpLoadingSpinner', function ($q, $window) {
+        return function (promise) {
+            return promise.then(function (response) {
+                // do something on success
+                $('#loading').hide();
+                return response;
+
+            }, function (response) {
+                // do something on error
+                $('#loading').hide();
+                return $q.reject(response);
+            });
+        };
+    })
+;
