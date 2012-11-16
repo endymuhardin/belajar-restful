@@ -17,6 +17,12 @@ angular.module('belajar.controller',['belajar.service'])
     .controller('LoginRedirectorController', ['$window', function($window){
         $window.location = 'login.html';
     }])
+    .controller('MenubarController', ['$http', '$scope', function($http, $scope){
+        $scope.userinfo = {};
+        $http.get('/homepage/userinfo').success(function(data){
+            $scope.userinfo = data;
+        });
+    }])
     .controller('AboutController', ['$scope', function($scope){
         $scope.appName = "Aplikasi Belajar";
         $scope.appVersion = "Versi 1.0.0";
