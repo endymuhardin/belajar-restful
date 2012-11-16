@@ -28,7 +28,7 @@
     </head>
     <body ng-app="belajar">
         <div id="loading">Loading...</div>
-        
+
         <!-- header start -->
         <div class="navbar navbar-inverse navbar-static-top">
             <div class="navbar-inner">
@@ -77,9 +77,17 @@
                             </li>
                             <li><a href="#about">About</a></li>
                         </ul>
-                        <form class="navbar-form pull-right" action="j_spring_security_logout">
-                            <button type="submit" class="btn">Logout</button>
-                        </form>
+                        <ul class="nav pull-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Endy Muhardin <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Ganti Password</a></li>
+                                    <li><a href="#">Opsi</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="j_spring_security_logout">Logout</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
