@@ -94,4 +94,8 @@ governing permissions and limitations under the License. -->
         <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
+    
+    <session-config>
+        <session-timeout>1</session-timeout>
+    </session-config>
 </web-app>

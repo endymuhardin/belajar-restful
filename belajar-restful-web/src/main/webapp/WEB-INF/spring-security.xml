@@ -8,6 +8,8 @@
            http://www.springframework.org/schema/security/spring-security.xsd">
     
     
+    <debug />
+    
     <http pattern="/css/**" security="none"/>
     <http pattern="/js/**" security="none"/>
     
@@ -19,6 +21,7 @@
         <form-login login-page="/login.html" 
                     default-target-url="/main.html" 
                     always-use-default-target="true"/>
+        <logout logout-success-url="/login.html"/>
     </http>
     
     
