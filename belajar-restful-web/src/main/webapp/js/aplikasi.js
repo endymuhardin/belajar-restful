@@ -17,11 +17,30 @@ angular.module('belajar', ['belajar.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})
+            .when('/401', {templateUrl: 'pages/404.html', controller: 'LoginRedirectorController'})
             .when('/system/config', {templateUrl: 'pages/system/config.html', controller: 'ApplicationConfigController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});
     }])
     .config(['$httpProvider', function($httpProvider){
+        var sessionTimeoutInterceptor = ['$rootScope', '$location', '$q', function($rootScope, $location, $q){
+            function success(response){
+                return response;
+            }
+            
+            function error(response){
+                if (response.status === 401) {
+                    $location.path('/401');
+                }
+            }
+            
+            return function(promise) {
+                return promise.then(success, error);
+            }
+        }];
+        
+        
+        $httpProvider.responseInterceptors.push(sessionTimeoutInterceptor);
         $httpProvider.responseInterceptors.push('httpLoadingSpinner');
         var spinnerFunction = function (data, headersGetter) {
             $('#loading').show();

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-  xmlns:beans="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://www.springframework.org/schema/beans
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
@@ -13,9 +13,11 @@
     <http pattern="/css/**" security="none"/>
     <http pattern="/js/**" security="none"/>
     
-    <http auto-config='true'>
+    <http entry-point-ref="restAuthenticationEntryPoint">
         <intercept-url pattern="/main.html**" access="ROLE_USER" />
+        <intercept-url pattern="/pages/404.html*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/pages/**" access="ROLE_USER" />
+        <intercept-url pattern="/config*" access="ROLE_USER" />
         
         <intercept-url pattern="/login.html*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <form-login login-page="/login.html" 
@@ -24,15 +26,15 @@
         <logout logout-success-url="/login.html"/>
     </http>
     
+    <beans:bean id="restAuthenticationEntryPoint" class="com.artivisi.spring.security.RestAuthenticationEntryPoint" />
     
-    
-    <authentication-manager>
+    <authentication-manager alias="authenticationManager">
         <authentication-provider>
             <user-service>
                 <user name="endy" password="123"
-            authorities="ROLE_USER, ROLE_ADMIN" />
+                      authorities="ROLE_USER, ROLE_ADMIN" />
                 <user name="bob" password="111"
-            authorities="ROLE_USER" />
+                      authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
     </authentication-manager>

@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 angular.module('belajar.controller',['belajar.service'])
+    .controller('LoginRedirectorController', ['$window', function($window){
+        $window.location = 'login.html';
+    }])
     .controller('AboutController', ['$scope', function($scope){
         $scope.appName = "Aplikasi Belajar";
         $scope.appVersion = "Versi 1.0.0";
@@ -22,7 +25,7 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.configs = ApplicationConfigService.query();
         $scope.edit = function(x){
             if(x.id == null){
-                return;
+                return; 
             }
             $scope.currentConfig = ApplicationConfigService.get({configId: x.id});
         };
