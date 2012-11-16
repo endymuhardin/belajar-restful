@@ -25,6 +25,10 @@
                     default-target-url="/main.html" 
                     always-use-default-target="true"/>
         <logout logout-success-url="/login.html"/>
+        
+        <session-management>
+            <concurrency-control max-sessions="1"/>
+        </session-management>
     </http>
     
     <beans:bean id="restAuthenticationEntryPoint" class="com.artivisi.spring.security.RestAuthenticationEntryPoint" />

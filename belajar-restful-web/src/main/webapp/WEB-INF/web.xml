@@ -25,6 +25,11 @@ governing permissions and limitations under the License. -->
     <listener>
         <listener-class>net.bull.javamelody.SessionListener</listener-class>
     </listener>
+    <listener>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
+    </listener>
 	
     <!-- spring security filter -->
     <filter>
