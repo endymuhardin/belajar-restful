@@ -27,6 +27,12 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.appName = "Aplikasi Belajar";
         $scope.appVersion = "Versi 1.0.0";
     }])
+    .controller('ApplicationSessionsController', ['$http', '$scope', function($http, $scope){
+        $scope.sessioninfo = {};
+        $http.get('/homepage/sessioninfo').success(function(data){
+            $scope.sessioninfo = data;
+        });
+    }])
     .controller('ApplicationConfigController', ['$scope', 'ApplicationConfigService', function($scope, ApplicationConfigService){
         $scope.configs = ApplicationConfigService.query();
         $scope.edit = function(x){

@@ -19,6 +19,7 @@ angular.module('belajar', ['belajar.controller'])
             .when('/', {templateUrl: 'pages/home.html'})
             .when('/401', {templateUrl: 'pages/404.html', controller: 'LoginRedirectorController'})
             .when('/system/config', {templateUrl: 'pages/system/config.html', controller: 'ApplicationConfigController'})
+            .when('/system/sessions', {templateUrl: 'pages/system/sessions.html', controller: 'ApplicationSessionsController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});
     }])
