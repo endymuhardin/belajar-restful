@@ -1,86 +1,97 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com> Licensed 
-	under the Apache License, Version 2.0 (the "License"); you may not use this 
-	file except in compliance with the License. You may obtain a copy of the 
-	License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
-	applicable law or agreed to in writing, software distributed under the License 
-	is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
-	KIND, either express or implied. See the License for the specific language 
-	governing permissions and limitations under the License. -->
+under the Apache License, Version 2.0 (the "License"); you may not use this 
+file except in compliance with the License. You may obtain a copy of the 
+License at http://www.apache.org/licenses/LICENSE-2.0 Unless required by 
+applicable law or agreed to in writing, software distributed under the License 
+is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY 
+KIND, either express or implied. See the License for the specific language 
+governing permissions and limitations under the License. -->
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	<context-param>
-		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			classpath:net/bull/javamelody/monitoring-spring.xml
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:net/bull/javamelody/monitoring-spring.xml
             classpath*:com/artivisi/**/applicationContext.xml
+            /WEB-INF/spring-security.xml
         </param-value>
-	</context-param>
-	<listener>
-		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-	</listener>
-	<listener>
-		<listener-class>net.bull.javamelody.SessionListener</listener-class>
-	</listener>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>net.bull.javamelody.SessionListener</listener-class>
+    </listener>
 	
+    <!-- spring security filter -->
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 	
-	<filter>
-		<filter-name>httpMethodFilter</filter-name>
-		<filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
-	</filter>
+    <filter>
+        <filter-name>httpMethodFilter</filter-name>
+        <filter-class>org.springframework.web.filter.HiddenHttpMethodFilter</filter-class>
+    </filter>
 	
-	<!-- Monitor aplikasi menggunakan javamelody -->
-	<filter>
-		<filter-name>monitoring</filter-name>
-		<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>monitoring</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <!-- Monitor aplikasi menggunakan javamelody -->
+    <filter>
+        <filter-name>monitoring</filter-name>
+        <filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>monitoring</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-	<!-- Reads request input using UTF-8 encoding -->
-	<filter>
-		<filter-name>characterEncodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
+    <!-- Reads request input using UTF-8 encoding -->
+    <filter>
+        <filter-name>characterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
 
-	<filter-mapping>
-		<filter-name>characterEncodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+    <filter-mapping>
+        <filter-name>characterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
-	<!-- Handles all requests into the application -->
-	<servlet>
-		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>
+    <!-- Handles all requests into the application -->
+    <servlet>
+        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
                 /WEB-INF/springmvc-context.xml
             </param-value>
-		</init-param>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
 
 
-	<filter-mapping>
-		<filter-name>httpMethodFilter</filter-name>
-		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-	</filter-mapping>
+    <filter-mapping>
+        <filter-name>httpMethodFilter</filter-name>
+        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+    </filter-mapping>
 
-	<servlet-mapping>
-		<servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
 </web-app>

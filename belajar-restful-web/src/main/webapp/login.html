@@ -96,14 +96,14 @@
 
     <div class="container">
 
-      <form class="form-signin" action="main.html">
+        <form class="form-signin" action="j_spring_security_check" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="input-block-level" placeholder="Username">
-        <input type="password" class="input-block-level" placeholder="Password">
+        <input type="text" name="j_username" class="input-block-level" placeholder="Username">
+        <input type="password" name="j_password" class="input-block-level" placeholder="Password">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <button class="btn btn-large btn-primary" type="submit">Sign in</button>
+        <input class="btn btn-large btn-primary" type="submit" value="Sign in ">
       </form>
 
     </div> <!-- /container -->
