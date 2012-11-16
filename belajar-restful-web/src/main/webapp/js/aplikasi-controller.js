@@ -27,11 +27,19 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.appName = "Aplikasi Belajar";
         $scope.appVersion = "Versi 1.0.0";
     }])
-    .controller('ApplicationSessionsController', ['$http', '$scope', function($http, $scope){
-        $scope.sessioninfo = {};
-        $http.get('/homepage/sessioninfo').success(function(data){
-            $scope.sessioninfo = data;
-        });
+    .controller('ApplicationSessionsController', ['ApplicationSessionsService', '$scope', function(ApplicationSessionsService, $scope){
+        $scope.refresh = function(){
+            ApplicationSessionsService.list().success(function(data){
+                $scope.sessioninfo = data
+            });
+        }
+        
+        $scope.refresh();
+        
+        $scope.kick = function(user){
+            ApplicationSessionsService.kick(user).success($scope.refresh);
+        };
+        
     }])
     .controller('ApplicationConfigController', ['$scope', 'ApplicationConfigService', function($scope, ApplicationConfigService){
         $scope.configs = ApplicationConfigService.query();

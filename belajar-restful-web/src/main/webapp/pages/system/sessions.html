@@ -25,7 +25,7 @@
                 <th>Permission</th>
                 <th>Session ID</th>
                 <th>Status</th>
-                <th></th>
+                <th><a ng-click="refresh()" class="btn"><i class="icon-refresh"></i> refresh</a></th>
             </tr>
         </thead>
         <tbody>
@@ -35,7 +35,7 @@
                 <td>{{u.sessionid}}</td>
                 <td>{{u.status}}</td>
                 <td>
-                    <a ng-click="#"><i class="icon-remove"></i> kick</a>
+                    <a ng-click="kick(u)" class="btn"><i class="icon-eject"></i> kick</a>
                 </td>
             </tr>
         </tbody>

@@ -34,4 +34,17 @@ angular.module('belajar.service', ['ngResource'])
         };
             
         return service;
-    }]);
+    }])
+    .factory('ApplicationSessionsService', ['$http', function($http){
+        var service = {
+            list: function(){ 
+                return $http.get('/homepage/sessioninfo');
+            }, 
+            kick: function(user){
+                return $http.delete('/homepage/kick/'+user.sessionid);
+            }
+        };
+            
+        return service;
+    }])
+;
