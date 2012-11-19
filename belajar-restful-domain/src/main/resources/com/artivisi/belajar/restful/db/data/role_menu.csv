@@ -1,0 +1,17 @@
+id_role,id_menu
+superuser,system
+superuser,system-header
+superuser,system-config
+superuser,system-session
+superuser,system-rbac
+superuser,system-user
+superuser,system-role
+superuser,system-menu
+superuser,system-permission
+superuser,master
+superuser,master-produk
+superuser,master-customer
+superuser,transaksi
+superuser,transaksi-penjualan
+superuser,laporan
+superuser,rekap-penjualan

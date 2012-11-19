@@ -26,9 +26,11 @@ import org.springframework.util.StringUtils;
 
 import com.artivisi.belajar.restful.dao.ApplicationConfigDao;
 import com.artivisi.belajar.restful.dao.MenuDao;
+import com.artivisi.belajar.restful.dao.RoleDao;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.domain.Menu;
 import com.artivisi.belajar.restful.domain.Permission;
+import com.artivisi.belajar.restful.domain.Role;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import java.util.ArrayList;
 
@@ -42,6 +44,8 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     private MenuDao menuDao;
     @Autowired
     private PermissionDao permissionDao;
+    @Autowired
+    private RoleDao roleDao;
 
     @Override
     public void save(ApplicationConfig ac) {
@@ -172,5 +176,48 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     @Override
     public Long countAllPermissions() {
         return permissionDao.countAll();
+    }
+
+    @Override
+    public void save(Role role) {
+        roleDao.save(role);
+    }
+
+    @Override
+    public void delete(Role role) {
+        roleDao.delete(role);
+    }
+
+    @Override
+    public Role findRoleById(String id) {
+        if(!StringUtils.hasText(id)){
+            return null;
+        }
+        
+        Role r = roleDao.findOne(id);
+        if(r != null){
+            r.getPermissionSet().size();
+            r.getMenuSet().size();
+        }
+        
+        return r;
+    }
+
+    @Override
+    public List<Role> findAllRoles(Integer page, Integer rows) {
+        if (page == null || page < 0) {
+            page = 0;
+        }
+
+        if (rows == null || rows < 1) {
+            rows = 20;
+        }
+
+        return roleDao.findAll(new PageRequest(page, rows)).getContent();
+    }
+
+    @Override
+    public Long countAllRoles() {
+        return roleDao.countAll();
     }
 }

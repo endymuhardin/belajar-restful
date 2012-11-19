@@ -1,0 +1,9 @@
+id_role,id_permission
+superuser,user-view
+superuser,user-edit
+superuser,role-view
+superuser,role-edit
+superuser,menu-view
+superuser,menu-edit
+superuser,permission-view
+superuser,permission-edit

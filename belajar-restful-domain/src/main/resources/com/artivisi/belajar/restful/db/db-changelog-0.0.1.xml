@@ -63,6 +63,32 @@
                 <constraints nullable="false" />
             </column>
         </createTable>
+        
+        <createTable tableName="c_security_role">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="description" type="varchar(255)" />
+        </createTable>
+        <createTable tableName="c_security_role_permission">
+            <column name="id_role" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="id_permission" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="c_security_role_menu">
+            <column name="id_role" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="id_menu" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+        </createTable>
         <modifySql dbms="mysql">
             <append value=" engine innodb" />
         </modifySql>
@@ -80,6 +106,39 @@
             columnNames="permission_value"
             tableName="c_security_permission"
         />
+        <addUniqueConstraint
+            constraintName="unique_role_name"
+            columnNames="name"
+            tableName="c_security_role"
+        />
+        <addForeignKeyConstraint
+            constraintName="fk_role_permission_role"
+            baseColumnNames="id_role"
+            baseTableName="c_security_role_permission"
+            referencedTableName="c_security_role"
+            referencedColumnNames="id"
+        />
+        <addForeignKeyConstraint
+            constraintName="fk_role_permission_permission"
+            baseColumnNames="id_permission"
+            baseTableName="c_security_role_permission"
+            referencedTableName="c_security_permission"
+            referencedColumnNames="id"
+        />
+        <addForeignKeyConstraint
+            constraintName="fk_role_menu_role"
+            baseColumnNames="id_role"
+            baseTableName="c_security_role_menu"
+            referencedTableName="c_security_role"
+            referencedColumnNames="id"
+        />
+        <addForeignKeyConstraint
+            constraintName="fk_role_menu_menu"
+            baseColumnNames="id_menu"
+            baseTableName="c_security_role_menu"
+            referencedTableName="c_security_menu"
+            referencedColumnNames="id"
+        />
     </changeSet>
     <changeSet id="3" author="endy">
         <loadData tableName="c_security_menu" file="com/artivisi/belajar/restful/db/data/menu.csv">
@@ -95,6 +154,19 @@
             <column header="id" type="STRING"/>
             <column header="permission_label" type="STRING"/>
             <column header="permission_value" type="STRING"/>
+        </loadData>
+        <loadData tableName="c_security_role" file="com/artivisi/belajar/restful/db/data/role.csv">
+            <column header="id" type="STRING"/>
+            <column header="name" type="STRING"/>
+            <column header="description" type="STRING"/>
+        </loadData>
+        <loadData tableName="c_security_role_menu" file="com/artivisi/belajar/restful/db/data/role_menu.csv">
+            <column header="id_role" type="STRING"/>
+            <column header="id_menu" type="STRING"/>
+        </loadData>
+        <loadData tableName="c_security_role_permission" file="com/artivisi/belajar/restful/db/data/role_permission.csv">
+            <column header="id_role" type="STRING"/>
+            <column header="id_permission" type="STRING"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>

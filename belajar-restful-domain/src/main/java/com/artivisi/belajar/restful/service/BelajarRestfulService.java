@@ -20,6 +20,7 @@ import java.util.List;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.domain.Menu;
 import com.artivisi.belajar.restful.domain.Permission;
+import com.artivisi.belajar.restful.domain.Role;
 
 public interface BelajarRestfulService extends MonitoredService {
         // konfigurasi aplikasi
@@ -44,4 +45,11 @@ public interface BelajarRestfulService extends MonitoredService {
         Permission findPermissionById(String id);
         List<Permission> findAllPermissions(Integer page, Integer rows);
         Long countAllPermissions();
+        
+        // role
+        void save(Role role);
+        void delete(Role role);
+        Role findRoleById(String id);
+        List<Role> findAllRoles(Integer page, Integer rows);
+        Long countAllRoles();
 }
