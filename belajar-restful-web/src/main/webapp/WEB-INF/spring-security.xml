@@ -54,12 +54,34 @@
     <authentication-manager alias="authenticationManager">
         <authentication-provider>
             <user-service>
-                <user name="endy" password="123"
-                      authorities="ROLE_USER, ROLE_ADMIN" />
-                <user name="bob" password="111"
-                      authorities="ROLE_USER" />
+                <user name="root" password="admin" authorities="ROLE_USER" />
             </user-service>
         </authentication-provider>
+        <authentication-provider user-service-ref='myUserDetailsService'/>
     </authentication-manager>
+    
+    <beans:bean id="myUserDetailsService"
+                class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="enableAuthorities" value="false"/>
+        <beans:property name="enableGroups" value="true"/>
+        <beans:property name="usersByUsernameQuery">
+            <beans:value>
+                select username,password,active
+                from c_security_user
+                where username = ?
+            </beans:value>
+        </beans:property>
+        <beans:property name="groupAuthoritiesByUsernameQuery">
+            <beans:value>
+                select r.id, r.name as group_name, p.permission_value as authority
+                from c_security_user u
+                inner join c_security_role r on u.id_role = r.id
+                inner join c_security_role_permission rp on rp.id_role = r.id
+                inner join c_security_permission p on rp.id_permission = p.id
+                where username = ?
+            </beans:value>
+        </beans:property>
+    </beans:bean>
     
 </beans:beans>

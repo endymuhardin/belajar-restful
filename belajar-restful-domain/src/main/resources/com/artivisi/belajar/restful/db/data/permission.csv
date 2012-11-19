@@ -1,4 +1,5 @@
 id,permission_label,permission_value
+user,User Aplikasi,ROLE_USER
 user-view,Lihat User,ROLE_USER_VIEW
 user-edit,Edit User,ROLE_USER_EDIT
 role-view,Lihat Role,ROLE_ROLE_VIEW
