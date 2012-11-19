@@ -89,6 +89,22 @@
                 <constraints primaryKey="true" nullable="false" />
             </column>
         </createTable>
+        <createTable tableName="c_security_user">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="username" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="password" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="fullname" type="varchar(255)" />
+            <column name="active" type="boolean" />
+            <column name="id_role" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
         <modifySql dbms="mysql">
             <append value=" engine innodb" />
         </modifySql>
@@ -139,6 +155,18 @@
             referencedTableName="c_security_menu"
             referencedColumnNames="id"
         />
+        <addUniqueConstraint
+            constraintName="unique_user_username"
+            columnNames="username"
+            tableName="c_security_user"
+        />
+        <addForeignKeyConstraint
+            constraintName="fk_user_role"
+            baseColumnNames="id_role"
+            baseTableName="c_security_user"
+            referencedTableName="c_security_role"
+            referencedColumnNames="id"
+        />
     </changeSet>
     <changeSet id="3" author="endy">
         <loadData tableName="c_security_menu" file="com/artivisi/belajar/restful/db/data/menu.csv">
@@ -167,6 +195,14 @@
         <loadData tableName="c_security_role_permission" file="com/artivisi/belajar/restful/db/data/role_permission.csv">
             <column header="id_role" type="STRING"/>
             <column header="id_permission" type="STRING"/>
+        </loadData>
+        <loadData tableName="c_security_user" file="com/artivisi/belajar/restful/db/data/user.csv">
+            <column header="id" type="STRING"/>
+            <column header="username" type="STRING"/>
+            <column header="fullname" type="STRING"/>
+            <column header="password" type="STRING"/>
+            <column header="active" type="BOOLEAN"/>
+            <column header="id_role" type="STRING"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>

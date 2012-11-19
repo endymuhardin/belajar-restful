@@ -21,6 +21,7 @@ import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.domain.Menu;
 import com.artivisi.belajar.restful.domain.Permission;
 import com.artivisi.belajar.restful.domain.Role;
+import com.artivisi.belajar.restful.domain.User;
 
 public interface BelajarRestfulService extends MonitoredService {
         // konfigurasi aplikasi
@@ -52,4 +53,11 @@ public interface BelajarRestfulService extends MonitoredService {
         Role findRoleById(String id);
         List<Role> findAllRoles(Integer page, Integer rows);
         Long countAllRoles();
+        
+        // permission
+        void save(User m);
+        void delete(User m);
+        User findUserById(String id);
+        List<User> findAllUsers(Integer page, Integer rows);
+        Long countAllUsers();
 }

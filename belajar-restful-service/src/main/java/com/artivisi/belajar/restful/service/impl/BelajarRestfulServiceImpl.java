@@ -27,10 +27,12 @@ import org.springframework.util.StringUtils;
 import com.artivisi.belajar.restful.dao.ApplicationConfigDao;
 import com.artivisi.belajar.restful.dao.MenuDao;
 import com.artivisi.belajar.restful.dao.RoleDao;
+import com.artivisi.belajar.restful.dao.UserDao;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.domain.Menu;
 import com.artivisi.belajar.restful.domain.Permission;
 import com.artivisi.belajar.restful.domain.Role;
+import com.artivisi.belajar.restful.domain.User;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import java.util.ArrayList;
 
@@ -46,6 +48,8 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     private PermissionDao permissionDao;
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private UserDao userDao;
 
     @Override
     public void save(ApplicationConfig ac) {
@@ -221,4 +225,31 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
         return roleDao.count();
     }
 
+    @Override
+    public void save(User m) {
+        userDao.save(m);
+    }
+
+    @Override
+    public void delete(User m) {
+        userDao.delete(m);
+    }
+
+    @Override
+    public User findUserById(String id) {
+        if(!StringUtils.hasText(id)){
+            return null;
+        }
+        return userDao.findOne(id);
+    }
+
+    @Override
+    public List<User> findAllUsers(Integer page, Integer rows) {
+        return userDao.findAll(new PageRequest(page, rows)).getContent();
+    }
+
+    @Override
+    public Long countAllUsers() {
+        return userDao.count();
+    }
 }

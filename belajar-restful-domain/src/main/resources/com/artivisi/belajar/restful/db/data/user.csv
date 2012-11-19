@@ -1,0 +1,3 @@
+id,username,fullname,password,active,id_role
+endy,endy,Endy Muhardin,123,true,superuser
+anton,anton,Anton Raharja,123,true,superuser
