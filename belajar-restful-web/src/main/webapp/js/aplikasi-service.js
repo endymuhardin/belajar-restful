@@ -47,4 +47,25 @@ angular.module('belajar.service', ['ngResource'])
             
         return service;
     }])
+    .factory('SystemMenuService', ['$resource', '$http', function($resource, $http){
+        var service = {
+            menu: $resource('/menu/:id'),
+            get: function(param){ return this.menu.get(param) }, 
+            query: function(){ return this.menu.query() },
+            save: function(obj){
+                if(obj.id == null){
+                    return $http.post('/menu', obj);
+                } else {
+                    return $http.put('/menu/'+obj.id, obj);
+                }
+            }, 
+            remove: function(obj){
+                if(obj.id != null){
+                    return $http.delete('/menu/'+obj.id);
+                }
+            }
+        };
+            
+        return service;
+    }])
 ;

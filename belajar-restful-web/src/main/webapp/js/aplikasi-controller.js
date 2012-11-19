@@ -66,4 +66,31 @@ angular.module('belajar.controller',['belajar.service'])
                 $scope.configs = ApplicationConfigService.query();
             });
         }
-    }]);
+    }])
+    .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
+        $scope.configs = SystemMenuService.query();
+        $scope.edit = function(x){
+            if(x.id == null){
+                return; 
+            }
+            $scope.currentConfig = SystemMenuService.get({id: x.id});
+        };
+        $scope.baru = function(){
+            $scope.currentConfig = null;
+        }
+        $scope.simpan = function(){
+            SystemMenuService.save($scope.currentMenu)
+            .success(function(){
+                $scope.menus = SystemMenuService.query();
+            });
+        }
+        $scope.remove = function(x){
+            if(x.id == null){
+                return;
+            }
+            SystemMenuService.remove(x).success(function(){
+                $scope.menus = SystemMenuService.query();
+            });
+        }
+    }])
+;

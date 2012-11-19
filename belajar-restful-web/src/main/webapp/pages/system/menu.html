@@ -1,0 +1,63 @@
+<!--
+
+    Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div class="span5 well-large">
+    <h1>Daftar Menu</h1>
+    
+    <a class="btn" ng-click="baru()">
+        <i class="icon-plus-sign"></i>Tambah Data
+    </a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Label</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="c in menus">
+                <td>{{c.label}}</td>
+                <td>{{c.action}}</td>
+                <td>
+                    <a ng-click="edit(c)"><i class="icon-edit"></i></a>
+                    <a ng-click="remove(c)"><i class="icon-remove"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="span5 well-large">
+    <h1>Form Menu</h1>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="label">Label : &nbsp;</label>
+            <input type="text" id="label" name="label" placeholder="Label Menu" ng-model="currentMenu.label">
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="value">Action : &nbsp;</label>
+            <input type="text" id="value" name="value" placeholder="Action / URL" ng-model="currentMenu.value">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+            <button type="button" class="btn" ng-click="baru()">Batal</button>
+        </div>
+    </form>
+</div>
