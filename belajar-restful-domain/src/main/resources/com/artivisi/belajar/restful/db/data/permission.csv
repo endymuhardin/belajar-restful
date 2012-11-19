@@ -1,0 +1,9 @@
+id,permission_label,permission_value
+user-view,Lihat User,ROLE_USER_VIEW
+user-edit,Edit User,ROLE_USER_EDIT
+role-view,Lihat Role,ROLE_ROLE_VIEW
+role-edit,Edit Role,ROLE_ROLE_EDIT
+menu-view,Lihat Menu,ROLE_MENU_VIEW
+menu-edit,Edit Menu,ROLE_MENU_EDIT
+permission-view,Lihat Permission,ROLE_PERMISSION_VIEW
+permission-edit,Edit Permission,ROLE_PERMISSION_EDIT

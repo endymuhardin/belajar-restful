@@ -19,6 +19,7 @@ import java.util.List;
 
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.domain.Menu;
+import com.artivisi.belajar.restful.domain.Permission;
 
 public interface BelajarRestfulService extends MonitoredService {
         // konfigurasi aplikasi
@@ -36,4 +37,11 @@ public interface BelajarRestfulService extends MonitoredService {
         Menu findMenuById(String id);
         List<Menu> findTopLevelMenu();
         List<Menu> findMenuByParent(Menu m);
+        
+        // permission
+        void save(Permission m);
+        void delete(Permission m);
+        Permission findPermissionById(String id);
+        List<Permission> findAllPermissions(Integer page, Integer rows);
+        Long countAllPermissions();
 }

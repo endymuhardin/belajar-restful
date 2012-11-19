@@ -15,14 +15,12 @@
  */
 package com.artivisi.belajar.restful.dao;
 
+import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import java.util.List;
-
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
-
-import com.artivisi.belajar.restful.domain.ApplicationConfig;
 
 
 public interface ApplicationConfigDao extends PagingAndSortingRepository<ApplicationConfig, String> {

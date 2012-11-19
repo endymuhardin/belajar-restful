@@ -15,6 +15,7 @@
  */
 package com.artivisi.belajar.restful.service.impl;
 
+import com.artivisi.belajar.restful.dao.PermissionDao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.artivisi.belajar.restful.dao.ApplicationConfigDao;
 import com.artivisi.belajar.restful.dao.MenuDao;
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.domain.Menu;
+import com.artivisi.belajar.restful.domain.Permission;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import java.util.ArrayList;
 
@@ -38,6 +40,8 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     private ApplicationConfigDao applicationConfigDao;
     @Autowired
     private MenuDao menuDao;
+    @Autowired
+    private PermissionDao permissionDao;
 
     @Override
     public void save(ApplicationConfig ac) {
@@ -132,5 +136,41 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
             return new ArrayList<Menu>();
         }
         return menuDao.findMenuByParent(m.getId());
+    }
+
+    @Override
+    public void save(Permission m) {
+        permissionDao.save(m);
+    }
+
+    @Override
+    public void delete(Permission m) {
+        permissionDao.delete(m);
+    }
+
+    @Override
+    public Permission findPermissionById(String id) {
+        if(!StringUtils.hasText(id)){
+            return null;
+        }
+        return permissionDao.findOne(id);
+    }
+
+    @Override
+    public List<Permission> findAllPermissions(Integer page, Integer rows) {
+        if (page == null || page < 0) {
+            page = 0;
+        }
+
+        if (rows == null || rows < 1) {
+            rows = 20;
+        }
+
+        return permissionDao.findAll(new PageRequest(page, rows)).getContent();
+    }
+
+    @Override
+    public Long countAllPermissions() {
+        return permissionDao.countAll();
     }
 }

@@ -51,6 +51,18 @@
             <column name="menu_options" type="varchar(255)"/>
             <column name="id_parent" type="varchar(255)" />
         </createTable>
+        
+        <createTable tableName="c_security_permission">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="permission_label" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="permission_value" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
         <modifySql dbms="mysql">
             <append value=" engine innodb" />
         </modifySql>
@@ -63,6 +75,11 @@
             referencedTableName="c_security_menu"
             referencedColumnNames="id"
         />
+        <addUniqueConstraint
+            constraintName="unique_permission_value"
+            columnNames="permission_value"
+            tableName="c_security_permission"
+        />
     </changeSet>
     <changeSet id="3" author="endy">
         <loadData tableName="c_security_menu" file="com/artivisi/belajar/restful/db/data/menu.csv">
@@ -73,6 +90,11 @@
             <column header="menu_order" type="NUMERIC"/>
             <column header="menu_options" type="STRING"/>
             <column header="id_parent" type="STRING"/>
+        </loadData>
+        <loadData tableName="c_security_permission" file="com/artivisi/belajar/restful/db/data/permission.csv">
+            <column header="id" type="STRING"/>
+            <column header="permission_label" type="STRING"/>
+            <column header="permission_value" type="STRING"/>
         </loadData>
     </changeSet>
 </databaseChangeLog>
