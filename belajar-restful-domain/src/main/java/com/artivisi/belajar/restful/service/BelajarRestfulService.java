@@ -15,23 +15,24 @@
  */
 package com.artivisi.belajar.restful.service;
 
-import java.util.List;
-
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import com.artivisi.belajar.restful.domain.Menu;
 import com.artivisi.belajar.restful.domain.Permission;
 import com.artivisi.belajar.restful.domain.Role;
 import com.artivisi.belajar.restful.domain.User;
+import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 public interface BelajarRestfulService extends MonitoredService {
         // konfigurasi aplikasi
 	void save(ApplicationConfig ac);
 	void delete(ApplicationConfig ac);
 	ApplicationConfig findApplicationConfigById(String id);
-	List<ApplicationConfig> findAllApplicationConfigs(Integer page, Integer rows);
+        Page<ApplicationConfig> findAllApplicationConfigs(Pageable pageable);
 	Long countAllApplicationConfigs();
 	Long countApplicationConfigs(String search);
-	List<ApplicationConfig> findApplicationConfigs(String search, Integer page, Integer rows);
+	Page<ApplicationConfig> findApplicationConfigs(String search, Pageable pageable);
         
         // menu
         void save(Menu m);
@@ -44,20 +45,20 @@ public interface BelajarRestfulService extends MonitoredService {
         void save(Permission m);
         void delete(Permission m);
         Permission findPermissionById(String id);
-        List<Permission> findAllPermissions(Integer page, Integer rows);
+        Page<Permission> findAllPermissions(Pageable pageable);
         Long countAllPermissions();
         
         // role
         void save(Role role);
         void delete(Role role);
         Role findRoleById(String id);
-        List<Role> findAllRoles(Integer page, Integer rows);
+        Page<Role> findAllRoles(Pageable pageable);
         Long countAllRoles();
         
         // permission
         void save(User m);
         void delete(User m);
         User findUserById(String id);
-        List<User> findAllUsers(Integer page, Integer rows);
+        Page<User> findAllUsers(Pageable pageable);
         Long countAllUsers();
 }

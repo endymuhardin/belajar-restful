@@ -25,6 +25,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -51,7 +53,7 @@ public class UserServiceTestIT {
 
     @Test
     public void testFindAll() {
-        List<User> result = service.findAllUsers(0, service.countAllUsers().intValue());
-        assertTrue(result.size() > 0);
+        Page<User> result = service.findAllUsers(new PageRequest(0, service.countAllUsers().intValue()));
+        assertTrue(result.getTotalElements() > 0);
     }
 }

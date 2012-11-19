@@ -17,7 +17,6 @@ package com.artivisi.belajar.restful.service.impl;
 
 import com.artivisi.belajar.restful.domain.Permission;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
-import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -25,6 +24,8 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -47,7 +48,7 @@ public class PermissionServiceTestIT {
 
     @Test
     public void testFindAll() {
-        List<Permission> result = service.findAllPermissions(0, service.countAllPermissions().intValue());
-        assertTrue(result.size() > 0);
+        Page<Permission> result = service.findAllPermissions(new PageRequest(0, service.countAllPermissions().intValue()));
+        assertTrue(result.getTotalElements() > 0);
     }
 }

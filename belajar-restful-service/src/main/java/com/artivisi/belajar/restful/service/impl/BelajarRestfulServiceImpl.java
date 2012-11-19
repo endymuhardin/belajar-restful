@@ -35,6 +35,8 @@ import com.artivisi.belajar.restful.domain.Role;
 import com.artivisi.belajar.restful.domain.User;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import java.util.ArrayList;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Service("belajarRestfulService")
 @Transactional
@@ -73,16 +75,11 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     }
 
     @Override
-    public List<ApplicationConfig> findAllApplicationConfigs(Integer page, Integer rows) {
-        if (page == null || page < 0) {
-            page = 0;
+    public Page<ApplicationConfig> findAllApplicationConfigs(Pageable pageable) {
+        if(pageable == null){
+            pageable = new PageRequest(0, 20);
         }
-
-        if (rows == null || rows < 1) {
-            rows = 20;
-        }
-
-        return applicationConfigDao.findAll(new PageRequest(page, rows)).getContent();
+        return applicationConfigDao.findAll(pageable);
     }
 
     @Override
@@ -91,20 +88,16 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     }
 
     @Override
-    public List<ApplicationConfig> findApplicationConfigs(String search, Integer page, Integer rows) {
-        if (page == null || page < 0) {
-            page = 0;
-        }
-
-        if (rows == null || rows < 1) {
-            rows = 20;
-        }
-
+    public Page<ApplicationConfig> findApplicationConfigs(String search, Pageable pageable) {
         if (!StringUtils.hasText(search)) {
-            return findAllApplicationConfigs(page, rows);
+            return findAllApplicationConfigs(pageable);
+        }
+        
+        if(pageable == null){
+            pageable = new PageRequest(0, 20);
         }
 
-        return applicationConfigDao.search("%" + search + "%", new PageRequest(page, rows));
+        return applicationConfigDao.search("%" + search + "%", pageable);
     }
 
     @Override
@@ -165,16 +158,11 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     }
 
     @Override
-    public List<Permission> findAllPermissions(Integer page, Integer rows) {
-        if (page == null || page < 0) {
-            page = 0;
+    public Page<Permission> findAllPermissions(Pageable pageable) {
+        if(pageable == null){
+            pageable = new PageRequest(0, 20);
         }
-
-        if (rows == null || rows < 1) {
-            rows = 20;
-        }
-
-        return permissionDao.findAll(new PageRequest(page, rows)).getContent();
+        return permissionDao.findAll(pageable);
     }
 
     @Override
@@ -208,16 +196,8 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     }
 
     @Override
-    public List<Role> findAllRoles(Integer page, Integer rows) {
-        if (page == null || page < 0) {
-            page = 0;
-        }
-
-        if (rows == null || rows < 1) {
-            rows = 20;
-        }
-
-        return roleDao.findAll(new PageRequest(page, rows)).getContent();
+    public Page<Role> findAllRoles(Pageable pageable) {
+        return roleDao.findAll(pageable);
     }
 
     @Override
@@ -244,8 +224,8 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     }
 
     @Override
-    public List<User> findAllUsers(Integer page, Integer rows) {
-        return userDao.findAll(new PageRequest(page, rows)).getContent();
+    public Page<User> findAllUsers(Pageable pageable) {
+        return userDao.findAll(pageable);
     }
 
     @Override
