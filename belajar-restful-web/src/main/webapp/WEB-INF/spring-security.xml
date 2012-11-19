@@ -34,6 +34,7 @@
         <intercept-url pattern="/main.html**" access="ROLE_USER" />
         <intercept-url pattern="/pages/404.html*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/pages/**" access="ROLE_USER" />
+        <intercept-url pattern="/config/**" access="ROLE_USER" />
         <intercept-url pattern="/config*" access="ROLE_USER" />
         <intercept-url pattern="/homepage/**" access="ROLE_USER" />
         

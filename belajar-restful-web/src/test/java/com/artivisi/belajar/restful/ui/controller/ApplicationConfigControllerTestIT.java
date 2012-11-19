@@ -15,30 +15,35 @@
  */
 package com.artivisi.belajar.restful.ui.controller;
 
-import static com.jayway.restassured.RestAssured.expect;
+import com.artivisi.belajar.restful.domain.ApplicationConfig;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.with;
+import com.jayway.restassured.authentication.FormAuthConfig;
+import groovyx.net.http.ContentType;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.hasItems;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
-import groovyx.net.http.ContentType;
-
-import java.io.File;
-import java.util.Map;
-
 import org.junit.Test;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.client.ClientHttpRequest;
+import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RequestCallback;
+import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
-
-import com.artivisi.belajar.restful.domain.ApplicationConfig;
 
 public class ApplicationConfigControllerTestIT {
 	private String target = "http://localhost:10000/config";
+	private String login = "http://localhost:10000/j_spring_security_check";
 
 	@Test
 	public void testSaveUpdateDelete() {
@@ -57,7 +62,9 @@ public class ApplicationConfigControllerTestIT {
 		config.setLabel("Konfigurasi Percobaan");
 		config.setValue("test");
 
-		String location = given().body(config).contentType(ContentType.JSON)
+		String location = given()
+                        .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                        .body(config).contentType(ContentType.JSON)
 				.expect().statusCode(201).when().post(target)
 				.getHeader("Location");
 
@@ -73,10 +80,11 @@ public class ApplicationConfigControllerTestIT {
 	private void testGetExistingById(String id, String name, String label,
 			String value) {
 		with().header("Accept", "application/json")
-				.expect()
-				.statusCode(200)
-				.body("name", equalTo(name), "label", equalTo(label), "value",
-						equalTo(value)).when().get(target + "/" + id);
+                        .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                        .expect()
+                        .statusCode(200)
+                        .body("name", equalTo(name), "label", equalTo(label), "value",
+                                equalTo(value)).when().get(target + "/" + id);
 	}
 
 	private void testUpdateExisting(String id, String name, String label,
@@ -85,85 +93,121 @@ public class ApplicationConfigControllerTestIT {
 		config.setName(name);
 		config.setLabel(label);
 		config.setValue(value);
-
-		given().body(config).contentType(ContentType.JSON).expect()
+                
+		given()
+                        .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                        .body(config).contentType(ContentType.JSON).expect()
 				.statusCode(200).when().put(target + "/" + id);
 	}
 
 	private void testDeleteExistingById(String id) {
-		expect().statusCode(200).when().delete(target + "/" + id);
+            given().auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+            .expect().statusCode(200).when().delete(target + "/" + id);
 
-		expect().statusCode(404).when().get(target + "/" + id);
+		given().auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                        .expect().statusCode(404).when().get(target + "/" + id);
 	}
 
 	@Test
 	public void testGetExistingConfigById() {
 		with().header("Accept", "application/json")
-				.expect()
-				.statusCode(200)
-				.body("id", equalTo("abc123"), 
-						"name",	equalTo("applicationname"), 
-						"label", equalTo("Application Name"), 
-						"value", equalTo("Belajar Restful")).when()
-				.get(target + "/" + "abc123");
+                    .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                    .expect()
+                    .statusCode(200)
+                    .body("id", equalTo("abc123"), 
+                                    "name",	equalTo("applicationname"), 
+                                    "label", equalTo("Application Name"), 
+                                    "value", equalTo("Belajar Restful")).when()
+                    .get(target + "/" + "abc123");
 	}
 
 	@Test
 	public void testGetNonExistentConfigById() {
-		expect().statusCode(404).when().get(target + "/" + "/nonexistentconfig");
+            with()
+                 .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+		.expect().statusCode(404).when().get(target + "/" + "/nonexistentconfig");
 	}
 
 	@Test
 	public void testFindAll() {
-		with().header("Range", "items=0-5")
-				.header("Accept", "application/json").expect().statusCode(200)
-				.header("Content-Range", "items 0-1/2")
-				.body("id", hasItems("abc123", "def456")).when().get(target);
+            with()
+                .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                .header("Accept", "application/json").expect().statusCode(200)
+                .body("id", hasItems("abc123", "def456")).when().get(target);
 	}
 	
 	@Test
 	public void testSearch() {
-		with().header("Range", "items=0-5")
-				.header("Accept", "application/json")
-				.param("search", "name")
-				.expect().statusCode(200)
-				.header("Content-Range", "items 0-0/1")
-				.body("id", hasItems("abc123")).when().get(target);
+		with()
+                    .header("Accept", "application/json")
+                    .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                    .param("search", "name")
+                    .expect().statusCode(200)
+                    .body("id", hasItems("abc123")).when().get(target);
 		
-		with().header("Range", "items=0-5")
+		with()
 		.header("Accept", "application/json")
+                .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
 		.param("search", "xx")
 		.expect().statusCode(200)
-		.header("Content-Range", "items 0-0/0")
 		.when().get(target);
 	}
 
 	@Test
 	public void testUploadFile() {
-		given()
-			.multiPart("foto", new File("src/test/resources/foto-endy.jpg"))
-			.multiPart("cv",	"cv-endy.pdf", ApplicationConfig.class.getResourceAsStream("/resume-endy-en.pdf"))
-			.formParam("keterangan", "File Endy")
-		.expect()
-			.body(
-					"keterangan", is("success"), 
-					"cv", is("success"),
-					"keterangan", is("success")
-			)
-		.when()
-			.post(target+ "/" +"/abc123/files");
+            given()
+                .auth().form("endy", "123", new FormAuthConfig(login, "j_username", "j_password"))
+                .multiPart("foto", new File("src/test/resources/foto-endy.jpg"))
+                .multiPart("cv",	"cv-endy.pdf", ApplicationConfig.class.getResourceAsStream("/resume-endy-en.pdf"))
+                .formParam("keterangan", "File Endy")
+            .expect()
+                .body(
+                    "keterangan", is("success"), 
+                    "cv", is("success"),
+                    "keterangan", is("success")
+                )
+            .when()
+                    .post(target+ "/" +"/abc123/files");
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testUploadPakaiRestTemplate(){
-		RestTemplate restTemplate = new RestTemplate();
+            RestTemplate rest = new RestTemplate();
+            
+            String jsessionid = rest.execute(login, HttpMethod.POST,
+            new RequestCallback() {
+                @Override
+                public void doWithRequest(ClientHttpRequest request) throws IOException {
+                 request.getBody().write("j_username=endy&j_password=123".getBytes());
+                }
+            }, new ResponseExtractor<String>() {
+                @Override
+                public String extractData(ClientHttpResponse response) throws IOException {
+                    List<String> cookies = response.getHeaders().get("Cookie");
+
+                    // assuming only one cookie with jsessionid as the only value
+                    if (cookies == null) {
+                        cookies = response.getHeaders().get("Set-Cookie");
+                    }
+
+                    String cookie = cookies.get(cookies.size() - 1);
+
+                    int start = cookie.indexOf('=');
+                    int end = cookie.indexOf(';');
+
+                    return cookie.substring(start + 1, end);
+                }
+            });
+            
+            
+		
 		MultiValueMap<String, Object> form = new LinkedMultiValueMap<String, Object>();
 		form.add("foto", new FileSystemResource("src/test/resources/foto-endy.jpg"));
 		form.add("Filename", "cv-endy.pdf");
 		form.add("cv", new FileSystemResource("src/test/resources/resume-endy-en.pdf"));
 		form.add("keterangan", "File Endy");
-		Map<String, String> result = restTemplate.postForObject(target+"/abc123/files", form, Map.class);
+		Map<String, String> result = rest.postForObject(target+"/abc123/files;jsessionid=" + jsessionid, form, Map.class);
 		
 		assertEquals("success", result.get("cv"));
 		assertEquals("success", result.get("foto"));
