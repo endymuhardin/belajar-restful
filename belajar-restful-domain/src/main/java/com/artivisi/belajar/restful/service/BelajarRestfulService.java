@@ -18,8 +18,10 @@ package com.artivisi.belajar.restful.service;
 import java.util.List;
 
 import com.artivisi.belajar.restful.domain.ApplicationConfig;
+import com.artivisi.belajar.restful.domain.Menu;
 
 public interface BelajarRestfulService extends MonitoredService {
+        // konfigurasi aplikasi
 	void save(ApplicationConfig ac);
 	void delete(ApplicationConfig ac);
 	ApplicationConfig findApplicationConfigById(String id);
@@ -27,4 +29,11 @@ public interface BelajarRestfulService extends MonitoredService {
 	Long countAllApplicationConfigs();
 	Long countApplicationConfigs(String search);
 	List<ApplicationConfig> findApplicationConfigs(String search, Integer page, Integer rows);
+        
+        // menu
+        void save(Menu m);
+        void delete(Menu m);
+        Menu findMenuById(String id);
+        List<Menu> findTopLevelMenu();
+        List<Menu> findMenuByParent(Menu m);
 }

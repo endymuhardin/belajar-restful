@@ -16,26 +16,63 @@
 
 -->
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-2.0.xsd">
 
-	<changeSet id="1" author="endy">
-		<createTable tableName="c_application_config">
-			<column name="id" type="varchar(255)">
-				<constraints primaryKey="true" nullable="false" />
-			</column>
-			<column name="name" type="varchar(255)">
-				<constraints unique="true" nullable="false" />
-			</column>
-			<column name="label" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-			<column name="value" type="varchar(255)">
-				<constraints nullable="false" />
-			</column>
-		</createTable>
-		<modifySql dbms="mysql">
-			<append value=" engine innodb" />
-		</modifySql>
-	</changeSet>
+    <changeSet id="1" author="endy">
+        <createTable tableName="c_application_config">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints unique="true" nullable="false" />
+            </column>
+            <column name="label" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="value" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+        <createTable tableName="c_security_menu">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" nullable="false" />
+            </column>
+            <column name="label" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="menu_action" type="varchar(255)"/>
+            <column name="menu_level" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="menu_order" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="menu_options" type="varchar(255)"/>
+            <column name="id_parent" type="varchar(255)" />
+        </createTable>
+        <modifySql dbms="mysql">
+            <append value=" engine innodb" />
+        </modifySql>
+    </changeSet>
+    <changeSet id="2" author="endy">
+        <addForeignKeyConstraint
+            constraintName="fk_menu_parent"
+            baseColumnNames="id_parent"
+            baseTableName="c_security_menu"
+            referencedTableName="c_security_menu"
+            referencedColumnNames="id"
+        />
+    </changeSet>
+    <changeSet id="3" author="endy">
+        <loadData tableName="c_security_menu" file="com/artivisi/belajar/restful/db/data/menu.csv">
+            <column header="id" type="STRING"/>
+            <column header="label" type="STRING"/>
+            <column header="menu_action" type="STRING"/>
+            <column header="menu_level" type="NUMERIC"/>
+            <column header="menu_order" type="NUMERIC"/>
+            <column header="menu_options" type="STRING"/>
+            <column header="id_parent" type="STRING"/>
+        </loadData>
+    </changeSet>
 </databaseChangeLog>

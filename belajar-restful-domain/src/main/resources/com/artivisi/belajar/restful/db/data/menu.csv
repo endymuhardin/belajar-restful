@@ -1,0 +1,17 @@
+id,label,menu_action,menu_level,menu_order,id_parent,menu_options
+system,System,#,0,0,NULL,NULL
+system-header,Pengaturan Aplikasi,NULL,1,0,system,{css-class:nav-header}
+system-config,Konfigurasi Aplikasi,#/system/config,1,1,system,NULL
+system-session,User Aktif,#/system/sessions,1,2,system,NULL
+system-rbac,Ijin Akses,NULL,1,3,system,{css-class:nav-header}
+system-user,User,#/system/user,1,4,system,NULL
+system-role,Role,#/system/role,1,5,system,NULL
+system-menu,Menu,#/system/menu,1,6,system,NULL
+system-permission,Permission,#/system/permission,1,7,system,NULL
+master,Master,#,0,1,NULL,NULL
+master-produk,Produk,#/master/produk,1,0,master,NULL
+master-customer,Customer,#/master/customer,1,1,master,NULL
+transaksi,Transaksi,#,0,2,NULL,NULL
+transaksi-penjualan,Penjualan,#/transaksi/penjualan,1,0,transaksi,NULL
+laporan,Laporan,#,0,3,NULL,NULL
+rekap-penjualan,Rekap Penjualan,#/laporan/penjualan,1,0,laporan,NULL
