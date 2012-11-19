@@ -24,9 +24,6 @@ import org.springframework.data.repository.query.Param;
 
 
 public interface ApplicationConfigDao extends PagingAndSortingRepository<ApplicationConfig, String> {
-    @Query("select count(a) from ApplicationConfig a")
-	Long countAll();
-    
     @Query("select ac from ApplicationConfig ac " +
 			"where lower(ac.name) like lower(:search) " +
 			"or lower(ac.label) like lower(:search) " +

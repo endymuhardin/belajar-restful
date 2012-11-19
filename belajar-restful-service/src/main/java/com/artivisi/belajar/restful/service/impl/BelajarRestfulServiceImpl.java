@@ -83,7 +83,7 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
     @Override
     public Long countAllApplicationConfigs() {
-        return applicationConfigDao.countAll();
+        return applicationConfigDao.count();
     }
 
     @Override
@@ -175,7 +175,7 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
     @Override
     public Long countAllPermissions() {
-        return permissionDao.countAll();
+        return permissionDao.count();
     }
 
     @Override
@@ -218,6 +218,7 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
 
     @Override
     public Long countAllRoles() {
-        return roleDao.countAll();
+        return roleDao.count();
     }
+
 }

@@ -16,10 +16,7 @@
 package com.artivisi.belajar.restful.dao;
 
 import com.artivisi.belajar.restful.domain.Role;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface RoleDao extends PagingAndSortingRepository<Role, String> {
-    @Query("select count(a) from Role a")
-    Long countAll();
 }

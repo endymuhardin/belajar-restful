@@ -16,10 +16,7 @@
 package com.artivisi.belajar.restful.dao;
 
 import com.artivisi.belajar.restful.domain.Permission;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface PermissionDao extends PagingAndSortingRepository<Permission, String> {
-    @Query("select count(a) from Permission a")
-    Long countAll();
 }
