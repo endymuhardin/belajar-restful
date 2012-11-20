@@ -22,7 +22,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Belajar RESTful</title>
 
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.0/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="css/aplikasi.css" rel="stylesheet">
 
     </head>
@@ -33,6 +34,11 @@
         <div class="navbar navbar-inverse navbar-static-top">
             <div class="navbar-inner">
                 <div class="container">
+                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </button>
                     <a class="brand" href="#">Belajar RESTful</a>
                     <div class="nav-collapse collapse" ng-controller="MenubarController">
                         <ul class="nav">
@@ -98,10 +104,10 @@
             <div ng-view></div>
         </div>
 
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.0/js/bootstrap.min.js"></script>
-        <script src="http://code.angularjs.org/1.0.2/angular.min.js"></script>
-        <script src="http://code.angularjs.org/1.0.2/angular-resource.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/angular.min.js"></script>
+        <script src="js/angular-resource.min.js"></script>
         <script src="js/aplikasi.js"></script>
         <script src="js/aplikasi-service.js"></script>
         <script src="js/aplikasi-controller.js"></script>
