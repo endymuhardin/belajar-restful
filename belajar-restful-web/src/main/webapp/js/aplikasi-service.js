@@ -89,4 +89,25 @@ angular.module('belajar.service', ['ngResource'])
             
         return service;
     }])
+    .factory('RoleService', ['$resource', '$http', function($resource, $http){
+        var service = {
+            role: $resource('/role/:id'),
+            get: function(param){ return this.role.get(param) }, 
+            query: function(){ return this.role.query() },
+            save: function(obj){
+                if(obj.id == null){
+                    return $http.post('/role', obj);
+                } else {
+                    return $http.put('/role/'+obj.id, obj);
+                }
+            }, 
+            remove: function(obj){
+                if(obj.id != null){
+                    return $http.delete('/role/'+obj.id);
+                }
+            }
+        };
+            
+        return service;
+    }])
 ;

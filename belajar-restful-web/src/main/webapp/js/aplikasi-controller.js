@@ -121,4 +121,31 @@ angular.module('belajar.controller',['belajar.service'])
             });
         }
     }])
+    .controller('RoleController', ['$scope', 'RoleService', function($scope, RoleService){
+        $scope.roles = RoleService.query();
+        $scope.edit = function(x){
+            if(x.id == null){
+                return; 
+            }
+            $scope.currentRole = RoleService.get({id: x.id});
+        };
+        $scope.baru = function(){
+            $scope.currentRole = null;
+        }
+        $scope.simpan = function(){
+            RoleService.save($scope.currentRole)
+            .success(function(){
+                $scope.roles = RoleService.query();
+                $scope.currentRole = null;
+            });
+        }
+        $scope.remove = function(x){
+            if(x.id == null){
+                return;
+            }
+            RoleService.remove(x).success(function(){
+                $scope.roles = RoleService.query();
+            });
+        }
+    }])
 ;

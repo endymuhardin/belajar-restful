@@ -17,4 +17,47 @@
 -->
 <div class="span5 well-large">
     <h1>Daftar Role</h1>
+
+    <a class="btn" ng-click="baru()">
+        <i class="icon-plus-sign"></i>Tambah Data
+    </a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Keterangan</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in roles">
+                <td>{{x.name}}</td>
+                <td>{{x.description}}</td>
+                <td>
+                    <a ng-click="edit(x)"><i class="icon-edit"></i></a>
+                    <a ng-click="remove(x)"><i class="icon-remove"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="span5 well-large">
+    <h1>Form Role</h1>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="name">Nama : &nbsp;</label>
+            <input type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name">
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="description">Keterangan : &nbsp;</label>
+            <input type="text" id="description" name="description" placeholder="Keterangan" ng-model="currentRole.description">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+            <button type="button" class="btn" ng-click="baru()">Batal</button>
+        </div>
+    </form>
 </div>
