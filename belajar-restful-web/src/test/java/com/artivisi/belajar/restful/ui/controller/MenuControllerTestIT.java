@@ -96,7 +96,7 @@ public class MenuControllerTestIT {
     }
 
     @Test
-    public void testGetExistingConfigById() {
+    public void testGetExistingById() {
         with().header("Accept", "application/json")
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
                 .expect()
@@ -108,7 +108,7 @@ public class MenuControllerTestIT {
     }
 
     @Test
-    public void testGetNonExistentConfigById() {
+    public void testGetNonExistentById() {
         with()
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
                 .expect().statusCode(404).when().get(target + "/" + "/nonexistentconfig");

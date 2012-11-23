@@ -55,7 +55,7 @@ public interface BelajarRestfulService extends MonitoredService {
         Page<Role> findAllRoles(Pageable pageable);
         Long countAllRoles();
         
-        // permission
+        // user
         void save(User m);
         void delete(User m);
         User findUserById(String id);
