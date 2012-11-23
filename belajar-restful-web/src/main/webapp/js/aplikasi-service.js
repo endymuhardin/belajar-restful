@@ -110,4 +110,25 @@ angular.module('belajar.service', ['ngResource'])
             
         return service;
     }])
+    .factory('UserService', ['$resource', '$http', function($resource, $http){
+        var service = {
+            user: $resource('/user/:id'),
+            get: function(param){ return this.user.get(param) }, 
+            query: function(){ return this.user.query() },
+            save: function(obj){
+                if(obj.id == null){
+                    return $http.post('/user', obj);
+                } else {
+                    return $http.put('/user/'+obj.id, obj);
+                }
+            }, 
+            remove: function(obj){
+                if(obj.id != null){
+                    return $http.delete('/user/'+obj.id);
+                }
+            }
+        };
+            
+        return service;
+    }])
 ;

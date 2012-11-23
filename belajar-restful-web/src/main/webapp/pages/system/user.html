@@ -17,4 +17,63 @@
 -->
 <div class="span5 well-large">
     <h1>Daftar User</h1>
+
+    <a class="btn" ng-click="baru()">
+        <i class="icon-plus-sign"></i>Tambah Data
+    </a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Nama Lengkap</th>
+                <th>Aktif</th>
+                <th>Role</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="x in users">
+                <td>{{x.username}}</td>
+                <td>{{x.fullname}}</td>
+                <td>{{x.active}}</td>
+                <td>{{x.role.name}}</td>
+                <td>
+                    <a ng-click="edit(x)"><i class="icon-edit"></i></a>
+                    <a ng-click="remove(x)"><i class="icon-remove"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="span5 well-large">
+    <h1>Form User</h1>
+    <form class="form-horizontal">
+        <div class="control-group">
+            <label class="control-label" for="fullname">Nama : &nbsp;</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Nama User" ng-model="currentUser.fullname">
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="username">Username : &nbsp;</label>
+            <input type="text" id="username" name="username" placeholder="Nama User" ng-model="currentUser.username">
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="password">Password : &nbsp;</label>
+            <input type="password" id="password" name="password" placeholder="Password" ng-model="currentUser.password">
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="active">Aktif : &nbsp;</label>
+            <input type="checkbox" id="active" name="active" placeholder="Keterangan" ng-model="currentUser.active">
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="role">Role : &nbsp;</label>
+            <input type="input" id="role" name="role" placeholder="ID Role" ng-model="currentUser.role.id">
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+            <button type="button" class="btn" ng-click="baru()">Batal</button>
+        </div>
+    </form>
 </div>

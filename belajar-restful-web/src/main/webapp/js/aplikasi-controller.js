@@ -148,4 +148,34 @@ angular.module('belajar.controller',['belajar.service'])
             });
         }
     }])
+    .controller('UserController', ['$scope', 'UserService', function($scope, UserService){
+        $scope.users = UserService.query();
+        $scope.edit = function(x){
+            if(x.id == null){
+                return; 
+            }
+            $scope.currentUser = UserService.get({id: x.id});
+        };
+        $scope.baru = function(){
+            $scope.currentUser = null;
+        }
+        $scope.simpan = function(){
+            if($scope.currentUser.active == null){
+                $scope.currentUser.active = false;
+            }
+            UserService.save($scope.currentUser)
+            .success(function(){
+                $scope.users = UserService.query();
+                $scope.currentUser = null;
+            });
+        }
+        $scope.remove = function(x){
+            if(x.id == null){
+                return;
+            }
+            UserService.remove(x).success(function(){
+                $scope.users = UserService.query();
+            });
+        }
+    }])
 ;
