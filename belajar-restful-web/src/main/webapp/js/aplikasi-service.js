@@ -68,4 +68,25 @@ angular.module('belajar.service', ['ngResource'])
             
         return service;
     }])
+    .factory('PermissionService', ['$resource', '$http', function($resource, $http){
+        var service = {
+            permission: $resource('/permission/:id'),
+            get: function(param){ return this.permission.get(param) }, 
+            query: function(){ return this.permission.query() },
+            save: function(obj){
+                if(obj.id == null){
+                    return $http.post('/permission', obj);
+                } else {
+                    return $http.put('/permission/'+obj.id, obj);
+                }
+            }, 
+            remove: function(obj){
+                if(obj.id != null){
+                    return $http.delete('/permission/'+obj.id);
+                }
+            }
+        };
+            
+        return service;
+    }])
 ;

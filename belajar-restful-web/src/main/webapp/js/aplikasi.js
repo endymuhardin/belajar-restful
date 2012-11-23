@@ -22,7 +22,7 @@ angular.module('belajar', ['belajar.controller'])
             .when('/system/sessions', {templateUrl: 'pages/system/sessions.html', controller: 'ApplicationSessionsController'})
             .when('/system/user', {templateUrl: 'pages/system/user.html'})
             .when('/system/role', {templateUrl: 'pages/system/role.html'})
-            .when('/system/permission', {templateUrl: 'pages/system/permission.html'})
+            .when('/system/permission', {templateUrl: 'pages/system/permission.html', controller: 'PermissionController'})
             .when('/system/menu', {templateUrl: 'pages/system/menu.html', controller: 'SystemMenuController'})
             .when('/about', {templateUrl: 'pages/about.html', controller: 'AboutController'})
             .otherwise({templateUrl: 'pages/404.html'});

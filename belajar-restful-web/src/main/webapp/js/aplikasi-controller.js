@@ -94,4 +94,31 @@ angular.module('belajar.controller',['belajar.service'])
             });
         }
     }])
+    .controller('PermissionController', ['$scope', 'PermissionService', function($scope, PermissionService){
+        $scope.permissions = PermissionService.query();
+        $scope.edit = function(x){
+            if(x.id == null){
+                return; 
+            }
+            $scope.currentPermission = PermissionService.get({id: x.id});
+        };
+        $scope.baru = function(){
+            $scope.currentPermission = null;
+        }
+        $scope.simpan = function(){
+            PermissionService.save($scope.currentPermission)
+            .success(function(){
+                $scope.permissions = PermissionService.query();
+                $scope.currentPermission = null;
+            });
+        }
+        $scope.remove = function(x){
+            if(x.id == null){
+                return;
+            }
+            PermissionService.remove(x).success(function(){
+                $scope.permissions = PermissionService.query();
+            });
+        }
+    }])
 ;
