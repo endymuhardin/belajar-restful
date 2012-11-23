@@ -206,6 +206,8 @@
 						<exclude>.git/**</exclude>
 						<exclude>**/.metadata/**</exclude>
 						<exclude>**/logs/**</exclude>
+						<exclude>**/js/**</exclude>
+						<exclude>**/css/**</exclude>
 						<exclude>**/jacoco-result/**</exclude>
 						<exclude>**/src/main/webapp/resources/**</exclude>
 					</excludes>
