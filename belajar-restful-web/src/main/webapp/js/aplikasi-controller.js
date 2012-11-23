@@ -68,20 +68,21 @@ angular.module('belajar.controller',['belajar.service'])
         }
     }])
     .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
-        $scope.configs = SystemMenuService.query();
+        $scope.menus = SystemMenuService.query();
         $scope.edit = function(x){
             if(x.id == null){
                 return; 
             }
-            $scope.currentConfig = SystemMenuService.get({id: x.id});
+            $scope.currentMenu = SystemMenuService.get({id: x.id});
         };
         $scope.baru = function(){
-            $scope.currentConfig = null;
+            $scope.currentMenu = null;
         }
         $scope.simpan = function(){
             SystemMenuService.save($scope.currentMenu)
             .success(function(){
                 $scope.menus = SystemMenuService.query();
+                $scope.currentMenu = null;
             });
         }
         $scope.remove = function(x){
