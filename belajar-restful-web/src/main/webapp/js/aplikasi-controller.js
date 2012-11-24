@@ -148,8 +148,9 @@ angular.module('belajar.controller',['belajar.service'])
             });
         }
     }])
-    .controller('UserController', ['$scope', 'UserService', function($scope, UserService){
+    .controller('UserController', ['$scope', 'UserService', 'RoleService', function($scope, UserService, RoleService){
         $scope.users = UserService.query();
+        $scope.roles = RoleService.query();
         $scope.edit = function(x){
             if(x.id == null){
                 return; 
