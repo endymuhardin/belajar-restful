@@ -15,49 +15,112 @@
     limitations under the License.
 
 -->
-<div class="span5 well-large">
-    <h1>Daftar Role</h1>
+<div class="row">
+    <div class="span5 well-large">
+        <h1>Daftar Role</h1>
 
-    <a class="btn" ng-click="baru()">
-        <i class="icon-plus-sign"></i>Tambah Data
-    </a>
-    
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Nama</th>
-                <th>Keterangan</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="x in roles">
-                <td>{{x.name}}</td>
-                <td>{{x.description}}</td>
-                <td>
-                    <a ng-click="edit(x)"><i class="icon-edit"></i></a>
-                    <a ng-click="remove(x)"><i class="icon-remove"></i></a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+        <a class="btn" ng-click="baru()">
+            <i class="icon-plus-sign"></i>Tambah Data
+        </a>
+        
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Keterangan</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in roles">
+                    <td>{{x.name}}</td>
+                    <td>{{x.description}}</td>
+                    <td>
+                        <a ng-click="edit(x)"><i class="icon-edit"></i></a>
+                        <a ng-click="remove(x)"><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
+    </div>
+
+    <div class="span5 well-large">
+        <h1>Form Role</h1>
+        <form class="form-horizontal">
+            <div class="control-group">
+                <label class="control-label" for="name">Nama : &nbsp;</label>
+                <input type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name">
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="description">Keterangan : &nbsp;</label>
+                <input type="text" id="description" name="description" placeholder="Keterangan" ng-model="currentRole.description">
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+                <button type="button" class="btn" ng-click="baru()">Batal</button>
+            </div>
+        </form>
+    </div>
 </div>
+<div class="row" ng-show="currentRole">
+    <div class="span5 well-large">
+        <h1>Menu {{currentRole.name}}</h1>
 
-<div class="span5 well-large">
-    <h1>Form Role</h1>
-    <form class="form-horizontal">
-        <div class="control-group">
-            <label class="control-label" for="name">Nama : &nbsp;</label>
-            <input type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name">
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="description">Keterangan : &nbsp;</label>
-            <input type="text" id="description" name="description" placeholder="Keterangan" ng-model="currentRole.description">
-        </div>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
-            <button type="button" class="btn" ng-click="baru()">Batal</button>
-        </div>
-    </form>
+        <a class="btn">
+            <i class="icon-plus-sign"></i>Tambah Menu
+        </a>
+        <h3 ng-hide="currentRole.menuSet.length">
+            Tidak ada Menu untuk {{currentRole.name}}
+        </h3>
+
+        <table class="table table-striped" ng-show="currentRole.menuSet.length">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="m in currentRole.menuSet">
+                    <td>{{m.label}}</td>
+                    <td>{{m.action}}</td>
+                    <td>
+                        <a><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="span5 well-large">
+        <h1>Permission {{currentRole.name}}</h1>
+
+        <a class="btn">
+            <i class="icon-plus-sign"></i>Tambah Permission
+        </a>
+
+        <h3 ng-hide="currentRole.permissionSet.length">
+            Tidak ada Permission untuk {{currentRole.name}}
+        </h3>
+
+        <table class="table table-striped" ng-show="currentRole.permissionSet.length">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Nilai</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in currentRole.permissionSet">
+                    <td>{{p.label}}</td>
+                    <td>{{p.value}}</td>
+                    <td>
+                        <a><i class="icon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
