@@ -56,6 +56,7 @@ angular.module('belajar.controller',['belajar.service'])
             ApplicationConfigService.save($scope.currentConfig)
             .success(function(){
                 $scope.configs = ApplicationConfigService.query();
+                $scope.currentConfig = null;
             });
         }
         $scope.remove = function(x){
