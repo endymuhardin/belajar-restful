@@ -67,7 +67,7 @@
     <div class="span5 well-large">
         <h1>Menu {{currentRole.name}}</h1>
 
-        <a class="btn">
+        <a class="btn" ng-click="showMenuDialog=true">
             <i class="icon-plus-sign"></i>Tambah Menu
         </a>
         <h3 ng-hide="currentRole.menuSet.length">
@@ -96,7 +96,7 @@
     <div class="span5 well-large">
         <h1>Permission {{currentRole.name}}</h1>
 
-        <a class="btn">
+        <a class="btn" ng-click="showPermissionDialog=true">
             <i class="icon-plus-sign"></i>Tambah Permission
         </a>
 
@@ -122,5 +122,31 @@
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+<div ui-modal class="fade" ng-model="showPermissionDialog" id="dialogPermission">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="showPermissionDialog=false">×</button>
+        <h3>Tambah Permission</h3>
+    </div>
+    <div class="modal-body">
+        <p>Nanti tabel di sini</p>
+    </div>
+    <div class="modal-footer">
+        <a class="btn" ng-click="showPermissionDialog=false">Close</a>
+        <a class="btn btn-primary">Save changes</a>
+    </div>
+</div>
+<div ui-modal class="fade" ng-model="showMenuDialog" id="dialogMenu">
+  <div class="modal-header">
+        <button type="button" class="close" ng-click="showMenuDialog=false">×</button>
+        <h3>Tambah Menu</h3>
+    </div>
+    <div class="modal-body">
+        <p>Nanti tabel di sini</p>
+    </div>
+    <div class="modal-footer">
+        <a class="btn" ng-click="showMenuDialog=false">Close</a>
+        <a class="btn btn-primary">Save changes</a>
     </div>
 </div>
