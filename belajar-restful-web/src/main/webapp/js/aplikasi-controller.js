@@ -47,7 +47,9 @@ angular.module('belajar.controller',['belajar.service'])
             if(x.id == null){
                 return; 
             }
-            $scope.currentConfig = ApplicationConfigService.get({configId: x.id});
+            $scope.currentConfig = ApplicationConfigService.get({
+                configId: x.id
+                });
         };
         $scope.baru = function(){
             $scope.currentConfig = null;
@@ -74,7 +76,9 @@ angular.module('belajar.controller',['belajar.service'])
             if(x.id == null){
                 return; 
             }
-            $scope.currentMenu = SystemMenuService.get({id: x.id});
+            $scope.currentMenu = SystemMenuService.get({
+                id: x.id
+                });
         };
         $scope.baru = function(){
             $scope.currentMenu = null;
@@ -101,7 +105,9 @@ angular.module('belajar.controller',['belajar.service'])
             if(x.id == null){
                 return; 
             }
-            $scope.currentPermission = PermissionService.get({id: x.id});
+            $scope.currentPermission = PermissionService.get({
+                id: x.id
+                });
         };
         $scope.baru = function(){
             $scope.currentPermission = null;
@@ -124,13 +130,19 @@ angular.module('belajar.controller',['belajar.service'])
     }])
     .controller('RoleController', ['$scope', 'RoleService', function($scope, RoleService){
         $scope.roles = RoleService.query();
-        $scope.unselectedPermission = null;
-        $scope.unselectedMenu = null;
+        
+        $scope.unselectedPermission = [];
+        $scope.unselectedMenu = [];
+        
+        $scope.selectedPermission = [];
+        
         $scope.edit = function(x){
             if(x.id == null){
                 return; 
             }
-            $scope.currentRole = RoleService.get({id: x.id});
+            $scope.currentRole = RoleService.get({
+                id: x.id
+                });
             RoleService.unselectedPermission(x).success(function(data){
                 $scope.unselectedPermission = data;
             });
@@ -156,6 +168,47 @@ angular.module('belajar.controller',['belajar.service'])
                 $scope.roles = RoleService.query();
             });
         }
+        
+        $scope.selectAllPermission = function($event){
+            if($event.target.checked){
+                for ( var i = 0; i < $scope.unselectedPermission.length; i++) {
+                    var p = $scope.unselectedPermission[i];
+                    if($scope.selectedPermission.indexOf(p.id) < 0){
+                        $scope.selectedPermission.push(p.id);
+                    }
+                }
+            } else {
+                $scope.selectedPermission = [];
+            }
+        }
+        
+        $scope.updateSelectedPermission = function($event, id){
+            var checkbox = $event.target;
+            if(checkbox.checked  && $scope.selectedPermission.indexOf(id) < 0){
+                $scope.selectedPermission.push(id);
+            } else {
+                $scope.selectedPermission.splice($scope.selectedPermission.indexOf(id), 1);
+            }
+        }
+        
+        $scope.isPermissionSelected = function(id){
+            return $scope.selectedPermission.indexOf(id) >= 0;
+        }
+
+        $scope.isAllPermissionSelected = function(){
+            return $scope.unselectedPermission.length === $scope.selectedPermission.length;
+        }
+        
+        $scope.saveSelectedPermission = function(){
+            console.log($scope.selectedPermission);
+            $scope.showPermissionDialog = false;
+        }
+        
+        $scope.cancelSelectedPermission = function(){
+            $scope.selectedPermission = [];
+            console.log($scope.selectedPermission);
+            $scope.showPermissionDialog = false;
+        }
     }])
     .controller('UserController', ['$scope', 'UserService', 'RoleService', function($scope, UserService, RoleService){
         $scope.users = UserService.query();
@@ -164,7 +217,9 @@ angular.module('belajar.controller',['belajar.service'])
             if(x.id == null){
                 return; 
             }
-            $scope.currentUser = UserService.get({id: x.id});
+            $scope.currentUser = UserService.get({
+                id: x.id
+                });
         };
         $scope.baru = function(){
             $scope.currentUser = null;

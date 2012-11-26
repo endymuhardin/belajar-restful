@@ -138,7 +138,11 @@
         <table class="table table-striped" ng-show="unselectedPermission">
             <thead>
                 <tr>
-                    <th>Pilih</th>
+                    <th>
+                        <input type="checkbox"
+                               ng-checked="isAllPermissionSelected()"
+                               ng-click="selectAllPermission($event)">
+                    </th>
                     <th>Nama</th>
                     <th>Nilai</th>
                 </tr>
@@ -146,7 +150,9 @@
             <tbody>
                 <tr ng-repeat="p in unselectedPermission">
                     <td>
-                        <input type="checkbox" value="{{p.id}}">
+                        <input type="checkbox" 
+                               ng-checked="isPermissionSelected(p.id)" 
+                               ng-click="updateSelectedPermission($event, p.id)">
                     </td>
                     <td>{{p.label}}</td>
                     <td>{{p.value}}</td>
@@ -155,8 +161,8 @@
         </table>
     </div>
     <div class="modal-footer">
-        <a class="btn" ng-click="showPermissionDialog=false">Batal</a>
-        <a class="btn btn-primary">Tambah Permission</a>
+        <a class="btn" ng-click="cancelSelectedPermission()">Batal</a>
+        <a class="btn btn-primary" ng-click="saveSelectedPermission()">Tambah Permission</a>
     </div>
 </div>
 <div ui-modal class="fade" ng-model="showMenuDialog" id="dialogMenu">
@@ -172,7 +178,7 @@
         <table class="table table-striped" ng-show="unselectedMenu">
             <thead>
                 <tr>
-                    <th>Pilih</th>
+                    <th><input type="checkbox"></th>
                     <th>Nama</th>
                     <th>Action</th>
                 </tr>
