@@ -170,32 +170,39 @@
         <button type="button" class="close" ng-click="showMenuDialog=false">×</button>
         <h3>Tambah Menu</h3>
     </div>
+        
     <div class="modal-body">
         <h4 ng-hide="unselectedMenu">
-            Tidak ada Permission yang tersedia untuk {{currentRole.name}}
+            Tidak ada Menu yang tersedia untuk {{currentRole.name}}
         </h4>
         
         <table class="table table-striped" ng-show="unselectedMenu">
             <thead>
                 <tr>
-                    <th><input type="checkbox"></th>
+                    <th>
+                        <input type="checkbox"
+                               ng-checked="isAllMenuSelected()"
+                               ng-click="selectAllMenu($event)">
+                    </th>
                     <th>Nama</th>
-                    <th>Action</th>
+                    <th>Nilai</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="p in unselectedMenu">
                     <td>
-                        <input type="checkbox" value="{{p.id}}">
+                        <input type="checkbox" 
+                               ng-checked="isMenuSelected(p.id)" 
+                               ng-click="updateSelectedMenu($event, p.id)">
                     </td>
                     <td>{{p.label}}</td>
-                    <td>{{p.action}}</td>
+                    <td>{{p.value}}</td>
                 </tr>
             </tbody>
         </table>
     </div>
     <div class="modal-footer">
-        <a class="btn" ng-click="showMenuDialog=false">Batal</a>
-        <a class="btn btn-primary">Tambah Menu</a>
+        <a class="btn" ng-click="cancelSelectedMenu()">Batal</a>
+        <a class="btn btn-primary" ng-click="saveSelectedMenu()">Tambah Menu</a>
     </div>
 </div>

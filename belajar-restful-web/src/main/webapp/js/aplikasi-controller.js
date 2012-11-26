@@ -135,6 +135,7 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.unselectedMenu = [];
         
         $scope.selectedPermission = [];
+        $scope.selectedMenu = [];
         
         $scope.edit = function(x){
             if(x.id == null){
@@ -208,6 +209,47 @@ angular.module('belajar.controller',['belajar.service'])
             $scope.selectedPermission = [];
             console.log($scope.selectedPermission);
             $scope.showPermissionDialog = false;
+        }
+        
+        $scope.selectAllMenu = function($event){
+            if($event.target.checked){
+                for ( var i = 0; i < $scope.unselectedMenu.length; i++) {
+                    var p = $scope.unselectedMenu[i];
+                    if($scope.selectedMenu.indexOf(p.id) < 0){
+                        $scope.selectedMenu.push(p.id);
+                    }
+                }
+            } else {
+                $scope.selectedMenu = [];
+            }
+        }
+        
+        $scope.updateSelectedMenu = function($event, id){
+            var checkbox = $event.target;
+            if(checkbox.checked  && $scope.selectedMenu.indexOf(id) < 0){
+                $scope.selectedMenu.push(id);
+            } else {
+                $scope.selectedMenu.splice($scope.selectedMenu.indexOf(id), 1);
+            }
+        }
+        
+        $scope.isMenuSelected = function(id){
+            return $scope.selectedMenu.indexOf(id) >= 0;
+        }
+
+        $scope.isAllMenuSelected = function(){
+            return $scope.unselectedMenu.length === $scope.selectedMenu.length;
+        }
+        
+        $scope.saveSelectedMenu = function(){
+            console.log($scope.selectedMenu);
+            $scope.showMenuDialog = false;
+        }
+        
+        $scope.cancelSelectedMenu = function(){
+            $scope.selectedMenu = [];
+            console.log($scope.selectedMenu);
+            $scope.showMenuDialog = false;
         }
     }])
     .controller('UserController', ['$scope', 'UserService', 'RoleService', function($scope, UserService, RoleService){
