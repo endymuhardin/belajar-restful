@@ -15,9 +15,11 @@
  */
 package com.artivisi.belajar.restful.ui.controller;
 
+import com.artivisi.belajar.restful.domain.Permission;
 import com.artivisi.belajar.restful.domain.Role;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,6 +53,12 @@ public class RoleController {
             throw new IllegalStateException();
         }
         return x;
+    }
+    
+    @RequestMapping("/role/{id}/unselected-permission")
+    @ResponseBody
+    public List<Permission> findPermissionNotInRole(@PathVariable String id) {
+        return belajarRestfulService.findPermissionsNotInRole(belajarRestfulService.findRoleById(id));
     }
 
     @RequestMapping(value = "/role", method = RequestMethod.POST)

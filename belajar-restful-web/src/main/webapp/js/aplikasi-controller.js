@@ -124,11 +124,19 @@ angular.module('belajar.controller',['belajar.service'])
     }])
     .controller('RoleController', ['$scope', 'RoleService', function($scope, RoleService){
         $scope.roles = RoleService.query();
+        $scope.unselectedPermission = null;
+        $scope.unselectedMenu = null;
         $scope.edit = function(x){
             if(x.id == null){
                 return; 
             }
             $scope.currentRole = RoleService.get({id: x.id});
+            RoleService.unselectedPermission(x).success(function(data){
+                $scope.unselectedPermission = data;
+            });
+            RoleService.unselectedMenu(x).success(function(data){
+                $scope.unselectedMenu = data;
+            });
         };
         $scope.baru = function(){
             $scope.currentRole = null;

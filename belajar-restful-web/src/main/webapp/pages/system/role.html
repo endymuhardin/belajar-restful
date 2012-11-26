@@ -129,12 +129,34 @@
         <button type="button" class="close" ng-click="showPermissionDialog=false">×</button>
         <h3>Tambah Permission</h3>
     </div>
+        
     <div class="modal-body">
-        <p>Nanti tabel di sini</p>
+        <h4 ng-hide="unselectedPermission">
+            Tidak ada Permission yang tersedia untuk {{currentRole.name}}
+        </h4>
+        
+        <table class="table table-striped" ng-show="unselectedPermission">
+            <thead>
+                <tr>
+                    <th>Pilih</th>
+                    <th>Nama</th>
+                    <th>Nilai</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in unselectedPermission">
+                    <td>
+                        <input type="checkbox" value="{{p.id}}">
+                    </td>
+                    <td>{{p.label}}</td>
+                    <td>{{p.value}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="modal-footer">
-        <a class="btn" ng-click="showPermissionDialog=false">Close</a>
-        <a class="btn btn-primary">Save changes</a>
+        <a class="btn" ng-click="showPermissionDialog=false">Batal</a>
+        <a class="btn btn-primary">Tambah Permission</a>
     </div>
 </div>
 <div ui-modal class="fade" ng-model="showMenuDialog" id="dialogMenu">
@@ -143,10 +165,31 @@
         <h3>Tambah Menu</h3>
     </div>
     <div class="modal-body">
-        <p>Nanti tabel di sini</p>
+        <h4 ng-hide="unselectedMenu">
+            Tidak ada Permission yang tersedia untuk {{currentRole.name}}
+        </h4>
+        
+        <table class="table table-striped" ng-show="unselectedMenu">
+            <thead>
+                <tr>
+                    <th>Pilih</th>
+                    <th>Nama</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in unselectedMenu">
+                    <td>
+                        <input type="checkbox" value="{{p.id}}">
+                    </td>
+                    <td>{{p.label}}</td>
+                    <td>{{p.action}}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="modal-footer">
-        <a class="btn" ng-click="showMenuDialog=false">Close</a>
-        <a class="btn btn-primary">Save changes</a>
+        <a class="btn" ng-click="showMenuDialog=false">Batal</a>
+        <a class="btn btn-primary">Tambah Menu</a>
     </div>
 </div>

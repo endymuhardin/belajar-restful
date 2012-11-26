@@ -52,6 +52,12 @@ public class MenuController {
         }
         return x;
     }
+    
+    @RequestMapping("/role/{id}/unselected-menu")
+    @ResponseBody
+    public List<Menu> findMenuNotInRole(@PathVariable String id) {
+        return belajarRestfulService.findMenuNotInRole(belajarRestfulService.findRoleById(id));
+    }
 
     @RequestMapping(value = "/menu", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)

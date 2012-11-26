@@ -105,6 +105,12 @@ angular.module('belajar.service', ['ngResource'])
                 if(obj.id != null){
                     return $http.delete('/role/'+obj.id);
                 }
+            },
+            unselectedPermission: function(obj){
+                return $http.get('/role/'+obj.id+'/unselected-permission');
+            },
+            unselectedMenu: function(obj){
+                return $http.get('/role/'+obj.id+'/unselected-menu');
             }
         };
             
