@@ -40,6 +40,7 @@ public interface BelajarRestfulService extends MonitoredService {
         Menu findMenuById(String id);
         List<Menu> findTopLevelMenu();
         List<Menu> findMenuByParent(Menu m);
+        List<Menu> findMenuNotInRole(Role r);
         
         // permission
         void save(Permission m);
@@ -47,6 +48,7 @@ public interface BelajarRestfulService extends MonitoredService {
         Permission findPermissionById(String id);
         Page<Permission> findAllPermissions(Pageable pageable);
         Long countAllPermissions();
+        List<Permission> findPermissionsNotInRole(Role r);
         
         // role
         void save(Role role);

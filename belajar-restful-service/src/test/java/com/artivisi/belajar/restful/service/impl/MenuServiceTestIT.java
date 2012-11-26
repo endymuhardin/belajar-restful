@@ -16,8 +16,10 @@
 package com.artivisi.belajar.restful.service.impl;
 
 import com.artivisi.belajar.restful.domain.Menu;
+import com.artivisi.belajar.restful.domain.Role;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import java.util.List;
+import org.junit.Assert;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,5 +85,20 @@ public class MenuServiceTestIT {
         assertNull(permission.getOptions());
         assertEquals(Integer.valueOf(7), permission.getOrder());
         assertNotNull(permission.getParent());
+    }
+    
+    @Test
+    public void testFindNotInRole() {
+        Role r = new Role();
+        r.setId("staff");
+        
+        List<Menu> hasil = belajarRestfulService.findMenuNotInRole(r);
+        assertEquals(new Integer(13), new Integer(hasil.size()));
+        
+        for (Menu menu : hasil) {
+            if(menu.getId().equals("master")){
+                Assert.fail("Seharusnya tidak ada menu master");
+            }
+        }
     }
 }

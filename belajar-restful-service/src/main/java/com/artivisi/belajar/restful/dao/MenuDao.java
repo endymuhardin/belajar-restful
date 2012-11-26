@@ -32,5 +32,7 @@ public interface MenuDao extends PagingAndSortingRepository<Menu, String> {
 			"where m.parent.id = :id " +
 			"order by m.level, m.order")
     public List<Menu> findMenuByParent(@Param("id") String id);
+
+    public List<Menu> findByIdNotIn(List<String> ids);
     
 }

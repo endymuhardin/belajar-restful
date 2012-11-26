@@ -138,6 +138,25 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
         }
         return menuDao.findMenuByParent(m.getId());
     }
+    
+    @Override
+    public List<Menu> findMenuNotInRole(Role role){
+        if(role == null){
+            return new ArrayList<Menu>();
+        }
+        
+        Role r = findRoleById(role.getId());
+        if(r == null || r.getMenuSet().isEmpty()){
+            return new ArrayList<Menu>();
+        }
+        
+        List<String> ids = new ArrayList<String>();
+        for (Menu m : r.getMenuSet()) {
+            ids.add(m.getId());
+        }
+        
+        return menuDao.findByIdNotIn(ids);
+    }
 
     @Override
     public void save(Permission m) {
@@ -168,6 +187,25 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     @Override
     public Long countAllPermissions() {
         return permissionDao.count();
+    }
+    
+    @Override
+    public List<Permission> findPermissionsNotInRole(Role role) {
+        if(role == null){
+            return new ArrayList<Permission>();
+        }
+        
+        Role r = findRoleById(role.getId());
+        if(r == null || r.getPermissionSet().isEmpty()){
+            return new ArrayList<Permission>();
+        }
+        
+        List<String> ids = new ArrayList<String>();
+        for (Permission p : r.getPermissionSet()) {
+            ids.add(p.getId());
+        }
+        
+        return permissionDao.findByIdNotIn(ids);
     }
 
     @Override

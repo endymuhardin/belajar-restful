@@ -16,7 +16,10 @@
 package com.artivisi.belajar.restful.service.impl;
 
 import com.artivisi.belajar.restful.domain.Permission;
+import com.artivisi.belajar.restful.domain.Role;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
+import java.util.List;
+import org.junit.Assert;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -50,5 +53,20 @@ public class PermissionServiceTestIT {
     public void testFindAll() {
         Page<Permission> result = service.findAllPermissions(new PageRequest(0, service.countAllPermissions().intValue()));
         assertTrue(result.getTotalElements() > 0);
+    }
+    
+    @Test
+    public void testFindNotInRole() {
+        Role r = new Role();
+        r.setId("staff");
+        
+        List<Permission> hasil = service.findPermissionsNotInRole(r);
+        assertEquals(new Integer(5), new Integer(hasil.size()));
+        
+        for (Permission permission : hasil) {
+            if(permission.getId().equals("role-view")){
+                Assert.fail("Seharusnya tidak ada permission untuk view");
+            }
+        }
     }
 }

@@ -15,3 +15,6 @@ superuser,transaksi
 superuser,transaksi-penjualan
 superuser,laporan
 superuser,rekap-penjualan
+staff,master
+staff,master-produk
+staff,master-customer
