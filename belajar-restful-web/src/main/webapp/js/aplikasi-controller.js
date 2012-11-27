@@ -202,6 +202,16 @@ angular.module('belajar.controller',['belajar.service'])
         
         $scope.saveSelectedPermission = function(){
             console.log($scope.selectedPermission);
+            for ( var i = 0; i < $scope.selectedPermission.length; i++) {
+                var p = {id: $scope.selectedPermission[i]};
+                $scope.currentRole.permissionSet.push(p);
+            }
+            RoleService.save($scope.currentRole)
+            .success(function(){
+                $scope.currentRole = RoleService.get({
+                    id: $scope.currentRole.id
+                });;
+            });
             $scope.showPermissionDialog = false;
         }
         
