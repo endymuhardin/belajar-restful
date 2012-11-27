@@ -24,6 +24,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -32,6 +34,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class MenuServiceTestIT {
     @Autowired
     private BelajarRestfulService belajarRestfulService;
+    
+    @Test
+    public void testFindAll() {
+        Page<Menu> result = belajarRestfulService.findAllMenu(new PageRequest(0, 
+                belajarRestfulService.countAllMenu().intValue()));
+        assertTrue(result.getTotalElements() > 0);
+    }
     
     @Test
     public void testFindTopLevelMenu(){

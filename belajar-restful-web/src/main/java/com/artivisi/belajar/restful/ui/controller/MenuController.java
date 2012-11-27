@@ -97,7 +97,7 @@ public class MenuController {
             Pageable pageable,
             HttpServletResponse response) {
 
-        return belajarRestfulService.findTopLevelMenu();
+        return belajarRestfulService.findAllMenu(pageable).getContent();
 
     }
 

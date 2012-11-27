@@ -130,6 +130,16 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     public List<Menu> findTopLevelMenu() {
         return menuDao.findTopLevelMenu();
     }
+    
+    @Override
+    public Page<Menu> findAllMenu(Pageable pageable) {
+        return menuDao.findAll(pageable);
+    }
+    
+    @Override
+    public Long countAllMenu() {
+        return menuDao.count();
+    }
 
     @Override
     public List<Menu> findMenuByParent(Menu m) {

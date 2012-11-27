@@ -72,13 +72,19 @@ angular.module('belajar.controller',['belajar.service'])
     }])
     .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
         $scope.menus = SystemMenuService.query();
+        
         $scope.edit = function(x){
             if(x.id == null){
                 return; 
             }
             $scope.currentMenu = SystemMenuService.get({
                 id: x.id
-                });
+            });
+            
+            $scope.parentSelection = _.filter($scope.menus, function(m){
+                return m.id != x.id;
+            });
+            console.log($scope.parentSelection);
         };
         $scope.baru = function(){
             $scope.currentMenu = null;

@@ -39,6 +39,8 @@ public interface BelajarRestfulService extends MonitoredService {
         void delete(Menu m);
         Menu findMenuById(String id);
         List<Menu> findTopLevelMenu();
+        Page<Menu> findAllMenu(Pageable pageable);
+        Long countAllMenu();
         List<Menu> findMenuByParent(Menu m);
         List<Menu> findMenuNotInRole(Role r);
         
