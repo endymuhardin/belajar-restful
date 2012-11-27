@@ -143,7 +143,7 @@ angular.module('belajar.controller',['belajar.service'])
             }
             $scope.currentRole = RoleService.get({
                 id: x.id
-                });
+            });
             RoleService.unselectedPermission(x).success(function(data){
                 $scope.unselectedPermission = data;
             });
@@ -208,9 +208,13 @@ angular.module('belajar.controller',['belajar.service'])
             }
             RoleService.save($scope.currentRole)
             .success(function(){
-                $scope.currentRole = RoleService.get({
-                    id: $scope.currentRole.id
-                });;
+                RoleService.unselectedPermission($scope.currentRole)
+                .success(function(data){
+                    $scope.unselectedPermission = data;
+                    $scope.currentRole = RoleService.get({
+                        id: $scope.currentRole.id
+                    });
+                });
             });
             $scope.showPermissionDialog = false;
         }
@@ -219,6 +223,32 @@ angular.module('belajar.controller',['belajar.service'])
             $scope.selectedPermission = [];
             console.log($scope.selectedPermission);
             $scope.showPermissionDialog = false;
+        }
+
+        $scope.removeSelectedPermission = function(x){
+            if(x.id == null){
+                return;
+            }
+            var ixPermission = -1;
+            for(var i = 0; i < $scope.currentRole.permissionSet.length; i++){
+                if(x.id === $scope.currentRole.permissionSet[i].id){
+                    ixPermission = i;
+                    break;
+                }
+            }
+            if(ixPermission >= 0){
+                $scope.currentRole.permissionSet.splice(ixPermission, 1);
+                RoleService.save($scope.currentRole)
+                .success(function(){
+                    RoleService.unselectedPermission($scope.currentRole)
+                    .success(function(data){
+                        $scope.unselectedPermission = data;
+                        $scope.currentRole = RoleService.get({
+                            id: $scope.currentRole.id
+                        });
+                    });
+                });
+            }
         }
         
         $scope.selectAllMenu = function($event){

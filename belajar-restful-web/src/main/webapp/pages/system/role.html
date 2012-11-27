@@ -89,7 +89,7 @@
                     <td>{{m.label}}</td>
                     <td>{{m.action}}</td>
                     <td>
-                        <a><i class="icon-remove"></i></a>
+                        <a removeSelectedMenu(p)><i class="icon-remove"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -120,7 +120,7 @@
                     <td>{{p.label}}</td>
                     <td>{{p.value}}</td>
                     <td>
-                        <a><i class="icon-remove"></i></a>
+                        <a ng-click="removeSelectedPermission(p)"><i class="icon-remove"></i></a>
                     </td>
                 </tr>
             </tbody>
