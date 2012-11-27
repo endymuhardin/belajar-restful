@@ -4,7 +4,6 @@
 
 Project ini terdiri dari beberapa sub-project : 
 * config : konfigurasi (misalnya jdbc.properties)
-* deployer : ini untuk deploy, sementara bisa diignore dulu
 * domain : entity class, dan service interface kita pakai Hibernate, bukan JPA
 * service : service implementation, pakai Spring untuk transaction
 * web : controller Spring MVC dan UI HTML
@@ -15,8 +14,8 @@ Project ini terdiri dari beberapa sub-project :
 Dalam project ini, kita pakai beberapa automated test : 
 * service : JUnit biasa, tapi pakai failsafe plugin supaya jalannya pada phase integration-test
 * web : rest-assured
-  http://code.google.com/p/rest-assured/wiki/Usage 
-  http://www.hascode.com/2011/10/testing-restful-web-services-made-easy-using-the-rest-assured-framework/ 
+	* http://code.google.com/p/rest-assured/wiki/Usage 
+	* http://www.hascode.com/2011/10/testing-restful-web-services-made-easy-using-the-rest-assured-framework/ 
 
 ## Build dan Run ##
 
