@@ -22,8 +22,8 @@
         <a class="btn" ng-click="baru()">
             <i class="icon-plus-sign"></i>Tambah Data
         </a>
-        
-        <table class="table table-striped">
+        <hr>
+        <table class="table table-striped table-condensed table-bordered">
             <thead>
                 <tr>
                     <th>Nama</th>
@@ -70,11 +70,13 @@
         <a class="btn" ng-click="showMenuDialog=true">
             <i class="icon-plus-sign"></i>Tambah Menu
         </a>
+        <hr>
         <h3 ng-hide="currentRole.menuSet.length">
             Tidak ada Menu untuk {{currentRole.name}}
         </h3>
 
-        <table class="table table-striped" ng-show="currentRole.menuSet.length">
+        <table class="table table-striped table-condensed table-bordered" 
+                ng-show="currentRole.menuSet.length">
             <thead>
                 <tr>
                     <th>Nama</th>
@@ -99,12 +101,13 @@
         <a class="btn" ng-click="showPermissionDialog=true">
             <i class="icon-plus-sign"></i>Tambah Permission
         </a>
-
+        <hr>
         <h3 ng-hide="currentRole.permissionSet.length">
             Tidak ada Permission untuk {{currentRole.name}}
         </h3>
 
-        <table class="table table-striped" ng-show="currentRole.permissionSet.length">
+        <table class="table table-striped table-condensed table-bordered" 
+                ng-show="currentRole.permissionSet.length">
             <thead>
                 <tr>
                     <th>Nama</th>
@@ -135,7 +138,8 @@
             Tidak ada Permission yang tersedia untuk {{currentRole.name}}
         </h4>
         
-        <table class="table table-striped" ng-show="unselectedPermission">
+        <table class="table table-striped table-condensed table-bordered" 
+                ng-show="unselectedPermission">
             <thead>
                 <tr>
                     <th>
@@ -176,7 +180,8 @@
             Tidak ada Menu yang tersedia untuk {{currentRole.name}}
         </h4>
         
-        <table class="table table-striped" ng-show="unselectedMenu">
+        <table class="table table-striped table-condensed table-bordered" 
+                ng-show="unselectedMenu">
             <thead>
                 <tr>
                     <th>
