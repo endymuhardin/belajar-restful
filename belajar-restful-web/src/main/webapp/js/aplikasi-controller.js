@@ -283,6 +283,20 @@ angular.module('belajar.controller',['belajar.service'])
         
         $scope.saveSelectedMenu = function(){
             console.log($scope.selectedMenu);
+            for ( var i = 0; i < $scope.selectedMenu.length; i++) {
+                var p = {id: $scope.selectedMenu[i]};
+                $scope.currentRole.menuSet.push(p);
+            }
+            RoleService.save($scope.currentRole)
+            .success(function(){
+                RoleService.unselectedMenu($scope.currentRole)
+                .success(function(data){
+                    $scope.unselectedMenu = data;
+                    $scope.currentRole = RoleService.get({
+                        id: $scope.currentRole.id
+                    });
+                });
+            });
             $scope.showMenuDialog = false;
         }
         
@@ -290,6 +304,32 @@ angular.module('belajar.controller',['belajar.service'])
             $scope.selectedMenu = [];
             console.log($scope.selectedMenu);
             $scope.showMenuDialog = false;
+        }
+
+        $scope.removeSelectedMenu = function(x){
+            if(x.id == null){
+                return;
+            }
+            var ixMenu = -1;
+            for(var i = 0; i < $scope.currentRole.menuSet.length; i++){
+                if(x.id === $scope.currentRole.menuSet[i].id){
+                    ixMenu = i;
+                    break;
+                }
+            }
+            if(ixMenu >= 0){
+                $scope.currentRole.menuSet.splice(ixMenu, 1);
+                RoleService.save($scope.currentRole)
+                .success(function(){
+                    RoleService.unselectedMenu($scope.currentRole)
+                    .success(function(data){
+                        $scope.unselectedMenu = data;
+                        $scope.currentRole = RoleService.get({
+                            id: $scope.currentRole.id
+                        });
+                    });
+                });
+            }
         }
     }])
     .controller('UserController', ['$scope', 'UserService', 'RoleService', function($scope, UserService, RoleService){

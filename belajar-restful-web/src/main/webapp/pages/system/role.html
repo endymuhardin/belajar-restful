@@ -89,7 +89,7 @@
                     <td>{{m.label}}</td>
                     <td>{{m.action}}</td>
                     <td>
-                        <a removeSelectedMenu(p)><i class="icon-remove"></i></a>
+                        <a ng-click="removeSelectedMenu(m)"><i class="icon-remove"></i></a>
                     </td>
                 </tr>
             </tbody>
@@ -201,7 +201,7 @@
                                ng-click="updateSelectedMenu($event, p.id)">
                     </td>
                     <td>{{p.label}}</td>
-                    <td>{{p.value}}</td>
+                    <td>{{p.action}}</td>
                 </tr>
             </tbody>
         </table>
