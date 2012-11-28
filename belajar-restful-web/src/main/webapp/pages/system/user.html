@@ -50,18 +50,21 @@
 
 <div class="span5 well-large">
     <h1>Form User</h1>
-    <form class="form-horizontal">
-        <div class="control-group">
+    <form class="form-horizontal" name="formEdit">
+        <div class="control-group" ng-class="{error: formEdit.fullname.$invalid}">
             <label class="control-label" for="fullname">Nama : &nbsp;</label>
-            <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" ng-model="currentUser.fullname">
+            <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" ng-model="currentUser.fullname" required>
+            <span ng-show="formEdit.fullname.$error.required" class="help-inline">Harus diisi</span>
         </div>
-        <div class="control-group">
+        <div class="control-group" ng-class="{error: formEdit.username.$invalid}">
             <label class="control-label" for="username">Username : &nbsp;</label>
-            <input type="text" id="username" name="username" placeholder="Nama User" ng-model="currentUser.username">
+            <input type="text" id="username" name="username" placeholder="Nama User" ng-model="currentUser.username" required>
+            <span ng-show="formEdit.username.$error.required" class="help-inline">Harus diisi</span>
         </div>
-        <div class="control-group">
+        <div class="control-group" ng-class="{error: formEdit.password.$invalid}">
             <label class="control-label" for="password">Password : &nbsp;</label>
-            <input type="password" id="password" name="password" placeholder="Password" ng-model="currentUser.password">
+            <input type="password" id="password" name="password" placeholder="Password" ng-model="currentUser.password" required>
+            <span ng-show="formEdit.password.$error.required" class="help-inline">Harus diisi</span>
         </div>
         <div class="control-group">
             <label class="control-label" for="active">Aktif : &nbsp;</label>
@@ -75,7 +78,7 @@
           </select>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+            <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
             <button type="button" class="btn" ng-click="baru()">Batal</button>
         </div>
     </form>

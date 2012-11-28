@@ -34,6 +34,16 @@ public class PermissionControllerTestIT {
     private String password = "123";
 
     @Test
+    public void testSaveInvalid(){
+        Permission u = new Permission();
+        
+        given()
+            .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
+            .body(u).contentType(ContentType.JSON)
+            .expect().statusCode(400).when().post(target);
+    }
+    
+    @Test
     public void testSaveUpdateDelete() {
 
         Permission x = new Permission();

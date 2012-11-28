@@ -34,6 +34,16 @@ public class RoleControllerTestIT {
     private String password = "123";
 
     @Test
+    public void testSaveInvalid(){
+        Role u = new Role();
+        
+        given()
+            .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
+            .body(u).contentType(ContentType.JSON)
+            .expect().statusCode(400).when().post(target);
+    }
+    
+    @Test
     public void testSaveUpdateDelete() {
 
         Role x = new Role();

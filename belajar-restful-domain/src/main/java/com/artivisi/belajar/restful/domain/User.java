@@ -22,7 +22,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "c_security_user")
@@ -32,18 +34,26 @@ public class User {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "password", nullable = false, unique = false)
     private String password;
     
+    @NotNull
     @Column(name = "active", nullable = false, unique = false)
     private Boolean active;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "fullname", nullable = false, unique = false)
     private String fullname;
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "id_role", nullable = false)
     private Role role;

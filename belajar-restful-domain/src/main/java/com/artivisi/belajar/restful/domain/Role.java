@@ -27,7 +27,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 @Table(name = "c_security_role")
@@ -37,6 +39,8 @@ public class Role {
     @GenericGenerator(name = "system-uuid", strategy = "uuid2")
     private String id;
 
+    @NotNull
+    @NotEmpty
     @Column(name = "name", nullable = false, unique = true)
     private String name;
 

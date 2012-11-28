@@ -17,7 +17,7 @@ angular.module('belajar.service', ['ngResource'])
     .factory('ApplicationConfigService', ['$resource', '$http', function($resource, $http){
         var service = {
             applicationConfig: $resource('/config/:configId'),
-            get: function(param){ return this.applicationConfig.get(param) }, 
+            get: function(param, callback){ return this.applicationConfig.get(param, callback) }, 
             query: function(){ return this.applicationConfig.query() },
             save: function(obj){
                 if(obj.id == null){
@@ -50,7 +50,7 @@ angular.module('belajar.service', ['ngResource'])
     .factory('SystemMenuService', ['$resource', '$http', function($resource, $http){
         var service = {
             menu: $resource('/menu/:id'),
-            get: function(param){ return this.menu.get(param) }, 
+            get: function(param, callback){ return this.menu.get(param, callback) }, 
             query: function(){ return this.menu.query() },
             save: function(obj){
                 if(obj.id == null){
@@ -71,7 +71,7 @@ angular.module('belajar.service', ['ngResource'])
     .factory('PermissionService', ['$resource', '$http', function($resource, $http){
         var service = {
             permission: $resource('/permission/:id'),
-            get: function(param){ return this.permission.get(param) }, 
+            get: function(param, callback){ return this.permission.get(param, callback) }, 
             query: function(){ return this.permission.query() },
             save: function(obj){
                 if(obj.id == null){
@@ -92,7 +92,7 @@ angular.module('belajar.service', ['ngResource'])
     .factory('RoleService', ['$resource', '$http', function($resource, $http){
         var service = {
             role: $resource('/role/:id'),
-            get: function(param){ return this.role.get(param) }, 
+            get: function(param, callback){ return this.role.get(param, callback) }, 
             query: function(){ return this.role.query() },
             save: function(obj){
                 if(obj.id == null){
@@ -119,7 +119,7 @@ angular.module('belajar.service', ['ngResource'])
     .factory('UserService', ['$resource', '$http', function($resource, $http){
         var service = {
             user: $resource('/user/:id'),
-            get: function(param){ return this.user.get(param) }, 
+            get: function(param, callback){ return this.user.get(param, callback) }, 
             query: function(){ return this.user.query() },
             save: function(obj){
                 if(obj.id == null){

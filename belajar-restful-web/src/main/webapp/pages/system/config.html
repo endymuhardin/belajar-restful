@@ -48,21 +48,24 @@
 
 <div class="span5 well-large">
     <h1>Form Konfigurasi</h1>
-    <form class="form-horizontal">
-        <div class="control-group">
+    <form class="form-horizontal" name="formEdit">
+        <div class="control-group" ng-class="{error: formEdit.name.$invalid}">
             <label class="control-label" for="name">Nama : &nbsp;</label>
-            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name">
+            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required>
+            <span ng-show="formEdit.name.$error.required" class="help-inline">Harus diisi</span>
         </div>
-        <div class="control-group">
+        <div class="control-group" ng-class="{error: formEdit.label.$invalid}">
             <label class="control-label" for="label">Label : &nbsp;</label>
-            <input type="text" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label">
+            <input type="text" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label" required>
+            <span ng-show="formEdit.label.$error.required" class="help-inline">Harus diisi</span>
         </div>
-        <div class="control-group">
+        <div class="control-group" ng-class="{error: formEdit.value.$invalid}">
             <label class="control-label" for="value">Nilai : &nbsp;</label>
-            <input type="text" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value">
+            <input type="text" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value" required>
+            <span ng-show="formEdit.value.$error.required" class="help-inline">Harus diisi</span>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+            <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
             <button type="button" class="btn" ng-click="baru()">Batal</button>
         </div>
     </form>

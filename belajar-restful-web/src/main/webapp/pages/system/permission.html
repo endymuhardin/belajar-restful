@@ -46,17 +46,28 @@
 
 <div class="span5 well-large">
     <h1>Form Permission</h1>
-    <form class="form-horizontal">
-        <div class="control-group">
+    <form class="form-horizontal" name="formEdit">
+        <div class="control-group" ng-class="{error: formEdit.label.$invalid}">
             <label class="control-label" for="label">Label : &nbsp;</label>
-            <input type="text" id="label" name="label" placeholder="Label Permission" ng-model="currentPermission.label">
+            <input type="text" id="label" 
+                   name="label" 
+                   placeholder="Label Permission" 
+                   ng-model="currentPermission.label"
+                   required>
+            <span ng-show="formEdit.label.$error.required" class="help-inline">Harus diisi</span>
         </div>
-        <div class="control-group">
+        <div class="control-group" ng-class="{error: formEdit.value.$invalid}">
             <label class="control-label" for="value">Nilai : &nbsp;</label>
-            <input type="text" id="value" name="value" placeholder="Nilai Permission" ng-model="currentPermission.value">
+            <input type="text" 
+                   id="value" 
+                   name="value" 
+                   placeholder="Nilai Permission" 
+                   ng-model="currentPermission.value"
+                   required>
+            <span ng-show="formEdit.value.$error.required" class="help-inline">Harus diisi</span>
         </div>
         <div class="form-actions">
-            <button type="submit" class="btn btn-primary" ng-click="simpan()">Simpan</button>
+            <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
             <button type="button" class="btn" ng-click="baru()">Batal</button>
         </div>
     </form>

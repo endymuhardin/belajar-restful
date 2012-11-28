@@ -21,6 +21,7 @@ import java.net.URI;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +57,7 @@ public class UserController {
 
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody User x, HttpServletRequest request, HttpServletResponse response) {
+    public void create(@RequestBody @Valid User x, HttpServletRequest request, HttpServletResponse response) {
         belajarRestfulService.save(x);
         String requestUrl = request.getRequestURL().toString();
         URI uri = new UriTemplate("{requestUrl}/{id}").expand(requestUrl, x.getId());
@@ -65,7 +66,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/user/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable String id, @RequestBody User x) {
+    public void update(@PathVariable String id, @RequestBody @Valid User x) {
         User a = belajarRestfulService.findUserById(id);
         if (a == null) {
             logger.warn("User dengan id [{}] tidak ditemukan", id);

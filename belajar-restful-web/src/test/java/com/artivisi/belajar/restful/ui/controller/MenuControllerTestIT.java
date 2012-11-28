@@ -34,6 +34,16 @@ public class MenuControllerTestIT {
     private String password = "123";
 
     @Test
+    public void testSaveInvalid(){
+        Menu u = new Menu();
+        
+        given()
+            .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
+            .body(u).contentType(ContentType.JSON)
+            .expect().statusCode(400).when().post(target);
+    }
+    
+    @Test
     public void testSaveUpdateDelete() {
 
         Menu x = new Menu();
