@@ -87,8 +87,19 @@ angular.module('belajar.controller',['belajar.service'])
         }
     }])
     .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
-        $scope.menus = SystemMenuService.query();
-        
+        $scope.currentPage = 0;
+        $scope.reloadMenupage = function(page){
+            if(!page) {
+                page = 0;
+            }
+
+            $scope.menupage = SystemMenuService.query(page, function(){
+                $scope.pages = _.range(1, ($scope.menupage.totalPages+1));
+            });
+        }
+
+        $scope.reloadMenupage(); 
+
         $scope.edit = function(x){
             if(x.id == null){
                 return; 
@@ -100,7 +111,6 @@ angular.module('belajar.controller',['belajar.service'])
             $scope.parentSelection = _.filter($scope.menus, function(m){
                 return m.id != x.id;
             });
-            console.log($scope.parentSelection);
         };
         $scope.baru = function(){
             $scope.currentMenu = null;
@@ -109,7 +119,7 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.simpan = function(){
             SystemMenuService.save($scope.currentMenu)
             .success(function(){
-                $scope.menus = SystemMenuService.query();
+                $scope.reloadMenupage();
                 $scope.baru();
             });
         }
@@ -118,7 +128,7 @@ angular.module('belajar.controller',['belajar.service'])
                 return;
             }
             SystemMenuService.remove(x).success(function(){
-                $scope.menus = SystemMenuService.query();
+                $scope.reloadMenupage();
             });
         }
         $scope.isClean = function(){

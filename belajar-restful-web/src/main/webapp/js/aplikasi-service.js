@@ -49,9 +49,11 @@ angular.module('belajar.service', ['ngResource'])
     }])
     .factory('SystemMenuService', ['$resource', '$http', function($resource, $http){
         var service = {
-            menu: $resource('/menu/:id'),
+            menu: $resource('/menu/:id', {}, {
+                queryPage: {method:'GET', isArray: false}
+            }),
             get: function(param, callback){ return this.menu.get(param, callback) }, 
-            query: function(){ return this.menu.query() },
+            query: function(p, callback){ return this.menu.queryPage({"page.page": p, "page.size": 10}, callback) },
             save: function(obj){
                 if(obj.id == null){
                     return $http.post('/menu', obj);
