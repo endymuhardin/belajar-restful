@@ -51,8 +51,9 @@
     <form class="form-horizontal" name="formEdit">
         <div class="control-group" ng-class="{error: formEdit.name.$invalid}">
             <label class="control-label" for="name">Nama : &nbsp;</label>
-            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required>
+            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required ui-validate="{configNameAvailable: isConfigNameAvailable}">
             <span ng-show="formEdit.name.$error.required" class="help-inline">Harus diisi</span>
+            <span ng-show="formEdit.name.$error.configNameAvailable" class="help-inline">sudah ada yang pakai</span>
         </div>
         <div class="control-group" ng-class="{error: formEdit.label.$invalid}">
             <label class="control-label" for="label">Label : &nbsp;</label>

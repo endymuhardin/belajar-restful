@@ -73,6 +73,18 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.isClean = function(){
             return angular.equals($scope.original, $scope.currentConfig);
         }
+        $scope.isConfigNameAvailable = function(value){
+            if($scope.currentConfig != null && $scope.currentConfig.id != null){
+                return true;
+            }
+            for(var i = 0; i < $scope.configs.length; i++){
+                var u = $scope.configs[i];
+                if(u.name === value){
+                    return false;
+                }
+            }
+            return true;
+        }
     }])
     .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
         $scope.menus = SystemMenuService.query();
@@ -145,6 +157,18 @@ angular.module('belajar.controller',['belajar.service'])
         $scope.isClean = function(){
             return angular.equals($scope.original, $scope.currentPermission);
         }
+        $scope.isPermissionValueAvailable = function(value){
+            if($scope.currentPermission != null && $scope.currentPermission.id != null){
+                return true;
+            }
+            for(var i = 0; i < $scope.permissions.length; i++){
+                var u = $scope.permissions[i];
+                if(u.value === value){
+                    return false;
+                }
+            }
+            return true;
+        }
     }])
     .controller('RoleController', ['$scope', 'RoleService', function($scope, RoleService){
         $scope.roles = RoleService.query();
@@ -192,6 +216,19 @@ angular.module('belajar.controller',['belajar.service'])
         
         $scope.isClean = function(){
             return angular.equals($scope.original, $scope.currentRole);
+        }
+
+        $scope.isRoleNameAvailable = function(value){
+            if($scope.currentRole != null && $scope.currentRole.id != null){
+                return true;
+            }
+            for(var i = 0; i < $scope.roles.length; i++){
+                var u = $scope.roles[i];
+                if(u.name === value){
+                    return false;
+                }
+            }
+            return true;
         }
         
         $scope.selectAllPermission = function($event){
@@ -391,6 +428,18 @@ angular.module('belajar.controller',['belajar.service'])
         }
         $scope.isClean = function(){
             return angular.equals($scope.original, $scope.currentUser);
+        }
+        $scope.isUsernameAvailable = function(value){
+            if($scope.currentUser != null && $scope.currentUser.id != null){
+                return true;
+            }
+            for(var i = 0; i < $scope.users.length; i++){
+                var u = $scope.users[i];
+                if(u.id === value){
+                    return false;
+                }
+            }
+            return true;
         }
     }])
 ;

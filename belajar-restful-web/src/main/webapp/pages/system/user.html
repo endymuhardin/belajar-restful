@@ -15,7 +15,46 @@
     limitations under the License.
 
 -->
-<div class="span5 well-large">
+<div class="row">
+<div class="span10 well-large">
+    <h1>Form User</h1>
+    <form class="form-horizontal" name="formEdit">
+        <div class="control-group" ng-class="{error: formEdit.fullname.$invalid}">
+            <label class="control-label" for="fullname">Nama : &nbsp;</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" ng-model="currentUser.fullname" required>
+            <span ng-show="formEdit.fullname.$error.required" class="help-inline">Harus diisi</span>
+        </div>
+        <div class="control-group" ng-class="{error: formEdit.username.$invalid}">
+            <label class="control-label" for="username">Username : &nbsp;</label>
+            <input type="text" id="username" name="username" placeholder="Nama User" ng-model="currentUser.username" required ui-validate="{usernameAvailable: isUsernameAvailable}">
+            <span ng-show="formEdit.username.$error.required" class="help-inline">Harus diisi</span>
+            <span ng-show="formEdit.username.$error.usernameAvailable" class="help-inline">sudah ada yang pakai</span>
+        </div>
+        <div class="control-group" ng-class="{error: formEdit.password.$invalid}">
+            <label class="control-label" for="password">Password : &nbsp;</label>
+            <input type="password" id="password" name="password" placeholder="Password" ng-model="currentUser.password" required>
+            <span ng-show="formEdit.password.$error.required" class="help-inline">Harus diisi</span>
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="active">Aktif : &nbsp;</label>
+            <input type="checkbox" id="active" name="active" placeholder="Keterangan" ng-model="currentUser.active">
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="role">Role : &nbsp;</label>
+            <select ui-select2 ng-model="currentUser.role.id" data-placeholder="-- Select One --">
+                <option></option>
+                <option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
+          </select>
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
+            <button type="button" class="btn" ng-click="baru()">Batal</button>
+        </div>
+    </form>
+</div>
+</div>
+<div class="row">
+<div class="span10 well-large">
     <h1>Daftar User</h1>
 
     <a class="btn" ng-click="baru()">
@@ -45,41 +84,5 @@
             </tr>
         </tbody>
     </table>
-
 </div>
-
-<div class="span5 well-large">
-    <h1>Form User</h1>
-    <form class="form-horizontal" name="formEdit">
-        <div class="control-group" ng-class="{error: formEdit.fullname.$invalid}">
-            <label class="control-label" for="fullname">Nama : &nbsp;</label>
-            <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" ng-model="currentUser.fullname" required>
-            <span ng-show="formEdit.fullname.$error.required" class="help-inline">Harus diisi</span>
-        </div>
-        <div class="control-group" ng-class="{error: formEdit.username.$invalid}">
-            <label class="control-label" for="username">Username : &nbsp;</label>
-            <input type="text" id="username" name="username" placeholder="Nama User" ng-model="currentUser.username" required>
-            <span ng-show="formEdit.username.$error.required" class="help-inline">Harus diisi</span>
-        </div>
-        <div class="control-group" ng-class="{error: formEdit.password.$invalid}">
-            <label class="control-label" for="password">Password : &nbsp;</label>
-            <input type="password" id="password" name="password" placeholder="Password" ng-model="currentUser.password" required>
-            <span ng-show="formEdit.password.$error.required" class="help-inline">Harus diisi</span>
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="active">Aktif : &nbsp;</label>
-            <input type="checkbox" id="active" name="active" placeholder="Keterangan" ng-model="currentUser.active">
-        </div>
-        <div class="control-group">
-            <label class="control-label" for="role">Role : &nbsp;</label>
-            <select ui-select2 ng-model="currentUser.role.id" data-placeholder="-- Select One --">
-                <option></option>
-                <option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
-          </select>
-        </div>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
-            <button type="button" class="btn" ng-click="baru()">Batal</button>
-        </div>
-    </form>
 </div>

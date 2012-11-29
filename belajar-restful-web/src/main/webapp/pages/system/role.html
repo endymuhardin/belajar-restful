@@ -48,10 +48,11 @@
     <div class="span5 well-large">
         <h1>Form Role</h1>
         <form class="form-horizontal" name="formEdit">
-            <div class="control-group" ng-class="{error: formEdit.label.$invalid}">
+            <div class="control-group" ng-class="{error: formEdit.name.$invalid}">
                 <label class="control-label" for="name">Nama : &nbsp;</label>
-                <input type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name" required>
+                <input type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name" required ui-validate="{roleNameAvailable: isRoleNameAvailable}">
                 <span ng-show="formEdit.name.$error.required" class="help-inline">Harus diisi</span>
+                <span ng-show="formEdit.name.$error.roleNameAvailable" class="help-inline">sudah ada yang pakai</span>
             </div>
             <div class="control-group">
                 <label class="control-label" for="description">Keterangan : &nbsp;</label>
