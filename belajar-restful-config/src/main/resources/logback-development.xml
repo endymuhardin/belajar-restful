@@ -9,6 +9,7 @@
 	governing permissions and limitations under the License. -->
 <included>
 
+	<!--
 	<logger name="org.hibernate.type" level="TRACE">
 		<appender-ref ref="stdout" />
 	</logger>
@@ -16,8 +17,13 @@
 	<logger name="org.hibernate.SQL" level="TRACE">
 		<appender-ref ref="stdout" />
 	</logger>
+	-->
 
-	<root level="DEBUG">
+	<logger name="com.artivisi.belajar" level="DEBUG">
+		<appender-ref ref="stdout" />
+	</logger>
+
+	<root level="INFO">
 		<appender-ref ref="STDOUT" />
 	</root>
 
