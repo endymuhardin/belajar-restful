@@ -129,7 +129,7 @@ public class MenuControllerTestIT {
         with()
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
                 .header("Accept", "application/json").expect().statusCode(200)
-                .body("id", hasItems("system", "master")).when().get(target);
+                .body("content.id", hasItems("system", "master")).when().get(target);
     }
 
 }

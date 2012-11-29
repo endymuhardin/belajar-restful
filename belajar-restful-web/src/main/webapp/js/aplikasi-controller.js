@@ -87,7 +87,6 @@ angular.module('belajar.controller',['belajar.service'])
         }
     }])
     .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
-        $scope.currentPage = 0;
         $scope.reloadMenupage = function(page){
             if(!page) {
                 page = 0;
