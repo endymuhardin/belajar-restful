@@ -15,6 +15,7 @@
  */
 package com.artivisi.belajar.restful.ui.controller;
 
+import com.artivisi.belajar.restful.domain.Menu;
 import com.artivisi.belajar.restful.domain.Permission;
 import com.artivisi.belajar.restful.domain.Role;
 import com.artivisi.belajar.restful.service.BelajarRestfulService;
@@ -59,6 +60,12 @@ public class RoleController {
     @ResponseBody
     public List<Permission> findPermissionNotInRole(@PathVariable String id) {
         return belajarRestfulService.findPermissionsNotInRole(belajarRestfulService.findRoleById(id));
+    }
+    
+    @RequestMapping("/role/{id}/unselected-menu")
+    @ResponseBody
+    public List<Menu> findMenuNotInRole(@PathVariable String id) {
+        return belajarRestfulService.findMenuNotInRole(belajarRestfulService.findRoleById(id));
     }
 
     @RequestMapping(value = "/role", method = RequestMethod.POST)
