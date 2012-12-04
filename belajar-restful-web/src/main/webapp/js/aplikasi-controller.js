@@ -444,7 +444,7 @@ angular.module('belajar.controller',['belajar.service'])
             }
             for(var i = 0; i < $scope.users.length; i++){
                 var u = $scope.users[i];
-                if(u.id === value){
+                if(u.username === value){
                     return false;
                 }
             }
