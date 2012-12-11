@@ -205,6 +205,7 @@
 						<exclude>**/src/test/data/**</exclude>
 						<exclude>.git/**</exclude>
 						<exclude>**/.metadata/**</exclude>
+						<exclude>**/.idea/**</exclude>
 						<exclude>**/logs/**</exclude>
 						<exclude>**/js/**</exclude>
 						<exclude>**/css/**</exclude>
