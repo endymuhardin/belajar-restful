@@ -1,3 +1,4 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com> Licensed
 	under the Apache License, Version 2.0 (the "License"); you may not use this
@@ -9,22 +10,24 @@
 	governing permissions and limitations under the License. -->
 <included>
 
-	<!--
 	<logger name="org.hibernate.type" level="TRACE">
-		<appender-ref ref="stdout" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</logger>
 
 	<logger name="org.hibernate.SQL" level="TRACE">
-		<appender-ref ref="stdout" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</logger>
-	-->
 
 	<logger name="com.artivisi.belajar" level="DEBUG">
-		<appender-ref ref="stdout" />
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</logger>
 
 	<root level="INFO">
 		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE" />
 	</root>
 
 </included>

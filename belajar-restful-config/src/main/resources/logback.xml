@@ -15,8 +15,16 @@
 		</encoder>
 	</appender>
 
-	<appender name="FILE" class="ch.qos.logback.core.FileAppender">
-		<file>${catalina.home:-.}/logs/belajar-${stage:-development}.log</file>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- ganti file setiap jam -->
+			<fileNamePattern>
+				${catalina.home:-.}/logs/%d{yyyy-MM-dd_HH}/coba-${spring.profiles.active:-development}.log
+			</fileNamePattern>
+
+			<!-- simpan file selama sebulan (24 * 31) -->
+			<maxHistory>384</maxHistory>
+		</rollingPolicy>
 		<encoder>
 			<pattern>%d %-5level %logger{35} - %msg %n</pattern>
 		</encoder>

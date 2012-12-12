@@ -9,11 +9,7 @@
 	governing permissions and limitations under the License. -->
 <included>
 
-	<logger name="com.artivisi" level="WARN">
-		<appender-ref ref="FILE" />
-	</logger>
-
-	<root level="WARN">
+	<root level="INFO">
 		<appender-ref ref="FILE" />
 	</root>
 
