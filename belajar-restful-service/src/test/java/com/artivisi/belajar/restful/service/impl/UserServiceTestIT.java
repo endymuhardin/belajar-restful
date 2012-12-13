@@ -56,4 +56,10 @@ public class UserServiceTestIT {
         Page<User> result = service.findAllUsers(new PageRequest(0, service.countAllUsers().intValue()));
         assertTrue(result.getTotalElements() > 0);
     }
+
+    @Test
+    public void testFindByUsername() {
+        assertNotNull(service.findUserByUsername("endy"));
+        assertNull(service.findUserByUsername("adi"));
+    }
 }

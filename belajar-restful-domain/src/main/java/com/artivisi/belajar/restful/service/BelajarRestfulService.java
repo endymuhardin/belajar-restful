@@ -33,7 +33,7 @@ public interface BelajarRestfulService extends MonitoredService {
 	Long countAllApplicationConfigs();
 	Long countApplicationConfigs(String search);
 	Page<ApplicationConfig> findApplicationConfigs(String search, Pageable pageable);
-        
+
         // menu
         void save(Menu m);
         void delete(Menu m);
@@ -43,7 +43,7 @@ public interface BelajarRestfulService extends MonitoredService {
         Long countAllMenu();
         List<Menu> findMenuByParent(Menu m);
         List<Menu> findMenuNotInRole(Role r);
-        
+
         // permission
         void save(Permission m);
         void delete(Permission m);
@@ -51,18 +51,20 @@ public interface BelajarRestfulService extends MonitoredService {
         Page<Permission> findAllPermissions(Pageable pageable);
         Long countAllPermissions();
         List<Permission> findPermissionsNotInRole(Role r);
-        
+
         // role
         void save(Role role);
         void delete(Role role);
         Role findRoleById(String id);
         Page<Role> findAllRoles(Pageable pageable);
         Long countAllRoles();
-        
+
         // user
         void save(User m);
         void delete(User m);
         User findUserById(String id);
+        User findUserByUsername(String username);
         Page<User> findAllUsers(Pageable pageable);
         Long countAllUsers();
+
 }

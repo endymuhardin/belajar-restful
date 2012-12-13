@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import com.artivisi.belajar.restful.service.BelajarRestfulService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -43,7 +45,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
  */
 @Controller
 public class HomepageController {
-    
+
+    @Autowired private BelajarRestfulService belajarRestfulService;
     @Autowired private SessionRegistry sessionRegistry;
     
     @RequestMapping("/homepage/userinfo")
@@ -57,7 +60,12 @@ public class HomepageController {
             if(principal != null && User.class.isAssignableFrom(principal.getClass())){
                 User u = (User) principal;
                 hasil.put("user", u.getUsername());
-                hasil.put("group", "superuser");
+                com.artivisi.belajar.restful.domain.User ux = belajarRestfulService.findUserByUsername(u.getUsername());
+                if(ux != null || ux.getRole() != null || ux.getRole().getName() != null) {
+                    hasil.put("group", ux.getRole().getName());
+                } else {
+                    hasil.put("group", "undefined");
+                }
             }
         }
         

@@ -272,6 +272,14 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
     }
 
     @Override
+    public User findUserByUsername(String username) {
+        if(!StringUtils.hasText(username)){
+            return null;
+        }
+        return userDao.findByUsername(username);
+    }
+
+    @Override
     public Page<User> findAllUsers(Pageable pageable) {
         return userDao.findAll(pageable);
     }
