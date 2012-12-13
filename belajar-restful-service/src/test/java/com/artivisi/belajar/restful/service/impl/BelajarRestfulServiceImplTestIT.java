@@ -27,6 +27,8 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.dbunit.database.DatabaseConnection;
+import org.dbunit.dataset.CompositeDataSet;
+import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.xml.FlatXmlDataSetBuilder;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.Before;
@@ -51,9 +53,15 @@ public class BelajarRestfulServiceImplTestIT {
 
     @Before
     public void resetDatabase() throws Exception {
+
+        IDataSet[] daftarDataset = new IDataSet[]{
+                new FlatXmlDataSetBuilder().build(new File("src/test/resources/sample-data.xml"))
+        };
+
         Connection conn = dataSource.getConnection();
-        DatabaseOperation.CLEAN_INSERT.execute(new DatabaseConnection(conn),
-                new FlatXmlDataSetBuilder().build(new File("src/test/resources/sample-data.xml")));
+        DatabaseOperation.CLEAN_INSERT
+                .execute(new DatabaseConnection(conn),
+                        new CompositeDataSet(daftarDataset));
     }
 
     @Test
