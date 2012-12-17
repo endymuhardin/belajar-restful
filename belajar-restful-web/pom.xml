@@ -129,7 +129,6 @@
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<configuration>
-                                        <reload>manual</reload>
 					<webAppConfig>
 						<contextPath>${appserver.deployment.context}</contextPath>
 					</webAppConfig>
