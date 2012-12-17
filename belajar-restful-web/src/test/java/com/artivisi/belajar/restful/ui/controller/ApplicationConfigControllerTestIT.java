@@ -20,7 +20,6 @@ import com.artivisi.belajar.restful.domain.User;
 import static com.jayway.restassured.RestAssured.given;
 import static com.jayway.restassured.RestAssured.with;
 import com.jayway.restassured.authentication.FormAuthConfig;
-import groovyx.net.http.ContentType;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -31,6 +30,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpMethod;
@@ -55,7 +55,8 @@ public class ApplicationConfigControllerTestIT {
 
         given()
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
-                .body(u).contentType(ContentType.JSON)
+                .contentType("application/json")
+                .body(u)
                 .expect().statusCode(400).when().post(target);
     }
 
@@ -78,7 +79,8 @@ public class ApplicationConfigControllerTestIT {
 
         String location = given()
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
-                .body(config).contentType(ContentType.JSON)
+                .contentType("application/json")
+                .body(config)
                 .expect().statusCode(201).when().post(target)
                 .getHeader("Location");
 
@@ -110,7 +112,9 @@ public class ApplicationConfigControllerTestIT {
 
         given()
                 .auth().form(username, password, new FormAuthConfig(login, "j_username", "j_password"))
-                .body(config).contentType(ContentType.JSON).expect()
+                .contentType("application/json")
+                .body(config)
+                .expect()
                 .statusCode(200).when().put(target + "/" + id);
     }
 
