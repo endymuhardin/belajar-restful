@@ -50,7 +50,7 @@
 		<org.slf4j.version>1.7.2</org.slf4j.version>
 		<ch.qos.logback.version>1.0.9</ch.qos.logback.version>
 		<joda-time.version>2.1</joda-time.version>
-		<jackson-mapper-asl.version>1.9.11</jackson-mapper-asl.version>
+		<jackson2.version>2.1.1</jackson2.version>
 		<mysql.version>5.1.22</mysql.version>
 		<postgresql.version>9.1-901.jdbc4</postgresql.version>
 		<javassist.version>3.12.0.GA</javassist.version>
@@ -64,7 +64,7 @@
 		<guava.version>10.0.1</guava.version>
 		<liquibase-maven-plugin.version>2.0.5</liquibase-maven-plugin.version>
 		<maven-failsafe-plugin.version>2.10</maven-failsafe-plugin.version>
-		<rest-assured.version>1.4</rest-assured.version>
+		<rest-assured.version>1.7.2</rest-assured.version>
 		<javamelody.version>1.39.0</javamelody.version>
 
 		<!-- konfigurasi database development -->
