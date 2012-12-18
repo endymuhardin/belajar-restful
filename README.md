@@ -4,10 +4,10 @@
 
 Project ini terdiri dari beberapa sub-project : 
 
-* config : konfigurasi (misalnya jdbc.properties)
-* domain : entity class, dan service interface kita pakai Hibernate, bukan JPA
-* service : service implementation, pakai Spring untuk transaction
-* web : controller Spring MVC dan UI HTML
+* config : berisi jdbc.properties, dataSource, transactionManager, dsb
+* domain : berisi @Entity dan service interface
+* service : berisi @Service dan @Repository
+* web : berisi @Controller, HTML, JavaScript, dsb
 
 
 ## Automated Test ##
@@ -45,12 +45,12 @@ Untuk menjalankan projectnya :
 
 ### Framework dan Library ###
 
-* Spring Framework 3.1.3
+* Spring Framework 3.2.0
 * Spring Security 3.1.3
 * Spring Data JPA 1.1.0
-* Hibernate 4.1.7
+* Hibernate 4.1.9
 * Joda Time 2.1
-* Logback 1.0.7
+* Logback 1.0.9
 * AngularJS 1.0.3
 * Twitter Bootstrap 2.2.1
 * jQuery 1.8.3
@@ -58,9 +58,9 @@ Untuk menjalankan projectnya :
 ### Tools ###
 
 * Build Tool : Maven 2
-* Database Schema : Liquibase 2.0.5
+* Database Schema : Liquibase
 * Unit Test Runner : Maven Surefire Plugin
 * Integration Test Runner : Maven Failsafe Plugin
 * Functional Test : Rest-Assured
-* Performance Monitoring : Javamelody 1.39.0
-* Application Server : Jetty 6.1.26
+* Performance Monitoring : Javamelody
+* Application Server : Jetty 6
