@@ -19,6 +19,10 @@ governing permissions and limitations under the License. -->
             /WEB-INF/spring-security.xml
         </param-value>
     </context-param>
+    <context-param>
+        <param-name>spring.profiles.default</param-name>
+        <param-value>development</param-value>
+    </context-param>
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>

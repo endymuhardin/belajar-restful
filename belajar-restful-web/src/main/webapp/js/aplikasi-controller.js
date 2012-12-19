@@ -23,9 +23,11 @@ angular.module('belajar.controller',['belajar.service'])
             $scope.userinfo = data;
         });
     }])
-    .controller('AboutController', ['$scope', function($scope){
-        $scope.appName = "Aplikasi Belajar";
-        $scope.appVersion = "Versi 1.0.0";
+    .controller('AboutController', ['$http', '$scope', function($http, $scope){
+        $scope.appinfo = {};
+        $http.get('/homepage/appinfo').success(function(data){
+            $scope.appinfo = data;
+        });
     }])
     .controller('ApplicationSessionsController', ['ApplicationSessionsService', '$scope', function(ApplicationSessionsService, $scope){
         $scope.refresh = function(){
