@@ -31,7 +31,7 @@
 		</encoder>
 	</appender>
 
-	<include resource="logback-${stage:-development}.xml"/>
+	<include resource="logback-${spring.profiles.active:-development}.xml"/>
 
 </configuration>
 

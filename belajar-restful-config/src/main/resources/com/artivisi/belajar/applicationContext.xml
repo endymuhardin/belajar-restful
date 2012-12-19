@@ -17,7 +17,7 @@
 	<context:property-placeholder
 		location="
 	classpath*:jdbc.properties,
-	classpath*:jdbc.${stage}.properties
+	classpath*:jdbc.${spring.profiles.active}.properties
 	" />
 
 	<tx:annotation-driven />
