@@ -29,13 +29,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.artivisi.belajar</groupId>
-			<artifactId>belajar-restful-config</artifactId>
-			<version>0.1.2-SNAPSHOT</version>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework.version}</version>
