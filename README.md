@@ -45,7 +45,7 @@ Untuk menjalankan projectnya :
 
 ### Framework dan Library ###
 
-* Spring Framework 3.2.0
+* Spring Framework 3.2.1
 * Spring Security 3.1.3
 * Spring Data JPA 1.1.0
 * Hibernate 4.1.9
