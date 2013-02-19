@@ -47,7 +47,7 @@ Untuk menjalankan projectnya :
 
 * Spring Framework 3.2.1
 * Spring Security 3.1.3
-* Spring Data JPA 1.1.0
+* Spring Data JPA 1.3.0
 * Hibernate 4.1.9
 * Joda Time 2.1
 * Logback 1.0.9
