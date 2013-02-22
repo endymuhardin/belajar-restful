@@ -53,8 +53,9 @@ Untuk menjalankan projectnya :
 * Logback 1.0.9
 * AngularJS 1.0.4
 * AngularUI 0.3.2
-* Twitter Bootstrap 2.2.2
+* Twitter Bootstrap 2.3.0
 * jQuery 1.8.3
+* Underscore JS 1.4.4
 
 ### Tools ###
 
