@@ -45,12 +45,12 @@ Untuk menjalankan projectnya :
 
 ### Framework dan Library ###
 
-* Spring Framework 3.2.1
-* Spring Security 3.1.3
+* Spring Framework 3.2.3
+* Spring Security 3.1.4
 * Spring Data JPA 1.3.0
-* Hibernate 4.1.9
-* Joda Time 2.1
-* Logback 1.0.9
+* Hibernate 4.2.2
+* Joda Time 2.2
+* Logback 1.0.13
 * AngularJS 1.0.4
 * AngularUI 0.3.2
 * Twitter Bootstrap 2.3.0

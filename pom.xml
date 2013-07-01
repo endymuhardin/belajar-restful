@@ -42,25 +42,32 @@
 	<!-- Default Properties -->
 	<properties>
 		<!-- versi library dan framework -->
-		<org.springframework.version>3.2.1.RELEASE</org.springframework.version>
+		<org.springframework.version>3.2.3.RELEASE</org.springframework.version>
 		<org.springframework.data.version>1.3.0.RELEASE</org.springframework.data.version>
-		<org.springframework.security.version>3.1.3.RELEASE</org.springframework.security.version>
-		<org.hibernate.version>4.1.9.Final</org.hibernate.version>
-		<org.hibernate.validator.version>4.3.1.Final</org.hibernate.validator.version>
-		<org.slf4j.version>1.7.2</org.slf4j.version>
-		<ch.qos.logback.version>1.0.9</ch.qos.logback.version>
-		<joda-time.version>2.1</joda-time.version>
-		<jackson2.version>2.1.1</jackson2.version>
-		<mysql.version>5.1.22</mysql.version>
-		<postgresql.version>9.1-901.jdbc4</postgresql.version>
-		<junit.version>4.11</junit.version>
-		<dbunit.version>2.4.8</dbunit.version>
-		<jacoco-maven-plugin.version>0.5.3.201107060350</jacoco-maven-plugin.version>
-		<servlet.version>2.5</servlet.version>
-		<commons-fileupload.version>1.2.2</commons-fileupload.version>
-		<commons-io.version>2.0.1</commons-io.version>
+		<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
+		<org.hibernate.version>4.2.2.Final</org.hibernate.version>
+		<org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>
+		
 		<commons-logging.version>1.1.1</commons-logging.version>
+		<org.slf4j.version>1.7.5</org.slf4j.version>
+		<ch.qos.logback.version>1.0.13</ch.qos.logback.version>
+		
+		<joda-time.version>2.2</joda-time.version>
+		<jackson2.version>2.2.0</jackson2.version>
+		
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<mysql.version>5.1.25</mysql.version>
+		<postgresql.version>9.1-901.jdbc4</postgresql.version>
+		
+		<junit.version>4.11</junit.version>
+		<dbunit.version>2.4.9</dbunit.version>
+		<jacoco-maven-plugin.version>0.5.3.201107060350</jacoco-maven-plugin.version>
+		
+		<servlet.version>2.5</servlet.version>
+		<commons-fileupload.version>1.3</commons-fileupload.version>
+		<commons-io.version>2.4</commons-io.version>
 		<guava.version>10.0.1</guava.version>
+		
 		<liquibase-maven-plugin.version>2.0.5</liquibase-maven-plugin.version>
 		<maven-failsafe-plugin.version>2.12.4</maven-failsafe-plugin.version>
 		<rest-assured.version>1.7.2</rest-assured.version>
