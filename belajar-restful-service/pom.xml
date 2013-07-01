@@ -14,15 +14,15 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.artivisi.belajar</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>belajar-restful-domain</artifactId>
-			<version>0.1.2-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.artivisi.belajar</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>belajar-restful-config</artifactId>
-			<version>0.1.2-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>
