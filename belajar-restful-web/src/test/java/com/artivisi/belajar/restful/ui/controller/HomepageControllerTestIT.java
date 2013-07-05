@@ -39,7 +39,7 @@ public class HomepageControllerTestIT {
                 .body("profileDefault", equalTo("development"),
                     "profileActive", equalTo(""),
                     "namaAplikasi", equalTo("Aplikasi Belajar"),
-                    "versiAplikasi", containsString("belajar-restful-")
+                    "versiAplikasi", equalTo("")
                 )
                 .when()
                 .get(target + "/" + "appinfo");
