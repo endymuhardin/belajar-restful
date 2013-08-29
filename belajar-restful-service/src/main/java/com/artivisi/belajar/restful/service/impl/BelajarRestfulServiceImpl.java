@@ -157,7 +157,9 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
         
         Role r = findRoleById(role.getId());
         if(r == null || r.getMenuSet().isEmpty()){
-            return new ArrayList<Menu>();
+            return menuDao
+                    .findAll(new PageRequest(0, new Long(menuDao.count()).intValue()))
+                    .getContent();
         }
         
         List<String> ids = new ArrayList<String>();
@@ -207,7 +209,9 @@ public class BelajarRestfulServiceImpl implements BelajarRestfulService {
         
         Role r = findRoleById(role.getId());
         if(r == null || r.getPermissionSet().isEmpty()){
-            return new ArrayList<Permission>();
+            return permissionDao
+                    .findAll(new PageRequest(0, new Long(permissionDao.count()).intValue()))
+                    .getContent();
         }
         
         List<String> ids = new ArrayList<String>();
