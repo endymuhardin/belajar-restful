@@ -18,7 +18,8 @@
 <div class="row">
     <div class="span10 well-large">
         <h1>Form User</h1>
-        <form class="form-horizontal" name="formEdit">
+        <form ng-upload class="form-horizontal" name="formEdit" action="user/photo">
+              
             <div class="control-group" ng-class="{error: formEdit.fullname.$invalid}">
                 <label class="control-label" for="fullname">Nama : &nbsp;</label>
                 <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" ng-model="currentUser.fullname" required>
@@ -46,8 +47,16 @@
                     <option ng-repeat="role in roles" value="{{role.id}}">{{role.name}}</option>
               </select>
             </div>
+            <div class="control-group">
+                <label class="control-label" for="photo">Photo : &nbsp;</label>
+                <input type="file" id="photo_user" name="photo" />
+            </div>
+            <div class="control-group error">
+                <label class="control-label"></label>
+                <label class="control-label" style="text-align: left; width: 100%;">{{currentUser.uploadError}}</label>
+            </div>
             <div class="form-actions">
-                <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
+                <button type="submit" class="btn btn-primary" upload-submit="uploadComplete(content, completed)" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
                 <button type="button" class="btn" ng-click="baru()">Batal</button>
             </div>
         </form>
@@ -64,6 +73,7 @@
         <table class="table table-striped table-condensed table-bordered">
             <thead>
                 <tr>
+                    <th>Photo</th>
                     <th>Username</th>
                     <th>Nama Lengkap</th>
                     <th>Aktif</th>
@@ -72,7 +82,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="x in users">
+                <tr ng-repeat="x in users" valign="top">
+                    <td>
+                        <img src="{{x.photo}}" width="80" height="120">
+                    </td>
                     <td>{{x.username}}</td>
                     <td>{{x.fullname}}</td>
                     <td>{{x.active}}</td>
