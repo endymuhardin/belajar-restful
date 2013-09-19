@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-angular.module('belajar.controller',['belajar.service'])
+angular.module('belajar.controller',['belajar.service','ngUpload'])
     .controller('LoginRedirectorController', ['$window', function($window){
         $window.location = 'login.html';
     }])
@@ -429,11 +429,22 @@ angular.module('belajar.controller',['belajar.service'])
             if($scope.currentUser.active == null){
                 $scope.currentUser.active = false;
             }
-            UserService.save($scope.currentUser)
+            var obj = $scope.currentUser;
+            delete obj.uploadError;
+            console.log("Save obj ", obj);
+            UserService.save(obj)
             .success(function(){
                 $scope.users = UserService.query();
                 $scope.baru();
             });
+        }
+        $scope.uploadComplete = function(content, completed){
+            if (completed) {
+                $scope.currentUser.uploadError = content.msg + "  [" + content.status + "]";
+                if(content.status=="200"){
+                    $scope.simpan();
+                }
+            }
         }
         $scope.remove = function(x){
             if(x.id == null){
