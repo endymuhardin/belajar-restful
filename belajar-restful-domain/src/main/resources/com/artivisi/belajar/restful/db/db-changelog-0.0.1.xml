@@ -104,6 +104,7 @@
             <column name="id_role" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
+            <column name="photo" type="varchar(255)" />
         </createTable>
         <modifySql dbms="mysql">
             <append value=" engine innodb" />
