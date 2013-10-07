@@ -42,17 +42,17 @@
 	<!-- Default Properties -->
 	<properties>
 		<!-- versi library dan framework -->
-		<org.springframework.version>3.2.3.RELEASE</org.springframework.version>
-		<org.springframework.data.version>1.3.0.RELEASE</org.springframework.data.version>
+		<org.springframework.version>3.2.4.RELEASE</org.springframework.version>
+		<org.springframework.data.version>1.4.1.RELEASE</org.springframework.data.version>
 		<org.springframework.security.version>3.1.4.RELEASE</org.springframework.security.version>
-		<org.hibernate.version>4.2.2.Final</org.hibernate.version>
+		<org.hibernate.version>4.2.6.Final</org.hibernate.version>
 		<org.hibernate.validator.version>5.0.1.Final</org.hibernate.validator.version>
 		
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<org.slf4j.version>1.7.5</org.slf4j.version>
 		<ch.qos.logback.version>1.0.13</ch.qos.logback.version>
 		
-		<joda-time.version>2.2</joda-time.version>
+		<joda-time.version>2.3</joda-time.version>
 		<jackson2.version>2.2.0</jackson2.version>
 		
 		<commons-dbcp.version>1.4</commons-dbcp.version>
