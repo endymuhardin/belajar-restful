@@ -51,7 +51,7 @@ Untuk menjalankan projectnya :
 * Hibernate 4.2.6
 * Joda Time 2.3
 * Logback 1.0.13
-* AngularJS 1.0.8
+* AngularJS 1.2.1
 * AngularUI 0.4.0
 * Twitter Bootstrap 3.0.2
 * jQuery 1.8.3

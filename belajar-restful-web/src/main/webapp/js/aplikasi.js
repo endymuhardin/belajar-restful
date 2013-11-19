@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-angular.module('belajar', ['ui', 'belajar.controller'])
+angular.module('belajar', ['ngRoute', 'ui', 'belajar.controller'])
     .config(['$routeProvider', function($routeProvider){
         $routeProvider
             .when('/', {templateUrl: 'pages/home.html'})
