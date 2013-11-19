@@ -25,87 +25,85 @@
         <!-- css orang lain -->
         <link rel="stylesheet" href="css/jquery-ui.min.css">
         <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
         <link href="css/select2.css" rel="stylesheet"/>
 
         <!-- css kita sendiri -->
         <link href="css/aplikasi.css" rel="stylesheet">
 
     </head>
-    <body ng-app="belajar">
+    <body ng-app="belajar" style="padding-top: 70px;">
         <div id="loading">Loading...</div>
 
         <!-- header start -->
-        <div class="navbar navbar-inverse navbar-static-top">
-            <div class="navbar-inner">
-                <div class="container">
-                        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                      </button>
-                    <a class="brand" href="#">Belajar RESTful</a>
-                    <div class="nav-collapse collapse" ng-controller="MenubarController">
-                        <ul class="nav">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li class="nav-header">Pengaturan Sistem</li>
-                                    <li><a href="#system/config">Konfigurasi Aplikasi</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Ijin Akses</li>
-                                    <li><a href="#/system/user">User</a></li>
-                                    <li><a href="#/system/role">Role</a></li>
-                                    <li><a href="#/system/permission">Permission</a></li>
-                                    <li><a href="#/system/menu">Menu</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Informasi Sistem</li>
-                                    <li><a href="#system/sessions">User Aktif</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Produk</a></li>
-                                    <li><a href="#">Customer</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Pembelian</a></li>
-                                    <li><a href="#">Penjualan</a></li>
-                                </ul>
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Rekap Pembelian</a></li>
-                                    <li><a href="#">Rekap Penjualan</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#about">About</a></li>
-                        </ul>
-                        <ul class="nav pull-right">
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                    User : {{ userinfo.user }} | Group : {{ userinfo.group }} <b class="caret"></b>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Ganti Password</a></li>
-                                    <li><a href="#">Opsi</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="j_spring_security_logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Belajar RESTful</a>
             </div>
-        </div>
+            <div class="collapse navbar-collapse" ng-controller="MenubarController" id="collapsible-navbar">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Pengaturan Sistem</li>
+                            <li><a href="#system/config">Konfigurasi Aplikasi</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Ijin Akses</li>
+                            <li><a href="#/system/user">User</a></li>
+                            <li><a href="#/system/role">Role</a></li>
+                            <li><a href="#/system/permission">Permission</a></li>
+                            <li><a href="#/system/menu">Menu</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Informasi Sistem</li>
+                            <li><a href="#system/sessions">User Aktif</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Produk</a></li>
+                            <li><a href="#">Customer</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Pembelian</a></li>
+                            <li><a href="#">Penjualan</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Rekap Pembelian</a></li>
+                            <li><a href="#">Rekap Penjualan</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            User : {{ userinfo.user }} | Group : {{ userinfo.group }} <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Ganti Password</a></li>
+                            <li><a href="#">Opsi</a></li>
+                            <li class="divider"></li>
+                            <li><a href="j_spring_security_logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.navbar-collapse -->
+        </nav>
         <!-- header end -->
 
-        <div class="container-fluid">
+        <div class="container">
             <div ng-view></div>
         </div>
 

@@ -90,7 +90,7 @@ angular.module('belajar.controller',['belajar.service','ngUpload'])
     }])
     .controller('SystemMenuController', ['$scope', 'SystemMenuService', function($scope, SystemMenuService){
         $scope.reloadMenupage = function(page){
-            if(!page) {
+            if(!page || page < 0) {
                 page = 0;
             }
 

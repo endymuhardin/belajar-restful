@@ -17,12 +17,6 @@
     text-align: center;
 }
 
-.marketing {
-    margin: 60px 0;
-}
-.marketing p + h4 {
-    margin-top: 28px;
-}
 #loading { 
     position: absolute; 
     left: 0px; 
@@ -31,4 +25,4 @@
     background: gold; 
     padding: 0.3em; 
     font-weight: bold; 
-}​
+}

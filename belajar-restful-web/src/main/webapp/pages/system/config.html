@@ -15,11 +15,11 @@
     limitations under the License.
 
 -->
-<div class="span5 well-large">
+<div class="col-md-5 well-large">
     <h1>Daftar Konfigurasi</h1>
 
-    <a class="btn" ng-click="baru()">
-        <i class="icon-plus-sign"></i>Tambah Data
+    <a class="btn btn-default" ng-click="baru()">
+        <i class="glyphicon glyphicon-plus-sign"></i>Tambah Data
     </a>
     
     <table class="table table-striped">
@@ -37,8 +37,8 @@
                 <td>{{c.label}}</td>
                 <td>{{c.value}}</td>
                 <td>
-                    <a ng-click="edit(c)"><i class="icon-edit"></i></a>
-                    <a ng-click="remove(c)"><i class="icon-remove"></i></a>
+                    <a ng-click="edit(c)"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a ng-click="remove(c)"><i class="glyphicon glyphicon-remove"></i></a>
                 </td>
             </tr>
         </tbody>
@@ -46,28 +46,36 @@
 
 </div>
 
-<div class="span5 well-large">
+<div class="col-md-5 well-large">
     <h1>Form Konfigurasi</h1>
     <form class="form-horizontal" name="formEdit">
-        <div class="control-group" ng-class="{error: formEdit.name.$invalid}">
-            <label class="control-label" for="name">Nama : &nbsp;</label>
-            <input type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required ui-validate="{configNameAvailable: isConfigNameAvailable}">
-            <span ng-show="formEdit.name.$error.required" class="help-inline">Harus diisi</span>
-            <span ng-show="formEdit.name.$error.configNameAvailable" class="help-inline">sudah ada yang pakai</span>
+        <div class="form-group" ng-class="{error: formEdit.name.$invalid}">
+            <label class="control-label col-sm-2" for="name">Nama : &nbsp;</label>
+            <div class="col-sm-6">                     
+                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required ui-validate="{configNameAvailable: isConfigNameAvailable}">
+            </div>
+            <span ng-show="formEdit.name.$error.required" class="help-block col-sm-2">Harus diisi</span>
+            <span ng-show="formEdit.name.$error.configNameAvailable" class="help-block col-sm-2">sudah ada yang pakai</span>
         </div>
-        <div class="control-group" ng-class="{error: formEdit.label.$invalid}">
-            <label class="control-label" for="label">Label : &nbsp;</label>
-            <input type="text" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label" required>
-            <span ng-show="formEdit.label.$error.required" class="help-inline">Harus diisi</span>
+        <div class="form-group" ng-class="{error: formEdit.label.$invalid}">
+            <label class="control-label col-sm-2" for="label">Label : &nbsp;</label>
+            <div class="col-sm-6">                     
+                <input class="form-control" type="text" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label" required>
+            </div>
+            <span ng-show="formEdit.label.$error.required" class="help-block col-sm-2">Harus diisi</span>
         </div>
-        <div class="control-group" ng-class="{error: formEdit.value.$invalid}">
-            <label class="control-label" for="value">Nilai : &nbsp;</label>
-            <input type="text" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value" required>
-            <span ng-show="formEdit.value.$error.required" class="help-inline">Harus diisi</span>
+        <div class="form-group" ng-class="{error: formEdit.value.$invalid}">
+            <label class="control-label col-sm-2" for="value">Nilai : &nbsp;</label>
+            <div class="col-sm-6">                     
+                <input class="form-control" type="text" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value" required>
+            </div>
+            <span ng-show="formEdit.value.$error.required" class="help-block col-sm-2">Harus diisi</span>
         </div>
-        <div class="form-actions">
-            <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
-            <button type="button" class="btn" ng-click="baru()">Batal</button>
+        <div class="form-group">     
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
+                <button type="button" class="btn btn-default" ng-click="baru()">Batal</button>
+            </div>
         </div>
     </form>
 </div>

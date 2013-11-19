@@ -27,7 +27,6 @@
     <!-- Le styles -->
     
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 20px;
@@ -36,16 +35,7 @@
       }
       
       .jumbotron {
-        margin: 60px 0;
         text-align: center;
-      }
-      .jumbotron h1 {
-        font-size: 72px;
-        line-height: 1;
-      }
-      .jumbotron .btn {
-        font-size: 21px;
-        padding: 14px 24px;
       }
 
       .form-signin {
@@ -93,19 +83,19 @@
   <div class="jumbotron">
         <h1>Belajar RESTful</h1>
         <p class="lead">Sample Project RESTful sederhana</p>
-        <a class="btn btn-large btn-success" href="https://github.com/endymuhardin/belajar-restful">Source Code @ Github</a>
+        <a class="btn btn-lg btn-success" href="https://github.com/endymuhardin/belajar-restful">Source Code @ Github</a>
       </div>
 
     <div class="container">
 
         <form class="form-signin" action="j_spring_security_check" method="post">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" name="j_username" class="input-block-level" placeholder="Username">
-        <input type="password" name="j_password" class="input-block-level" placeholder="Password">
+        <input type="text" name="j_username" class="form-control" placeholder="Username">
+        <input type="password" name="j_password" class="form-control" placeholder="Password">
         <label class="checkbox">
           <input type="checkbox" value="remember-me"> Remember me
         </label>
-        <input class="btn btn-large btn-primary" type="submit" value="Sign in ">
+        <input class="btn btn-lg btn-primary" type="submit" value="Sign in ">
       </form>
 
     </div> <!-- /container -->
