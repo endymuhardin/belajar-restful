@@ -280,6 +280,8 @@ angular.module('belajar.controller',['belajar.service','ngUpload'])
         
         $scope.saveSelectedPermission = function(){
             console.log($scope.selectedPermission);
+            if($scope.selectedPermission.length<1) return;
+            
             for ( var i = 0; i < $scope.selectedPermission.length; i++) {
                 var p = {id: $scope.selectedPermission[i]};
                 $scope.currentRole.permissionSet.push(p);
@@ -294,13 +296,13 @@ angular.module('belajar.controller',['belajar.service','ngUpload'])
                     });
                 });
             });
-            $scope.showPermissionDialog = false;
+            $('#dialogPermission').modal('hide');
         }
         
         $scope.cancelSelectedPermission = function(){
             $scope.selectedPermission = [];
             console.log($scope.selectedPermission);
-            $scope.showPermissionDialog = false;
+            $('#dialogPermission').modal('hide');
         }
 
         $scope.removeSelectedPermission = function(x){
@@ -361,6 +363,7 @@ angular.module('belajar.controller',['belajar.service','ngUpload'])
         
         $scope.saveSelectedMenu = function(){
             console.log($scope.selectedMenu);
+            if($scope.selectedMenu.length<1) return;
             for ( var i = 0; i < $scope.selectedMenu.length; i++) {
                 var p = {id: $scope.selectedMenu[i]};
                 $scope.currentRole.menuSet.push(p);
@@ -375,13 +378,13 @@ angular.module('belajar.controller',['belajar.service','ngUpload'])
                     });
                 });
             });
-            $scope.showMenuDialog = false;
+            $('#dialogMenu').modal('hide');
         }
         
         $scope.cancelSelectedMenu = function(){
             $scope.selectedMenu = [];
             console.log($scope.selectedMenu);
-            $scope.showMenuDialog = false;
+            $('#dialogMenu').modal('hide');
         }
 
         $scope.removeSelectedMenu = function(x){
