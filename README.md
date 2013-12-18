@@ -46,7 +46,7 @@ Untuk menjalankan projectnya :
 ### Framework dan Library ###
 
 * Spring Framework 4.0.0
-* Spring Security 3.1.4
+* Spring Security 3.2.0
 * Spring Data JPA 1.4.2
 * Hibernate 4.2.6
 * Joda Time 2.3
