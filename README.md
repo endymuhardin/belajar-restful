@@ -45,9 +45,9 @@ Untuk menjalankan projectnya :
 
 ### Framework dan Library ###
 
-* Spring Framework 3.2.4
+* Spring Framework 4.0.0
 * Spring Security 3.1.4
-* Spring Data JPA 1.4.1
+* Spring Data JPA 1.4.2
 * Hibernate 4.2.6
 * Joda Time 2.3
 * Logback 1.0.13
@@ -59,7 +59,7 @@ Untuk menjalankan projectnya :
 
 ### Tools ###
 
-* Build Tool : Maven 2
+* Build Tool : Maven 3
 * Database Schema : Liquibase
 * Unit Test Runner : Maven Surefire Plugin
 * Integration Test Runner : Maven Failsafe Plugin
