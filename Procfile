@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar belajar-restful-web/target/dependency/webapp-runner.jar belajar-restful-web/target/*.war
+web: java $JAVA_OPTS -jar belajar-restful-web/target/dependency/webapp-runner.jar --port $PORT belajar-restful-web/target/*.war
