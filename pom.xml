@@ -95,6 +95,19 @@
 		<artifact.repo.path.download>nexus/content/groups/public</artifact.repo.path.download>
 		<artifact.repo.url>http://${artifact.repo.host}:${artifact.repo.port.http}/${artifact.repo.path.download}</artifact.repo.url>
 	</properties>
+        
+        <profiles>
+            <profile>
+                <id>production</id>
+                <properties>
+                    <!-- konfigurasi database production -->
+                    <db.driver>org.postgresql.Driver</db.driver>
+                    <db.url><![CDATA[jdbc:postgresql://localhost/belajar]]></db.url>
+                    <db.username>root</db.username>
+                    <db.password>admin</db.password>
+                </properties>
+            </profile>
+        </profiles>
 
 	<dependencies>
 
