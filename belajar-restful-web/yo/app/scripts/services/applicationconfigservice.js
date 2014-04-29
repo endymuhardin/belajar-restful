@@ -13,7 +13,7 @@ angular.module('yoApp')
         return this.applicationConfig.query();
       },
       save: function (obj) {
-        if (obj.id === null) {
+        if (angular.isUndefined(obj.id) || obj.id === null) {
           return $http.post('api/config', obj);
         } else {
           return $http.put('api/config/' + obj.id, obj);
