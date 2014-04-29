@@ -37,6 +37,10 @@ angular
         templateUrl: 'views/system/sessions.html',
         controller: 'SystemSessionsCtrl'
       })
+      .when('/about', {
+        templateUrl: 'views/about.html',
+        controller: 'AboutCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
