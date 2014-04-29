@@ -51,6 +51,7 @@ import javax.validation.Valid;
 import org.springframework.data.domain.Pageable;
 
 @Controller
+@RequestMapping("/api")
 public class ApplicationConfigController {
 
     private static final String ESC_CHAR_TITIK = "\\.";
