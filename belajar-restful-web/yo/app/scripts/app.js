@@ -21,6 +21,10 @@ angular
         templateUrl: 'views/system/user.html',
         controller: 'SystemUserCtrl'
       })
+      .when('/system/role', {
+        templateUrl: 'views/system/role.html',
+        controller: 'SystemRoleCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

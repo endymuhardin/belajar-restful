@@ -1,0 +1,242 @@
+<!--
+
+    Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div class="row">
+    <div class="col-md-5 well-large">
+        <h1>Daftar Role</h1>
+
+        <a class="btn btn-default" ng-click="baru()">
+            <i class="glyphicon glyphicon-plus-sign"></i>Tambah Data
+        </a>
+        <hr>
+        <table class="table table-striped table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Keterangan</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in roles">
+                    <td>{{x.name}}</td>
+                    <td>{{x.description}}</td>
+                    <td>
+                        <a ng-click="edit(x)"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a ng-click="remove(x)"><i class="glyphicon glyphicon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-md-5 well-large">
+        <h1>Form Role</h1>
+        <form class="form-horizontal" name="formEdit">
+            <div class="form-group" ng-class="{error: formEdit.name.$invalid}">
+                <label class="control-label col-sm-2" for="name">Nama</label>
+                <div class="col-sm-6">                     
+                    <input class="form-control" type="text" id="name" name="name" placeholder="Nama Role" ng-model="currentRole.name" required ui-validate="{roleNameAvailable: isRoleNameAvailable}">
+                </div>
+                <span ng-show="formEdit.name.$error.required" class="help-block col-sm-2">Harus diisi</span>
+                <span ng-show="formEdit.name.$error.roleNameAvailable" class="help-block col-sm-2">sudah ada yang pakai</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="description">Keterangan</label>
+                <div class="col-sm-6">                     
+                    <input class="form-control" type="text" id="description" name="description" placeholder="Keterangan" ng-model="currentRole.description">
+                </div>
+            </div>
+            <div class="form-group">     
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
+                    <button type="button" class="btn btn-default" ng-click="baru()">Batal</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row" ng-show="currentRole">
+    <div class="col-md-5 well-large">
+        <h1>Menu {{currentRole.name}}</h1>
+
+        <a class="btn btn-default" data-toggle="modal" data-target="#dialogMenu">
+            <i class="glyphicon glyphicon-plus-sign"></i>Tambah Menu
+        </a>
+        <hr>
+        <h3 ng-hide="currentRole.menuSet.length">
+            Tidak ada Menu untuk {{currentRole.name}}
+        </h3>
+
+        <table class="table table-striped table-condensed table-bordered" 
+                ng-show="currentRole.menuSet.length">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="m in currentRole.menuSet">
+                    <td>{{m.label}}</td>
+                    <td>{{m.action}}</td>
+                    <td>
+                        <a ng-click="removeSelectedMenu(m)"><i class="glyphicon glyphicon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-5 well-large">
+        <h1>Permission {{currentRole.name}}</h1>
+
+        <a class="btn btn-default" data-toggle="modal" data-target="#dialogPermission">
+            <i class="glyphicon glyphicon-plus-sign"></i>Tambah Permission
+        </a>
+        <hr>
+        <h3 ng-hide="currentRole.permissionSet.length">
+            Tidak ada Permission untuk {{currentRole.name}}
+        </h3>
+
+        <table class="table table-striped table-condensed table-bordered" 
+                ng-show="currentRole.permissionSet.length">
+            <thead>
+                <tr>
+                    <th>Nama</th>
+                    <th>Nilai</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="p in currentRole.permissionSet">
+                    <td>{{p.label}}</td>
+                    <td>{{p.value}}</td>
+                    <td>
+                        <a ng-click="removeSelectedPermission(p)"><i class="glyphicon glyphicon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="dialogPermission" tabindex="-1" role="dialog" aria-labelledby="permissionModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="permissionModalLabel">Tambah Permission</h3>
+            </div>
+
+            <div class="modal-body">
+                <h4 ng-hide="currentRole.id">
+                    Save dulu role {{currentRole.name}} agar bisa menambah permission.
+                </h4>
+
+                <div ng-show="currentRole.id">
+                    <h4 ng-hide="unselectedPermission">
+                        Tidak ada Permission yang tersedia untuk {{currentRole.name}}
+                    </h4>
+
+                    <table class="table table-striped table-condensed table-bordered" 
+                            ng-show="unselectedPermission">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox"
+                                           ng-checked="isAllPermissionSelected()"
+                                           ng-click="selectAllPermission($event)">
+                                </th>
+                                <th>Nama</th>
+                                <th>Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="p in unselectedPermission">
+                                <td>
+                                    <input type="checkbox" 
+                                           ng-checked="isPermissionSelected(p.id)" 
+                                           ng-click="updateSelectedPermission($event, p.id)">
+                                </td>
+                                <td>{{p.label}}</td>
+                                <td>{{p.value}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" ng-show="currentRole.id">
+                <a class="btn btn-default" ng-click="cancelSelectedPermission()">Batal</a>
+                <a class="btn btn-primary" ng-click="saveSelectedPermission()">Tambah Permission</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="dialogMenu" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3 class="modal-title" id="menuModalLabel">Tambah Menu</h3>
+            </div>
+
+            <div class="modal-body">
+                <h4 ng-hide="currentRole.id">
+                    Save dulu role {{currentRole.name}} agar bisa menambah menu.
+                </h4>
+
+                <div ng-show="currentRole.id">
+                    <h4 ng-hide="unselectedMenu">
+                        Tidak ada Menu yang tersedia untuk {{currentRole.name}}
+                    </h4>
+
+                    <table class="table table-striped table-condensed table-bordered" 
+                            ng-show="unselectedMenu">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox"
+                                           ng-checked="isAllMenuSelected()"
+                                           ng-click="selectAllMenu($event)">
+                                </th>
+                                <th>Nama</th>
+                                <th>Nilai</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="p in unselectedMenu">
+                                <td>
+                                    <input type="checkbox" 
+                                           ng-checked="isMenuSelected(p.id)" 
+                                           ng-click="updateSelectedMenu($event, p.id)">
+                                </td>
+                                <td>{{p.label}}</td>
+                                <td>{{p.action}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer" ng-show="currentRole.id">
+                <a class="btn btn-default" ng-click="cancelSelectedMenu()">Batal</a>
+                <a class="btn btn-primary" ng-click="saveSelectedMenu()">Tambah Menu</a>
+            </div>
+        </div>
+    </div>
+</div>
