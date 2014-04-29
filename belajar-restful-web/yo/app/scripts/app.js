@@ -25,6 +25,10 @@ angular
         templateUrl: 'views/system/role.html',
         controller: 'SystemRoleCtrl'
       })
+      .when('/system/permission', {
+        templateUrl: 'views/system/permission.html',
+        controller: 'SystemPermissionCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
