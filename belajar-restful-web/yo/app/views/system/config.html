@@ -1,0 +1,81 @@
+<!--
+
+    Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<div class="col-md-5 well-large">
+    <h1>Daftar Konfigurasi</h1>
+
+    <a class="btn btn-default" ng-click="baru()">
+        <i class="glyphicon glyphicon-plus-sign"></i>Tambah Data
+    </a>
+    
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Nama</th>
+                <th>Label</th>
+                <th>Nilai</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="c in configs">
+                <td>{{c.name}}</td>
+                <td>{{c.label}}</td>
+                <td>{{c.value}}</td>
+                <td>
+                    <a ng-click="edit(c)"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a ng-click="remove(c)"><i class="glyphicon glyphicon-remove"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div class="col-md-5 well-large">
+    <h1>Form Konfigurasi</h1>
+    <form class="form-horizontal" name="formEdit">
+        <div class="form-group" ng-class="{error: formEdit.name.$invalid}">
+            <label class="control-label col-sm-2" for="name">Nama : &nbsp;</label>
+            <div class="col-sm-6">                     
+                <input class="form-control" type="text" id="name" name="name" placeholder="Nama Konfigurasi" ng-model="currentConfig.name" required ui-validate="{configNameAvailable: isConfigNameAvailable}">
+            </div>
+            <span ng-show="formEdit.name.$error.required" class="help-block col-sm-2">Harus diisi</span>
+            <span ng-show="formEdit.name.$error.configNameAvailable" class="help-block col-sm-2">sudah ada yang pakai</span>
+        </div>
+        <div class="form-group" ng-class="{error: formEdit.label.$invalid}">
+            <label class="control-label col-sm-2" for="label">Label : &nbsp;</label>
+            <div class="col-sm-6">                     
+                <input class="form-control" type="text" id="label" name="label" placeholder="Label Konfigurasi" ng-model="currentConfig.label" required>
+            </div>
+            <span ng-show="formEdit.label.$error.required" class="help-block col-sm-2">Harus diisi</span>
+        </div>
+        <div class="form-group" ng-class="{error: formEdit.value.$invalid}">
+            <label class="control-label col-sm-2" for="value">Nilai : &nbsp;</label>
+            <div class="col-sm-6">                     
+                <input class="form-control" type="text" id="value" name="value" placeholder="Nilai Konfigurasi" ng-model="currentConfig.value" required>
+            </div>
+            <span ng-show="formEdit.value.$error.required" class="help-block col-sm-2">Harus diisi</span>
+        </div>
+        <div class="form-group">     
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
+                <button type="button" class="btn btn-default" ng-click="baru()">Batal</button>
+            </div>
+        </div>
+    </form>
+</div>
