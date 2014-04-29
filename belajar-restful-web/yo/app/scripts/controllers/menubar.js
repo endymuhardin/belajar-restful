@@ -14,6 +14,6 @@ angular.module('yoApp')
             $scope.userinfo = {
                 'user': 'unknown',
                 'group': 'unknown'
-              };  
+              };
           });
   });
