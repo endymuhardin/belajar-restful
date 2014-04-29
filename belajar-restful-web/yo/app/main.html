@@ -1,0 +1,137 @@
+<!--
+
+    Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <title>Belajar RESTful</title>
+
+        <meta name="viewport" content="width=device-width">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css({.tmp,app}) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+
+    </head>
+    <body ng-app="belajar" style="padding-top: 70px;">
+        <div id="loading">Loading...</div>
+
+        <!-- header start -->
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapsible-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Belajar RESTful</a>
+            </div>
+            <div class="collapse navbar-collapse" ng-controller="MenubarController" id="collapsible-navbar">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">System <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li class="dropdown-header">Pengaturan Sistem</li>
+                            <li><a href="#system/config">Konfigurasi Aplikasi</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Ijin Akses</li>
+                            <li><a href="#/system/user">User</a></li>
+                            <li><a href="#/system/role">Role</a></li>
+                            <li><a href="#/system/permission">Permission</a></li>
+                            <li><a href="#/system/menu">Menu</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">Informasi Sistem</li>
+                            <li><a href="#system/sessions">User Aktif</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Produk</a></li>
+                            <li><a href="#">Customer</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Transaksi <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Pembelian</a></li>
+                            <li><a href="#">Penjualan</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Laporan <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Rekap Pembelian</a></li>
+                            <li><a href="#">Rekap Penjualan</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            User : {{ userinfo.user }} | Group : {{ userinfo.group }} <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Ganti Password</a></li>
+                            <li><a href="#">Opsi</a></li>
+                            <li class="divider"></li>
+                            <li><a href="j_spring_security_logout">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div><!--/.navbar-collapse -->
+        </nav>
+        <!-- header end -->
+
+        <div class="container">
+            <div ng-view></div>
+        </div>
+
+        <!--[if lt IE 9]>
+        <script src="bower_components/es5-shim/es5-shim.js"></script>
+        <script src="bower_components/json3/lib/json3.min.js"></script>
+        <![endif]-->
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="bower_components/jquery/dist/jquery.js"></script>
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="bower_components/angular-resource/angular-resource.js"></script>
+        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <!-- endbuild -->
+    </body>
+</html>
