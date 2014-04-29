@@ -1,0 +1,127 @@
+<!--
+
+    Copyright (C) 2011 ArtiVisi Intermedia <info@artivisi.com>
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+            http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+-->
+
+<div class="row">
+    <div class="col-md-10 well-large">
+        <h1>Form Menu</h1>
+        <form class="form-horizontal" name="formEdit">
+            <div class="form-group" ng-class="{error: formEdit.label.$invalid}">
+                <label class="control-label col-sm-2" for="label">Label : &nbsp;</label>
+                <div class="col-sm-6">                     
+                    <input class="form-control" type="text" id="label" name="label" placeholder="Label Menu" ng-model="currentMenu.label" required>
+                </div>
+                <span ng-show="formEdit.label.$error.required" class="help-block col-sm-2">Harus diisi</span>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="action">Action : &nbsp;</label>
+                <div class="col-sm-6">                     
+                    <input class="form-control" type="text" id="action" name="action" placeholder="Action / URL" ng-model="currentMenu.action">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2" for="parent">Parent : &nbsp;</label>
+                <div class="col-sm-6"> 
+                <select ui-select2 ng-model="currentMenu.parent.id" data-placeholder="-- Select One --">
+                    <option></option>
+                    <option ng-repeat="menu in parentSelection" value="{{menu.id}}">{{menu.label}}</option>
+                </select>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{error: formEdit.level.$invalid}">
+                <label class="control-label col-sm-2" for="level">Level : &nbsp;</label>
+                <div class="col-sm-6">                     
+                    <input class="form-control" type="text" id="level" name="level" placeholder="Level" ng-model="currentMenu.level" required>
+                </div>
+                <span ng-show="formEdit.level.$error.required" class="help-block col-sm-2">Harus diisi</span>
+            </div>
+            <div class="form-group" ng-class="{error: formEdit.level.$invalid}">
+                <label class="control-label col-sm-2" for="order">Order : &nbsp;</label>
+                <div class="col-sm-6">                     
+                    <input class="form-control" type="text" id="order" name="order" placeholder="Order" ng-model="currentMenu.order" required>
+                </div>
+                <span ng-show="formEdit.order.$error.required" class="help-block col-sm-2">Harus diisi</span>
+            </div>
+            <div class="form-group">     
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary" ng-click="simpan()" ng-disabled="isClean() || formEdit.$invalid">Simpan</button>
+                    <button type="button" class="btn btn-default" ng-click="baru()">Batal</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12 well-large">
+        <h1>Daftar Menu</h1>
+
+        <a class="btn btn-default" ng-click="baru()">
+            <i class="glyphicon glyphicon-plus-sign"></i>Tambah Data
+        </a>
+        <hr>
+        <table class="table table-striped table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Label</th>
+                    <th>Action</th>
+                    <th>Parent</th>
+                    <th>Level</th>
+                    <th>Order</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="c in menupage.content">
+                    <td>{{$index + 1}}</td>
+                    <td>{{c.label}}</td>
+                    <td>{{c.action}}</td>
+                    <td>{{c.parent.label}}</td>
+                    <td>{{c.level}}</td>
+                    <td>{{c.order}}</td>
+                    <td>
+                        <a ng-click="edit(c)"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a ng-click="remove(c)"><i class="glyphicon glyphicon-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div style="text-align: center;">
+            <ul class="pagination">
+                <li ng-class="{disabled: menupage.firstPage}">
+                    <a ng-click="reloadMenupage(1)">First</a>
+                </li>
+                <li ng-class="{disabled: menupage.firstPage}">
+                    <a ng-click="reloadMenupage(menupage.number - 1)">
+                        Prev
+                    </a>
+                </li>
+                <li ng-repeat="p in pages">
+                    <a ng-click="reloadMenupage(p)">{{p}}</a>
+                </li>
+                <li ng-class="{disabled: menupage.lastPage}">
+                    <a ng-click="reloadMenupage(menupage.number + 1)">
+                        Next
+                    </a>
+                </li>
+                <li ng-class="{disabled: menupage.lastPage}">
+                    <a ng-click="reloadMenupage(pages.length)">Last</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -29,6 +29,10 @@ angular
         templateUrl: 'views/system/permission.html',
         controller: 'SystemPermissionCtrl'
       })
+      .when('/system/menu', {
+        templateUrl: 'views/system/menu.html',
+        controller: 'SystemMenuCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
