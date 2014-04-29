@@ -24,3 +24,23 @@ build
 dist
 private
 
+# node.js / npm
+lib-cov
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+results
+node_modules
+npm-debug.log
+
+# Yeoman
+dist
+.sass-cache
+bower_components
+static
