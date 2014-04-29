@@ -6,7 +6,14 @@ angular.module('yoApp')
       'user': 'endy',
       'group': 'admin'
     };
-    $http.get('api/homepage/userinfo').success(function(data){
-        $scope.userinfo = data;
-      });
+    $http.get('api/homepage/userinfo')
+        .success(function(data){
+            $scope.userinfo = data;
+          })
+        .error(function(){
+            $scope.userinfo = {
+                'user': 'unknown',
+                'group': 'unknown'
+              };  
+          });
   });
