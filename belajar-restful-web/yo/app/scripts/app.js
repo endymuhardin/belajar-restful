@@ -33,6 +33,10 @@ angular
         templateUrl: 'views/system/menu.html',
         controller: 'SystemMenuCtrl'
       })
+      .when('/system/sessions', {
+        templateUrl: 'views/system/sessions.html',
+        controller: 'SystemSessionsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
