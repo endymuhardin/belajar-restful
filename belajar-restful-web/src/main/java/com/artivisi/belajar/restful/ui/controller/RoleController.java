@@ -40,6 +40,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.util.UriTemplate;
 
 @Controller
+@RequestMapping("/api")
 public class RoleController {
 
     @Autowired

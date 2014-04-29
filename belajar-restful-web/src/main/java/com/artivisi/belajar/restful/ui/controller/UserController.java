@@ -47,6 +47,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriTemplate;
 
 @Controller
+@RequestMapping("/api")
 public class UserController {
 
     @Autowired

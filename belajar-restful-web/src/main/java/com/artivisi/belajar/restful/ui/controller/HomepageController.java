@@ -50,6 +50,7 @@ import javax.servlet.http.HttpServletRequest;
  * @author endy
  */
 @Controller
+@RequestMapping("/api")
 public class HomepageController {
 
     @Autowired private BelajarRestfulService belajarRestfulService;
