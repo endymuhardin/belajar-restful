@@ -17,6 +17,10 @@ angular
         templateUrl: 'views/system/config.html',
         controller: 'SystemConfigCtrl'
       })
+      .when('/system/user', {
+        templateUrl: 'views/system/user.html',
+        controller: 'SystemUserCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
