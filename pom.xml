@@ -59,7 +59,7 @@
 		<mysql.version>5.1.25</mysql.version>
 		<postgresql.version>9.1-901.jdbc4</postgresql.version>
 		
-		<junit.version>4.11</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<dbunit.version>2.4.9</dbunit.version>
 		<jacoco-maven-plugin.version>0.5.3.201107060350</jacoco-maven-plugin.version>
 		
